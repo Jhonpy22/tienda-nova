@@ -9,7 +9,7 @@ const App = () => {
   const { messages, input, setInput, isLoading, sendMessage, clearChat } = useChat()
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-linear-to-br from-gray-50 via-white to-blue-50">
 
       {/* Panel izquierdo */}
       <InfoPanel isLoading={isLoading} />

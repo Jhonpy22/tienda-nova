@@ -1,1 +1,75 @@
 @import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-linear-to-br from-slate-900 to-slate-800;
+  }
+}
+
+@layer components {
+  /* Animaciones personalizadas */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 15px rgba(147, 51, 234, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 25px rgba(147, 51, 234, 0.5);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.5s ease-out;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.4s ease-out;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+}
+
+/* Estilos adicionales */
+.message-bubble-user {
+  @apply bg-linear-to-br from-purple-500 to-purple-600 shadow-lg transform transition-all duration-200 hover:shadow-xl;
+}
+
+.message-bubble-bot {
+  @apply bg-white shadow-md transform transition-all duration-200 hover:shadow-lg;
+}
+
+.chat-input-focus {
+  @apply focus:ring-2 focus:ring-purple-500 focus:shadow-lg;
+}

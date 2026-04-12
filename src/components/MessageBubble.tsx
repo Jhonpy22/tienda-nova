@@ -8,22 +8,23 @@ const MessageBubble = ({ message }: Props) => {
     const isUser = message.role === 'user'
 
     return (
-        <div className={`flex items-end gap-2 mb-3 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
+        <div className={`flex items-end gap-3 mb-4 ${isUser ? 'flex-row-reverse' : 'flex-row'} animate-fade-in-up`}>
 
             {/* Avatar */}
             {!isUser && (
-                <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                <div className="w-9 h-9 rounded-full bg-linear-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white text-xs font-bold shrink-0 shadow-md ring-2 ring-purple-300">
                     NB
                 </div>
             )}
 
             {/* Burbuja */}
-            <div className={`max-w-[70%] px-4 py-2 rounded-2xl text-sm ${isUser
-                ? 'bg-purple-600 text-white rounded-br-none'
-                : 'bg-white text-gray-800 rounded-bl-none shadow-sm'
-                }`}>
-                <p>{message.content}</p>
-                <span className={`text-xs mt-1 block ${isUser ? 'text-purple-200' : 'text-gray-400'}`}>
+            <div className={`max-w-[70%] px-4 py-3 rounded-3xl text-sm transition-all duration-200 ${
+                isUser
+                    ? 'message-bubble-user text-white rounded-br-sm'
+                    : 'message-bubble-bot text-gray-800 rounded-bl-sm'
+            }`}>
+                <p className="leading-relaxed">{message.content}</p>
+                <span className={`text-xs mt-2 block opacity-70 ${isUser ? 'text-purple-100' : 'text-gray-500'}`}>
                     {message.timestamp}
                 </span>
             </div>
