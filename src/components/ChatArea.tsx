@@ -16,7 +16,7 @@ const ChatArea = ({ messages, isLoading }: Props) => {
     }, [messages, isLoading])
 
     return (
-        <div className="flex-1 overflow-y-auto p-6 bg-linear-to-b from-slate-50 via-white to-blue-50/30">
+        <div className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 bg-linear-to-b from-slate-50 via-white to-blue-50/30 w-full">
 
             {messages.map((message, index) => (
                 <MessageBubble key={index} message={message} />

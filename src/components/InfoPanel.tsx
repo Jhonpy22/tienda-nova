@@ -4,7 +4,7 @@ interface Props {
 
 const InfoPanel = ({ isLoading }: Props) => {
     return (
-        <div className="w-64 bg-linear-to-b from-white via-purple-50/40 to-white border-r-2 border-purple-100 flex flex-col p-6 gap-6 shrink-0 shadow-xl">
+        <div className="w-72 md:w-80 h-screen bg-linear-to-b from-white via-purple-50/40 to-white border-r-2 border-purple-100 flex flex-col p-6 gap-6 shadow-xl overflow-y-auto">
 
             {/* Logo y nombre */}
             <div className="flex flex-col items-center gap-3 pt-2">

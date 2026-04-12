@@ -9,10 +9,12 @@ const App = () => {
   const { messages, input, setInput, isLoading, sendMessage, clearChat } = useChat()
 
   return (
-    <div className="flex h-screen bg-linear-to-br from-gray-50 via-white to-blue-50">
+    <div className="flex h-screen bg-linear-to-br from-gray-50 via-white to-blue-50 overflow-hidden">
 
-      {/* Panel izquierdo */}
-      <InfoPanel isLoading={isLoading} />
+      {/* Panel izquierdo - solo en desktop */}
+      <div className="hidden md:block shrink-0">
+        <InfoPanel isLoading={isLoading} />
+      </div>
 
       {/* Chat principal */}
       <div className="flex flex-col flex-1 overflow-hidden">
