@@ -5,18 +5,18 @@ interface Props {
 
 const Header = ({ isLoading, onClearChat }: Props) => {
     return (
-        <div className="bg-purple-700 text-white px-4 py-3 flex items-center justify-between shadow-md">
+        <div className="bg-linear-to-r from-purple-600 via-purple-700 to-purple-800 text-white px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between shadow-lg border-b border-purple-500/30">
 
             {/* Info del bot */}
-            <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center font-bold text-sm">
+            <div className="flex items-center gap-2 sm:gap-4">
+                <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-linear-to-br from-purple-400 to-purple-600 flex items-center justify-center font-bold text-sm sm:text-lg shadow-lg ring-2 ring-purple-300 transform transition-transform hover:scale-105">
                     NB
                 </div>
                 <div>
-                    <h1 className="font-semibold text-base leading-tight">NovaBot</h1>
-                    <div className="flex items-center gap-1">
-                        <span className={`w-2 h-2 rounded-full ${isLoading ? 'bg-yellow-400' : 'bg-green-400'}`}></span>
-                        <span className="text-xs text-purple-200">
+                    <h1 className="font-bold text-base sm:text-lg leading-tight tracking-wide">NovaBot</h1>
+                    <div className="flex items-center gap-2">
+                        <span className={`w-2.5 h-2.5 rounded-full animate-pulse transition-colors ${isLoading ? 'bg-yellow-300' : 'bg-emerald-300'}`}></span>
+                        <span className="text-xs text-purple-100 font-medium hidden sm:inline">
                             {isLoading ? 'Escribiendo...' : 'En línea'}
                         </span>
                     </div>
@@ -26,9 +26,9 @@ const Header = ({ isLoading, onClearChat }: Props) => {
             {/* Botón limpiar chat */}
             <button
                 onClick={onClearChat}
-                className="text-xs text-purple-200 hover:text-white transition-colors"
+                className="text-xs text-purple-100 hover:text-white font-semibold px-3 sm:px-4 py-2 rounded-full hover:bg-purple-500/20 transition-all duration-200 transform hover:scale-105 ring-1 ring-purple-300/30"
             >
-                Limpiar chat
+                🗑️ Limpiar
             </button>
 
         </div>

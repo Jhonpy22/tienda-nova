@@ -16,7 +16,7 @@ const ChatArea = ({ messages, isLoading }: Props) => {
     }, [messages, isLoading])
 
     return (
-        <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
+        <div className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 bg-linear-to-b from-slate-50 via-white to-blue-50/30 w-full">
 
             {messages.map((message, index) => (
                 <MessageBubble key={index} message={message} />
@@ -24,15 +24,15 @@ const ChatArea = ({ messages, isLoading }: Props) => {
 
             {/* Indicador de escritura */}
             {isLoading && (
-                <div className="flex items-end gap-2 mb-3">
-                    <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                <div className="flex items-end gap-3 mb-4 animate-fade-in-up">
+                    <div className="w-9 h-9 rounded-full bg-linear-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white text-xs font-bold shrink-0 shadow-md ring-2 ring-purple-300 animate-pulse-glow">
                         NB
                     </div>
-                    <div className="bg-white px-4 py-3 rounded-2xl rounded-bl-none shadow-sm">
-                        <div className="flex gap-1 items-center">
-                            <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0ms]"></span>
-                            <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:150ms]"></span>
-                            <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:300ms]"></span>
+                    <div className="bg-linear-to-r from-white to-purple-50 px-5 py-4 rounded-3xl rounded-bl-sm shadow-lg">
+                        <div className="flex gap-2 items-center">
+                            <span className="w-2.5 h-2.5 bg-purple-500 rounded-full animate-bounce [animation-delay:0ms]"></span>
+                            <span className="w-2.5 h-2.5 bg-purple-500 rounded-full animate-bounce [animation-delay:150ms]"></span>
+                            <span className="w-2.5 h-2.5 bg-purple-500 rounded-full animate-bounce [animation-delay:300ms]"></span>
                         </div>
                     </div>
                 </div>
