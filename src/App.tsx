@@ -1,44 +1,31 @@
-import { useChat, QUICK_SUGGESTIONS } from './hooks/useChat'
-import Header from './components/Header'
-import ChatArea from './components/ChatArea'
-import InputChat from './components/InputChat'
-import QuickSuggestions from './components/QuickSuggestions'
-import InfoPanel from './components/InfoPanel'
+import { RouterProvider, createRouter } from '@tanstack/react-router'
+import { rootRoute } from './routes/__root'
+import { homeRoute } from './routes/index'
+import { hombreRoute } from './routes/hombre/index'
+import { hombreCategoriaRoute } from './routes/hombre/$categoria'
+import { mujerRoute } from './routes/mujer/index'
+import { mujerCategoriaRoute } from './routes/mujer/$categoria'
 
-const App = () => {
-  const { messages, input, setInput, isLoading, sendMessage, clearChat } = useChat()
+const routeTree = rootRoute.addChildren([
+    homeRoute,
+    hombreRoute,
+    hombreCategoriaRoute,
+    mujerRoute,
+    mujerCategoriaRoute,
+])
 
-  return (
-    <div className="flex h-screen bg-linear-to-br from-gray-50 via-white to-blue-50 overflow-hidden">
+const router = createRouter({
+    routeTree,
+    defaultPreload: 'intent',
+    scrollRestoration: true,
+})
 
-      {/* Panel izquierdo - solo en desktop */}
-      <div className="hidden md:block shrink-0">
-        <InfoPanel isLoading={isLoading} />
-      </div>
-
-      {/* Chat principal */}
-      <div className="flex flex-col flex-1 overflow-hidden">
-
-        <Header isLoading={isLoading} onClearChat={clearChat} />
-
-        <ChatArea messages={messages} isLoading={isLoading} />
-
-        <QuickSuggestions
-          suggestions={QUICK_SUGGESTIONS}
-          isLoading={isLoading}
-          onSelect={sendMessage}
-        />
-
-        <InputChat
-          input={input}
-          isLoading={isLoading}
-          onChange={setInput}
-          onSend={sendMessage}
-        />
-
-      </div>
-    </div>
-  )
+declare module '@tanstack/react-router' {
+    interface Register {
+        router: typeof router
+    }
 }
+
+const App = () => <RouterProvider router={router} />
 
 export default App

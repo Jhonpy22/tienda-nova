@@ -1,19 +1,21 @@
-import { useState, useEffect } from 'react'
-import type { Message, QuickSuggestion } from '../types'
+import { useEffect, useState } from 'react'
 import { geminiService } from '../services/geminiService'
+import { getStructuredReply } from '../services/chatSupportService'
 import { storageService } from '../services/storageService'
+import type { Message, QuickSuggestion } from '../types'
 
 const WELCOME_MESSAGE: Message = {
     role: 'assistant',
-    content: '¡Hola! Bienvenido a Tienda Nova. Soy tu asistente virtual. Puedo ayudarte con productos, envíos, devoluciones y horarios.',
+    content:
+        '¡Hola! Soy NovaBot, el asistente virtual de Tienda Nova. Estoy aquí para ayudarte con información sobre nuestros productos, métodos de pago, envíos, política de devoluciones y horarios de atención. ¿En qué puedo ayudarte hoy?',
     timestamp: new Date().toLocaleTimeString('es-CR', { hour: '2-digit', minute: '2-digit' }),
 }
 
 export const QUICK_SUGGESTIONS: QuickSuggestion[] = [
-    { label: 'Ver promociones', message: '¿Qué promociones tienen disponibles?' },
-    { label: 'Consultar envío', message: '¿Cuánto tarda el envío?' },
-    { label: 'Política de devoluciones', message: '¿Cuál es la política de devoluciones?' },
-    { label: 'Horario de atención', message: '¿Cuál es el horario de atención?' },
+    { label: 'Camisas hombre', message: '¿Tienen camisas para hombre?' },
+    { label: 'Blusas mujer', message: 'Quiero ver blusas para mujer' },
+    { label: 'Pantalones', message: '¿Tienen pantalones o jeans?' },
+    { label: 'Envíos', message: '¿Cuánto tarda el envío?' },
 ]
 
 export const useChat = () => {
@@ -21,15 +23,13 @@ export const useChat = () => {
     const [input, setInput] = useState('')
     const [isLoading, setIsLoading] = useState(false)
 
-    // Cargar historial al iniciar
     useEffect(() => {
         const session = storageService.load()
-        if (session && session.history.length > 0) {
+        if (session?.history?.length) {
             setMessages(session.history)
         }
     }, [])
 
-    // Guardar historial cada vez que cambia
     useEffect(() => {
         storageService.save({
             username: '',
@@ -50,25 +50,42 @@ export const useChat = () => {
         const updatedHistory = [...messages, userMessage]
         setMessages(updatedHistory)
         setInput('')
+
+        const structuredReply = getStructuredReply(text)
+        if (structuredReply) {
+            setMessages((prev) => [
+                ...prev,
+                {
+                    role: 'assistant',
+                    content: structuredReply.content,
+                    action: structuredReply.action,
+                    timestamp: new Date().toLocaleTimeString('es-CR', { hour: '2-digit', minute: '2-digit' }),
+                },
+            ])
+            return
+        }
+
         setIsLoading(true)
 
         try {
             const response = await geminiService.sendMessage(updatedHistory)
-
-            const botMessage: Message = {
-                role: 'assistant',
-                content: response,
-                timestamp: new Date().toLocaleTimeString('es-CR', { hour: '2-digit', minute: '2-digit' }),
-            }
-
-            setMessages((prev) => [...prev, botMessage])
-        } catch  {
-            const errorMessage: Message = {
-                role: 'assistant',
-                content: 'Hubo un problema al procesar tu consulta. Por favor intentá nuevamente.',
-                timestamp: new Date().toLocaleTimeString('es-CR', { hour: '2-digit', minute: '2-digit' }),
-            }
-            setMessages((prev) => [...prev, errorMessage])
+            setMessages((prev) => [
+                ...prev,
+                {
+                    role: 'assistant',
+                    content: response,
+                    timestamp: new Date().toLocaleTimeString('es-CR', { hour: '2-digit', minute: '2-digit' }),
+                },
+            ])
+        } catch {
+            setMessages((prev) => [
+                ...prev,
+                {
+                    role: 'assistant',
+                    content: 'Puedo ayudarte con categorías de hombre y mujer, productos, envíos, pagos y devoluciones. Si quieres, intenta con una consulta más específica.',
+                    timestamp: new Date().toLocaleTimeString('es-CR', { hour: '2-digit', minute: '2-digit' }),
+                },
+            ])
         } finally {
             setIsLoading(false)
         }
