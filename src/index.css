@@ -1,14 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @theme {
-    --color-primary: #1A2E4A;
-    --color-secondary: #2D4A6E;
-    --color-accent: #C8B88A;
-    --color-background: #F8F9FA;
-    --color-warm: #E8E0D0;
-    --color-card: #FFFFFF;
-    --color-text-main: #1A2E4A;
-    --color-text-muted: #5A6A7A;
+    --color-primary: #16253c;
+    --color-secondary: #2b4467;
+    --color-accent: #ceb78a;
+    --color-accent-dark: #9f8451;
+    --color-background: #f5f1ea;
+    --color-sand: #eee6d8;
+    --color-warm: #d8cdb9;
+    --color-card: #fffdf9;
+    --color-text-main: #17253a;
+    --color-text-muted: #5f6a76;
+    --font-display: "Cormorant Garamond", "Times New Roman", serif;
 }
 
 @layer base {
@@ -35,6 +39,10 @@
     select {
         font: inherit;
     }
+
+    img {
+        display: block;
+    }
 }
 
 @layer components {
@@ -43,7 +51,7 @@
     }
 
     .section-title {
-        @apply text-2xl font-medium tracking-tight text-text-main sm:text-3xl;
+        @apply text-3xl font-medium tracking-tight text-text-main sm:text-4xl;
     }
 
     .section-copy {
@@ -55,15 +63,19 @@
     }
 
     .button-primary {
-        @apply inline-flex items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-medium text-card transition-colors hover:bg-secondary;
+        @apply inline-flex items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-medium text-card transition-all duration-200 hover:-translate-y-0.5 hover:bg-secondary;
     }
 
     .button-secondary {
-        @apply inline-flex items-center justify-center rounded-full border border-primary px-5 py-3 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-card;
+        @apply inline-flex items-center justify-center rounded-full border border-primary px-5 py-3 text-sm font-medium text-primary transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary hover:text-card;
     }
 
     .button-accent {
-        @apply inline-flex items-center justify-center rounded-full bg-accent px-5 py-3 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-card;
+        @apply inline-flex items-center justify-center rounded-full bg-accent px-5 py-3 text-sm font-medium text-primary transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent-dark hover:text-card;
+    }
+
+    .button-ghost-light {
+        @apply inline-flex items-center justify-center rounded-full border border-white/18 bg-white/6 px-5 py-3 text-sm font-medium text-card transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/12;
     }
 
     .input-base {

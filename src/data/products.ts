@@ -49,7 +49,7 @@ const createCategoryProducts = (
     }))
 
 const hombreCamisas: ProductSeed[] = [
-    { nombre: 'Camisa Oxford Blanca', precio: 21990, tallas: ['M', 'L', 'XL'], colores: ['Blanco'], imagen: 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Camisa clásica para oficina o eventos.', nuevo: true },
+    { nombre: 'Camisa Oxford Blanca', precio: 21990, tallas: ['M', 'L', 'XL'], colores: ['Blanco'], imagen: 'https://img.pacifiko.com/PROD/resize/1/500x500/ZTA4NDcxMT.jpg', descripcion: 'Camisa clásica para oficina o eventos.', nuevo: true },
     { nombre: 'Camisa Lino Arena', precio: 24990, tallas: ['S', 'M', 'L'], colores: ['Arena'], imagen: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Prenda fresca con acabado ligero.' },
     { nombre: 'Camisa Manga Larga Azul', precio: 22990, tallas: ['M', 'L'], colores: ['Azul'], imagen: 'https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Camisa versátil para uso diario.' },
     { nombre: 'Camisa Cuello Mao Verde Oliva', precio: 23990, tallas: ['S', 'M', 'L'], colores: ['Verde oliva'], imagen: 'https://images.unsplash.com/photo-1602810316693-3667c854239a?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Corte moderno con cuello mao.' },
@@ -85,11 +85,11 @@ const hombrePantalones: ProductSeed[] = [
 ]
 
 const hombreTrajes: ProductSeed[] = [
-    { nombre: 'Traje Dos Piezas Azul Marino', precio: 82990, tallas: ['M', 'L', 'XL'], colores: ['Azul marino'], imagen: 'https://images.unsplash.com/photo-1593032465175-481ac7f401a0?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Traje elegante y versátil.', nuevo: true },
+    { nombre: 'Traje Dos Piezas Azul Marino', precio: 82990, tallas: ['M', 'L', 'XL'], colores: ['Azul marino'], imagen: 'https://m.media-amazon.com/images/I/61TDZy3jBPL._AC_UY1000_.jpg', descripcion: 'Traje elegante y versátil.', nuevo: true },
     { nombre: 'Traje Formal Gris Grafito', precio: 89990, tallas: ['M', 'L'], colores: ['Gris grafito'], imagen: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Ideal para oficina y eventos.' },
     { nombre: 'Traje Corte Italiano Negro', precio: 94990, tallas: ['L', 'XL'], colores: ['Negro'], imagen: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Silueta estilizada de corte italiano.' },
     { nombre: 'Traje Lana Ligera Azul Acero', precio: 102990, tallas: ['M', 'L', 'XL'], colores: ['Azul acero'], imagen: 'https://images.unsplash.com/photo-1593032465175-481ac7f401a0?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Lana ligera con acabado refinado.' },
-    { nombre: 'Traje Slim Gris Humo', precio: 91990, tallas: ['M', 'L'], colores: ['Gris humo'], imagen: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Slim fit de aire contemporáneo.', nuevo: true },
+    { nombre: 'Traje Slim Gris Humo', precio: 91990, tallas: ['M', 'L'], colores: ['Gris humo'], imagen: 'https://image.made-in-china.com/2f0j00BFsEZLenNwkA/Fancy-Designer-Slim-Fit-Bespoke-Gray-Men-Suit.webp', descripcion: 'Slim fit de aire contemporáneo.', nuevo: true },
     { nombre: 'Traje Ceremonia Azul Profundo', precio: 104990, tallas: ['L', 'XL'], colores: ['Azul profundo'], imagen: 'https://images.unsplash.com/photo-1593032465175-481ac7f401a0?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Diseñado para eventos formales.' },
     { nombre: 'Traje Oficina Premium Negro', precio: 96990, tallas: ['M', 'L', 'XL'], colores: ['Negro'], imagen: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Prenda formal de presencia sobria.' },
     { nombre: 'Traje Clásico Gris Claro', precio: 87990, tallas: ['M', 'L'], colores: ['Gris claro'], imagen: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Corte clásico con apariencia limpia.' },
