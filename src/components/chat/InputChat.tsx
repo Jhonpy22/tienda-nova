@@ -14,24 +14,27 @@ const InputChat = ({ input, isLoading, onChange, onSend }: Props) => {
     }
 
     return (
-        <div className="border-t border-warm p-4">
-            <div className="flex items-center gap-3">
+        <div className="border-t border-warm bg-card p-3">
+            <div className="flex items-center gap-2 rounded-xl border border-warm bg-background px-3 py-2 transition-all focus-within:border-primary focus-within:shadow-sm">
                 <input
                     type="text"
                     value={input}
                     onChange={(event) => onChange(event.target.value)}
                     onKeyDown={handleKeyDown}
                     disabled={isLoading}
-                    placeholder="Escribe tu consulta"
-                    className="input-base"
+                    placeholder="Tu consulta..."
+                    className="flex-1 bg-transparent text-sm text-text-main outline-none placeholder:text-text-muted disabled:opacity-50"
                 />
                 <button
                     type="button"
                     onClick={() => onSend(input)}
                     disabled={isLoading || !input.trim()}
-                    className="button-primary px-4 disabled:cursor-not-allowed disabled:opacity-40"
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-card transition-all hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-40 active:scale-90"
+                    aria-label="Enviar"
                 >
-                    Enviar
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" />
+                    </svg>
                 </button>
             </div>
         </div>

@@ -1,9 +1,10 @@
 const InfoPanel = () => (
-    <div className="rounded-2xl border border-warm bg-background p-4">
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-text-muted">NovaBot</p>
-        <p className="mt-3 text-sm leading-6 text-text-muted">
-            Te orienta con categorías de hombre y mujer, preguntas sobre envíos, pagos y devoluciones, y puede llevarte
-            directo a una ruta del catálogo.
+    <div className="flex items-start gap-3">
+        <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent/20">
+            <span className="text-[10px] font-medium text-accent-dark">✦</span>
+        </div>
+        <p className="text-xs leading-5 text-text-muted">
+            Puedo orientarte con categorias, envios, pagos y devoluciones, y llevarte directo al catalogo que necesitas.
         </p>
     </div>
 )
