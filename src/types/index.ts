@@ -11,6 +11,7 @@ export interface ChatAction {
     search?: {
         page: number
         sort: SortOption
+        color?: string
     }
 }
 
