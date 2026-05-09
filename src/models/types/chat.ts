@@ -1,10 +1,10 @@
-import type { Categoria, SortOption } from './product'
+import type { Categoria, Estilo, Product, SortOption } from './product'
 
 export type Role = 'user' | 'assistant'
 
 export interface ChatAction {
     label: string
-    to: '/' | '/hombre' | '/mujer' | '/hombre/$categoria' | '/mujer/$categoria'
+    to: '/' | '/hombre' | '/hombre/$categoria'
     params?: {
         categoria: Categoria
     }
@@ -31,4 +31,26 @@ export interface ChatSession {
 export interface QuickSuggestion {
     label: string
     message: string
+}
+
+export type StructuredReply = {
+    content: string
+    action?: ChatAction
+}
+
+export type ProductIntent = {
+    categoria?: Categoria
+    color?: string
+    estilo?: Estilo
+}
+
+export type CatalogMatches = {
+    base: Product[]
+    exactColorMatches: Product[]
+    directMatches: Product[]
+}
+
+export type ScoredProduct = {
+    product: Product
+    score: number
 }

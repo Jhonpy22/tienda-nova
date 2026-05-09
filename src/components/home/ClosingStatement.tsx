@@ -2,21 +2,20 @@ import { Link } from '@tanstack/react-router'
 
 const ClosingStatement = () => (
     <section className="container-shell pb-20 pt-8">
-        <div className="space-y-6 rounded-[2rem] border border-warm bg-card px-8 py-12 text-center shadow-[0_18px_60px_rgba(26,46,74,0.08)]">
+        <div className="space-y-6 rounded-[2rem] border border-warm bg-card px-8 py-12 text-center shadow-[var(--shadow-panel)]">
             <p className="text-xs uppercase tracking-[0.32em] text-text-muted">Cierre</p>
             <h2 className="mx-auto max-w-3xl text-3xl leading-tight text-text-main sm:text-4xl" style={{ fontFamily: 'var(--font-display)' }}>
-                Una portada memorable abre la puerta. Un catalogo claro sostiene la experiencia.
+                Un buen fit empieza con piezas correctas y una ruta clara para comprarlas.
             </h2>
             <p className="mx-auto max-w-2xl text-sm leading-7 text-text-muted sm:text-base">
-                Nova combina ambas capas: una presentacion con criterio y una navegacion util para quien ya esta listo para
-                comprar o comparar.
+                Nova combina dirección visual, catálogo funcional y asesoría inmediata para elegir sin perder tiempo.
             </p>
             <div className="flex flex-col justify-center gap-3 sm:flex-row">
                 <Link to="/hombre" className="button-primary">
-                    Ver catalogo hombre
+                    Ver catálogo masculino
                 </Link>
-                <Link to="/mujer" className="button-secondary">
-                    Ver catalogo mujer
+                <Link to="/hombre/$categoria" params={{ categoria: 'accesorios' }} search={{ page: 1, sort: 'newest' }} className="button-secondary">
+                    Ver accesorios
                 </Link>
             </div>
         </div>

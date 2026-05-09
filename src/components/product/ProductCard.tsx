@@ -1,20 +1,31 @@
 import { useState } from 'react'
 import useCart from '../../hooks/useCart'
-import type { Product } from '../../models/Index'
+import type { Estilo, Product } from '../../models/Index'
 
 interface Props {
     product: Product
 }
 
-const currencyFormatter = new Intl.NumberFormat('es-CR', {
-    style: 'currency',
-    currency: 'CRC',
-    maximumFractionDigits: 0,
-})
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&h=900&q=80'
+
+const formatCRC = (value: number) => `₡${value.toLocaleString('es-CR').replace(/\s/g, '.')}`
+
+const STYLE_LABELS: Record<Estilo, string> = {
+    Oversized: 'Oversized',
+    Baggy: 'Baggy',
+    Skate: 'Skate',
+    Surf: 'Surf',
+    Y2K: 'Y2K',
+    'New Drop': 'Nueva colección',
+    Trending: 'En tendencia',
+    'Urban Essentials': 'Básicos urbanos',
+}
 
 const ProductCard = ({ product }: Props) => {
     const { addItem } = useCart()
     const [added, setAdded] = useState(false)
+    const visibleOptions = product.tallas.slice(0, 5)
+    const hiddenOptionsCount = product.tallas.length - visibleOptions.length
 
     const handleAdd = () => {
         addItem(product)
@@ -23,33 +34,43 @@ const ProductCard = ({ product }: Props) => {
     }
 
     return (
-        <article className="group panel-card overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-            <div className="relative overflow-hidden">
+        <article className="group panel-card flex h-full flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-accent/70 hover:shadow-[0_24px_80px_rgba(0,0,0,0.38)]">
+            <div className="relative overflow-hidden bg-primary/10">
                 <img
                     src={product.imagen}
                     alt={product.nombre}
-                    className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="aspect-[4/5] w-full object-cover grayscale-[8%] transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
+                    onError={(event) => {
+                        event.currentTarget.onerror = null
+                        event.currentTarget.src = FALLBACK_IMAGE
+                    }}
                 />
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-primary/72 to-transparent" />
                 {product.nuevo && (
-                    <span className="absolute left-3 top-3 rounded-full bg-accent px-2.5 py-1 text-[10px] font-medium tracking-wide text-primary">
-                        Nuevo
+                    <span className="absolute left-3 top-3 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-primary">
+                        Nuevo lanzamiento
                     </span>
                 )}
             </div>
 
-            <div className="space-y-3 p-4">
+            <div className="flex flex-1 flex-col space-y-3 p-4">
                 <div>
                     <h3 className="text-base font-medium text-text-main">{product.nombre}</h3>
                     <p className="mt-1 text-xs leading-5 text-text-muted line-clamp-2">{product.descripcion}</p>
                 </div>
 
                 <div className="flex flex-wrap gap-1.5">
-                    {product.tallas.map((size) => (
-                        <span key={size} className="rounded-md border border-warm px-2 py-0.5 text-[11px] text-text-muted">
+                    {visibleOptions.map((size) => (
+                        <span key={size} className="rounded-md border border-warm/60 px-2 py-0.5 text-[11px] text-text-muted">
                             {size}
                         </span>
                     ))}
+                    {hiddenOptionsCount > 0 && (
+                        <span className="rounded-md border border-warm/60 px-2 py-0.5 text-[11px] text-text-muted">
+                            +{hiddenOptionsCount}
+                        </span>
+                    )}
                 </div>
 
                 <div className="flex flex-wrap gap-1.5">
@@ -60,9 +81,17 @@ const ProductCard = ({ product }: Props) => {
                     ))}
                 </div>
 
-                <div className="flex items-center justify-between pt-1">
-                    <p className="text-lg font-medium text-primary" style={{ fontFamily: 'var(--font-display)' }}>
-                        {currencyFormatter.format(product.precio)}
+                <div className="flex flex-wrap gap-1.5">
+                    {product.estilos.slice(0, 3).map((style) => (
+                        <span key={style} className="rounded-full bg-accent/12 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-accent">
+                            {STYLE_LABELS[style]}
+                        </span>
+                    ))}
+                </div>
+
+                <div className="mt-auto flex items-center justify-between gap-3 pt-1">
+                    <p className="text-2xl font-medium tracking-wide text-accent" style={{ fontFamily: 'var(--font-display)' }}>
+                        {formatCRC(product.precio)}
                     </p>
                     <button
                         type="button"
@@ -73,7 +102,7 @@ const ProductCard = ({ product }: Props) => {
                             added ? 'opacity-80 cursor-default' : '',
                         ].join(' ')}
                     >
-                        {added ? '✓ Agregado' : 'Agregar'}
+                        {added ? 'Agregado' : 'Agregar'}
                     </button>
                 </div>
             </div>

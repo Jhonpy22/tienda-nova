@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createRoute } from '@tanstack/react-router'
 import AssistantHighlight from '../components/home/AssistantHighlight'
 import BrandStatement from '../components/home/BrandStatement'

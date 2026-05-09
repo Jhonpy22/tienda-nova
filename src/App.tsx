@@ -3,15 +3,11 @@ import { rootRoute } from './routes/__root'
 import { homeRoute } from './routes/index'
 import { hombreRoute } from './routes/hombre/index'
 import { hombreCategoriaRoute } from './routes/hombre/$categoria'
-import { mujerRoute } from './routes/mujer/index'
-import { mujerCategoriaRoute } from './routes/mujer/$categoria'
 
 const routeTree = rootRoute.addChildren([
     homeRoute,
     hombreRoute,
     hombreCategoriaRoute,
-    mujerRoute,
-    mujerCategoriaRoute,
 ])
 
 const router = createRouter({

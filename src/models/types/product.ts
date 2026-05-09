@@ -1,13 +1,41 @@
-export type Genero = 'hombre' | 'mujer'
+export type Genero = 'hombre'
 export type Categoria =
     | 'camisas'
+    | 'shorts'
     | 'pantalones'
-    | 'trajes'
+    | 'tenis'
     | 'accesorios'
-    | 'blusas'
-    | 'ropa-formal'
+    | 'relojes'
+    | 'lentes-sol'
 
-export type Talla = 'S' | 'M' | 'L' | 'XL'
+export type Estilo = 'Oversized' | 'Baggy' | 'Skate' | 'Surf' | 'Y2K' | 'New Drop' | 'Trending' | 'Urban Essentials'
+export type Talla =
+    | 'S'
+    | 'M'
+    | 'L'
+    | 'XL'
+    | '38'
+    | '39'
+    | '40'
+    | '41'
+    | '42'
+    | '43'
+    | '44'
+    | 'Acero'
+    | 'Cuero'
+    | 'Deportivo'
+    | 'Minimalista'
+    | 'Clásico'
+    | 'Negros'
+    | 'Polarizados'
+    | 'Redondos'
+    | 'Rectangulares'
+    | 'Smoke'
+    | 'Gorras'
+    | 'Cadenas'
+    | 'Bolsos'
+    | 'Billeteras'
+    | 'Cinturones'
 export type SortOption = 'newest' | 'price-asc' | 'price-desc'
 
 export interface Product {
@@ -18,9 +46,21 @@ export interface Product {
     precio: number
     tallas: Talla[]
     colores: string[]
+    estilos: Estilo[]
     imagen: string
     descripcion: string
     nuevo: boolean
+}
+
+export type ProductSeed = {
+    nombre: string
+    precio: number
+    tallas: Talla[]
+    colores: string[]
+    estilos: Estilo[]
+    imagen: string
+    descripcion: string
+    nuevo?: boolean
 }
 
 export interface CatalogSearch {
