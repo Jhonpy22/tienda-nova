@@ -77,11 +77,31 @@ const CATEGORY_KEYWORDS: Array<{ categoria: Categoria; terms: string[] }> = [
     },
     {
         categoria: 'tenis',
-        terms: ['tenis', 'sneaker', 'sneakers', 'zapatilla', 'zapatillas', 'runner', 'calzado urbano', 'zapatos casuales'],
+        terms: [
+            'tenis',
+            'sneaker',
+            'sneakers',
+            'zapatilla',
+            'zapatillas',
+            'runner',
+            'calzado urbano',
+            'zapatos casuales',
+        ],
     },
     {
         categoria: 'accesorios',
-        terms: ['accesorio', 'accesorios', 'gorra', 'crossbody', 'cinturon', 'cinturón', 'cadena', 'beanie', 'mochila', 'billetera'],
+        terms: [
+            'accesorio',
+            'accesorios',
+            'gorra',
+            'crossbody',
+            'cinturon',
+            'cinturón',
+            'cadena',
+            'beanie',
+            'mochila',
+            'billetera',
+        ],
     },
     {
         categoria: 'relojes',
@@ -104,44 +124,328 @@ const STYLE_KEYWORDS: Array<{ estilo: Estilo; terms: string[] }> = [
     { estilo: 'Urban Essentials', terms: ['essential', 'essentials', 'basico', 'básico', 'limpio', 'minimal', 'universidad', 'u'] },
 ]
 
-const HOT_CONTEXT_TERMS = ['playa', 'calor', 'caliente', 'tropical', 'verano', 'fresco', 'fresca']
-const SKATE_TERMS = ['skate', 'skater', 'patineta', 'cargo', 'baggy', 'jogger', 'corte bota', 'pantalon', 'pantalones', 'streetwear', 'urbano']
-const GUANACASTE_TERMS = ['guanacaste', 'nicoya', 'liberia', 'nosara', 'samara', 'sámara', 'tamarindo', 'flamingo']
-const COLD_CONTEXT_TERMS = ['frio', 'frío', 'fria', 'fría', 'frente frio', 'frente frío', 'mucho frio', 'mucho frío']
-const FORMAL_CONTEXT_TERMS = ['formal', 'traje', 'oficina formal', 'boda', 'corbata']
+const HOT_CONTEXT_TERMS = [
+    'playa',
+    'calor',
+    'caliente',
+    'tropical',
+    'verano',
+    'fresco',
+    'fresca',
+]
 
-const HUMAN_SUPPORT_TERMS = [
+const SKATE_TERMS = [
+    'skate',
+    'skater',
+    'patineta',
+    'cargo',
+    'baggy',
+    'jogger',
+    'corte bota',
+    'pantalon',
+    'pantalones',
+    'streetwear',
+    'urbano',
+]
+
+const GUANACASTE_TERMS = [
+    'guanacaste',
+    'nicoya',
+    'liberia',
+    'nosara',
+    'samara',
+    'sámara',
+    'tamarindo',
+    'flamingo',
+    'santa cruz',
+    'cañas',
+    'carrillo',
+    'playa',
+]
+
+const COLD_CONTEXT_TERMS = [
+    'frio',
+    'frío',
+    'fria',
+    'fría',
+    'frente frio',
+    'frente frío',
+    'mucho frio',
+    'mucho frío',
+]
+
+const FORMAL_CONTEXT_TERMS = [
+    'formal',
+    'traje',
+    'oficina formal',
+    'boda',
+    'corbata',
+]
+
+const ATTENTION_TERMS = [
+    'hay alguien atendiendo',
+    'alguien atiende',
+    'alguien atendiendo',
+    'estan atendiendo',
+    'están atendiendo',
+    'me atienden',
+    'atienden ahora',
+    'necesito hablar con alguien',
+    'quiero hablar con alguien',
+    'persona real',
+    'empleado real',
+    'asesor real',
+    'humano',
+    'servicio al cliente',
+    'soporte',
+    'atencion humana',
+    'atención humana',
+]
+
+const HOURS_TERMS = [
+    'horario',
+    'horarios',
+    'horario de atencion',
+    'horario de atención',
+    'a que hora abren',
+    'a qué hora abren',
+    'a que hora cierran',
+    'a qué hora cierran',
+    'estan abiertos',
+    'están abiertos',
+    'esta abierto',
+    'está abierto',
+    'abren hoy',
+    'cierran hoy',
+    'hora de apertura',
+    'hora de cierre',
+]
+
+const CONTACT_TERMS = [
+    'contacto',
+    'contactarlos',
+    'contactar',
+    'telefono',
+    'teléfono',
+    'numero',
+    'número',
+    'whatsapp',
+    'insta',
+    'instagram',
+    'facebook',
+    'redes sociales',
+    'como los contacto',
+    'cómo los contacto',
+    'como contacto la tienda',
+    'cómo contacto la tienda',
+]
+
+const SMALL_TALK_TERMS = [
+    'gracias',
+    'muchas gracias',
+    'ok',
+    'okay',
+    'esta bien',
+    'está bien',
+    'todo bien',
+    'perfecto',
+    'listo',
+    'dale',
+    'pura vida',
+    'entiendo',
+    'comprendo',
+    'genial',
+    'excelente',
+]
+
+const LOCATION_TERMS = [
+    'donde estan',
+    'dónde están',
+    'donde se ubican',
+    'dónde se ubican',
+    'ubicacion',
+    'ubicación',
+    'direccion',
+    'dirección',
+    'donde quedan',
+    'dónde quedan',
+    'local',
+    'tienda fisica',
+    'tienda física',
+    'sucursal',
+]
+
+const SHIPPING_TERMS = [
+    'envio',
+    'envío',
+    'envios',
+    'envíos',
+    'enviar',
+    'entrega',
+    'mandan',
+    'mandar',
+    'delivery',
+]
+
+const OUTSIDE_GUANACASTE_TERMS = [
+    'san jose',
+    'san josé',
+    'cartago',
+    'heredia',
+    'alajuela',
+    'limon',
+    'limón',
+    'puntarenas',
+    'nacional',
+    'todo costa rica',
+    'fuera de guanacaste',
+    'otra provincia',
+    'fuera',
+]
+
+const WARRANTY_TERMS = [
+    'garantia',
+    'garantía',
+    'garantias',
+    'garantías',
+    'garantizan',
+    'garantiza',
+    'defecto',
+    'defectuoso',
+    'producto defectuoso',
+    'vino malo',
+    'vino dañado',
+    'vino dañada',
+    'dañado',
+    'dañada',
+    'fallo de fabrica',
+    'fallo de fábrica',
+]
+
+const RETURN_TERMS = [
+    'devolucion',
+    'devolución',
+    'devoluciones',
+    'cambio',
+    'cambios',
+    'cambiar producto',
+    'quiero cambiar',
+    'quiero devolver',
+    'devolver producto',
+    'reembolso',
+    'me arrepenti',
+    'me arrepentí',
+]
+
+const PAYMENT_TERMS = [
+    'pago',
+    'pagos',
+    'tarjeta',
+    'transferencia',
+    'sinpe',
+    'contra entrega',
+    'efectivo',
+]
+
+const PAYMENT_PROBLEM_TERMS = [
+    'pago fallido',
+    'fallo el pago',
+    'falló el pago',
+    'problema con el pago',
+    'error de pago',
+    'error de cobro',
+    'me cobraron',
+    'cobro doble',
+    'cobro incorrecto',
+    'transaccion fallida',
+    'transacción fallida',
+]
+
+const ORDER_TERMS = [
     'donde esta mi pedido',
     'dónde está mi pedido',
     'estado de mi pedido',
     'seguimiento de pedido',
+    'rastrear pedido',
+    'mi pedido',
     'mi compra',
-    'problema con mi compra',
-    'reclamo',
-    'queja',
-    'pago fallido',
-    'fallo el pago',
-    'falló el pago',
-    'error de cobro',
-    'me cobraron',
-    'cobro doble',
-    'devolucion de mi pedido',
-    'devolución de mi pedido',
-    'cambio de mi pedido',
+    'mi orden',
+    'numero de orden',
+    'número de orden',
+    'numero de pedido',
+    'número de pedido',
+    'pedido que hice',
+    'compra que hice',
+]
+
+const DISCOUNT_TERMS = [
+    'descuento',
+    'descuentos',
     'descuento personalizado',
+    'descuento especial',
+    'rebaja',
+    'rebajas',
+    'oferta',
+    'ofertas',
+    'promo',
+    'promos',
+    'promocion',
+    'promoción',
+    'promociones',
+    'mejor precio',
+    'precio especial',
+    'promocion personalizada',
+    'promoción personalizada',
+]
+
+const RESERVATION_TERMS = [
     'reservar',
     'reserva',
+    'apartado',
+    'apartar',
+    'guardar producto',
+    'guardar una prenda',
+]
+
+const STOCK_EXACT_TERMS = [
     'stock exacto',
     'stock en tiempo real',
+    'disponible ahorita',
+    'hay ahorita',
+    'queda disponible',
+    'quedan disponibles',
+    'cuantas quedan',
+    'cuántas quedan',
+    'confirmar stock',
+]
+
+const SENSITIVE_TERMS = [
     'datos personales',
     'cedula',
     'cédula',
     'tarjeta completa',
+    'numero de tarjeta',
+    'número de tarjeta',
+    'direccion exacta',
+    'dirección exacta',
+]
+
+const COMPLAINT_TERMS = [
+    'reclamo',
+    'queja',
+    'molesto',
+    'molesta',
+    'mala experiencia',
+    'no me resolvieron',
+    'problema con mi compra',
+    'quiero reclamar',
 ]
 
 const OUT_OF_CATALOG_TERMS = [
     'zapatos de ganadero',
     'zapato de ganadero',
+    'botas ganaderas',
+    'bota ganadera',
     'botas vaqueras',
     'bota vaquera',
     'botas de trabajo',
@@ -271,12 +575,132 @@ const productReason = (product: Product) => {
 
 const getHumanSupportReply = (): StructuredReply => ({
     content:
-        'Esta consulta necesita revisión de un empleado de la tienda.\nYo puedo ayudarte mientras tanto con productos, outfits, precios o categorías.\nDejá el detalle para que el equipo lo revise en horario de atención.',
+        'Esta consulta necesita revisión de un empleado de la tienda.\n' +
+        'Yo puedo ayudarte mientras tanto con productos, outfits, precios o categorías.\n' +
+        'Dejá el detalle para que el equipo lo revise en horario de atención.',
+})
+
+const getAttentionReply = (): StructuredReply => ({
+    content:
+        'Puede que en este momento no haya personal disponible.\n' +
+        'Yo puedo ayudarte con productos, outfits, precios, envíos y categorías.\n' +
+        'Si ocupás atención humana, dejá el detalle para que el equipo lo revise luego.',
+})
+
+const getHoursReply = (): StructuredReply => ({
+    content:
+        'El horario puede variar según la disponibilidad del equipo.\n' +
+        'Podés dejar tu consulta y un empleado la revisará en horario de atención.\n' +
+        'Mientras tanto, puedo ayudarte con productos, precios, envíos o categorías.',
+})
+
+const getContactReply = (): StructuredReply => ({
+    content:
+        'Para contacto directo, lo mejor es que un empleado de la tienda revise tu consulta.\n' +
+        'Yo no puedo confirmar teléfonos, WhatsApp o redes si no están definidos en el sistema.\n' +
+        'Mientras tanto, puedo ayudarte con productos, precios, envíos o categorías.',
+})
+
+const getSmallTalkReply = (): StructuredReply => ({
+    content:
+        '¡Pura vida!\n' +
+        'Si ocupás algo más, puedo ayudarte con productos, precios, outfits, envíos o categorías.',
+})
+
+const getLocationReply = (): StructuredReply => ({
+    content:
+        'Estamos en Nicoya, Guanacaste, cerca del parque central de Nicoya.\n' +
+        'Por ahora realizamos envíos dentro de Guanacaste.\n' +
+        'Si querés, puedo ayudarte a revisar productos del catálogo.',
+})
+
+const getShippingReply = (text: string): StructuredReply => {
+    if (includesAny(text, OUTSIDE_GUANACASTE_TERMS)) {
+        return {
+            content:
+                'Por ahora manejamos envíos dentro de Guanacaste.\n' +
+                'Para envíos fuera de la provincia, lo mejor es que un empleado de la tienda lo revise.\n' +
+                'Puedo ayudarte mientras tanto con productos o precios.',
+        }
+    }
+
+    return {
+        content:
+            'Realizamos envíos dentro de Guanacaste.\n' +
+            'Si tu dirección es en otra provincia, lo mejor es consultarlo con un empleado de la tienda.\n' +
+            'Mientras tanto puedo ayudarte con productos, precios o categorías.',
+    }
+}
+
+const getWarrantyReply = (): StructuredReply => ({
+    content:
+        'Sí, puedo orientarte con garantías generales.\n' +
+        'Si el producto presenta un defecto, debe revisarlo un empleado de la tienda.\n' +
+        'Dejá el detalle para que el equipo lo revise en horario de atención.',
+})
+
+const getReturnReply = (text: string): StructuredReply => {
+    if (includesAny(text, ['mi pedido', 'mi compra', 'orden', 'reembolso', 'quiero devolver', 'quiero cambiar'])) {
+        return {
+            content:
+                'Para cambios o devoluciones de una compra específica, debe ayudarte un empleado.\n' +
+                'Yo puedo orientarte de forma general, pero no revisar pedidos.\n' +
+                'Dejá el detalle para que el equipo lo revise en horario de atención.',
+        }
+    }
+
+    return {
+        content:
+            'Puedo orientarte sobre cambios y devoluciones generales.\n' +
+            'La prenda debe conservar su estado original y cumplir las condiciones de la tienda.\n' +
+            'Si es un caso específico, debe revisarlo un empleado.',
+    }
+}
+
+const getPaymentReply = (text: string): StructuredReply => {
+    if (includesAny(text, PAYMENT_PROBLEM_TERMS)) {
+        return {
+            content:
+                'Para problemas de pago o cobros, lo mejor es que te atienda un empleado real.\n' +
+                'Yo puedo orientarte de forma general, pero no revisar transacciones.\n' +
+                'Dejá el detalle para que el equipo lo revise en horario de atención.',
+        }
+    }
+
+    return {
+        content:
+            'Aceptamos tarjeta, transferencia y pago contra entrega, según disponibilidad.\n' +
+            'Si hubo un problema de cobro, debe revisarlo un empleado.\n' +
+            'Yo puedo ayudarte con productos o presupuestos mientras tanto.',
+    }
+}
+
+const getOrderReply = (): StructuredReply => ({
+    content:
+        'Para revisar el estado exacto de tu pedido, debe ayudarte un empleado de la tienda.\n' +
+        'Yo no puedo consultar pedidos específicos desde aquí.\n' +
+        'Mientras tanto, puedo ayudarte con productos, precios o categorías.',
+})
+
+const getDiscountReply = (): StructuredReply => ({
+    content:
+        'Los descuentos o promociones deben confirmarlos un empleado de la tienda.\n' +
+        'Mientras tanto, puedo ayudarte a buscar opciones según tu presupuesto.\n' +
+        'Decime cuánto querés gastar y te recomiendo algo del catálogo.',
+})
+
+const getReservationReply = (): StructuredReply => ({
+    content:
+        'Para reservar o apartar productos, debe confirmarlo un empleado de la tienda.\n' +
+        'Yo puedo mostrarte opciones del catálogo, pero no asegurar apartados.\n' +
+        'Dejá el detalle para que el equipo lo revise en horario de atención.',
 })
 
 const getAvailabilityReply = (): StructuredReply => ({
     content:
-        'Para confirmar stock exacto en tiempo real, debe ayudarte un empleado de la tienda.\nYo solo puedo guiarte con el catálogo disponible aquí.\nMientras tanto, puedo mostrarte productos, precios o categorías.',
+        'Para confirmar stock exacto en tiempo real, debe ayudarte un empleado de la tienda.\n' +
+        'Yo solo puedo guiarte con el catálogo disponible aquí.\n' +
+        'Mientras tanto, puedo mostrarte productos, precios o categorías.',
 })
 
 const getHotClimateReply = (): StructuredReply => {
@@ -295,18 +719,21 @@ const getHotClimateReply = (): StructuredReply => {
 
 const getColdWeatherReply = (): StructuredReply => ({
     content:
-        'En este catálogo no veo prendas pensadas para frío fuerte.\nLo más cercano sería una camisa amplia o sobrecamisa, si buscás algo más cubierto.\nTe puedo mostrar Camisas.',
+        'En este catálogo no veo prendas pensadas para frío fuerte.\n' +
+        'Lo más cercano sería una camisa amplia o sobrecamisa, si buscás algo más cubierto.\n' +
+        'Te puedo mostrar Camisas.',
     action: buildCatalogAction('Ver camisas', 'camisas'),
 })
 
 const getFormalReply = (): StructuredReply => ({
     content:
-        'Este catálogo no está enfocado en ropa formal.\nSí puedo ayudarte con un look casual premium masculino.\nTe recomiendo camisas limpias, pantalón recto y reloj.',
+        'Este catálogo no está enfocado en ropa formal.\n' +
+        'Sí puedo ayudarte con un look casual premium masculino.\n' +
+        'Te recomiendo camisas limpias, pantalón recto y reloj.',
     action: buildCatalogAction('Ver camisas', 'camisas'),
 })
 
 const getOutOfCatalogReply = (text: string): StructuredReply | null => {
-
     if (
         includesAny(text, ['zapatos', 'zapato', 'calzado'])
         && !includesAny(text, ['tenis', 'sneakers', 'zapatillas', 'calzado urbano', 'zapatos casuales'])
@@ -319,6 +746,7 @@ const getOutOfCatalogReply = (text: string): StructuredReply | null => {
             action: buildCatalogAction('Ver tenis', 'tenis'),
         }
     }
+
     if (!includesAny(text, OUT_OF_CATALOG_TERMS)) return null
 
     if (includesAny(text, ['zapatos de ganadero', 'zapato de ganadero'])) {
@@ -331,7 +759,18 @@ const getOutOfCatalogReply = (text: string): StructuredReply | null => {
         }
     }
 
-    if (includesAny(text, ['botas vaqueras', 'bota vaquera', 'botas de trabajo', 'bota de trabajo', 'botas de hule', 'bota de hule'])) {
+    if (
+        includesAny(text, [
+            'botas ganaderas',
+            'bota ganadera',
+            'botas vaqueras',
+            'bota vaquera',
+            'botas de trabajo',
+            'bota de trabajo',
+            'botas de hule',
+            'bota de hule',
+        ])
+    ) {
         return {
             content:
                 'En este momento no manejamos botas en el catálogo.\n' +
@@ -433,21 +872,59 @@ const getProductReply = (product: Product, label?: string): StructuredReply => (
     action: buildCatalogAction(label ?? `Ver ${CATEGORY_LABELS[product.categoria].toLowerCase()}`, product.categoria, product.colores[0]),
 })
 
-const isHumanSupportIntent = (text: string) => includesAny(text, HUMAN_SUPPORT_TERMS)
+const isAttentionIntent = (text: string) => includesAny(text, ATTENTION_TERMS)
+
+const isHoursIntent = (text: string) => includesAny(text, HOURS_TERMS)
+
+const isContactIntent = (text: string) => includesAny(text, CONTACT_TERMS)
+
+const isSmallTalkIntent = (text: string) => includesAny(text, SMALL_TALK_TERMS)
+
+const isLocationIntent = (text: string) => includesAny(text, LOCATION_TERMS)
+
+const isShippingIntent = (text: string) => includesAny(text, SHIPPING_TERMS)
+
+const isWarrantyIntent = (text: string) => includesAny(text, WARRANTY_TERMS)
+
+const isReturnIntent = (text: string) => includesAny(text, RETURN_TERMS)
+
+const isPaymentIntent = (text: string) => includesAny(text, PAYMENT_TERMS) || includesAny(text, PAYMENT_PROBLEM_TERMS)
+
+const isOrderIntent = (text: string) => includesAny(text, ORDER_TERMS)
+
+const isDiscountIntent = (text: string) => includesAny(text, DISCOUNT_TERMS)
+
+const isReservationIntent = (text: string) => includesAny(text, RESERVATION_TERMS)
+
+const isSensitiveIntent = (text: string) => includesAny(text, SENSITIVE_TERMS)
+
+const isComplaintIntent = (text: string) => includesAny(text, COMPLAINT_TERMS)
+
+const isHumanSupportIntent = (text: string) =>
+    isOrderIntent(text)
+    || isDiscountIntent(text)
+    || isReservationIntent(text)
+    || isSensitiveIntent(text)
+    || isComplaintIntent(text)
 
 const isAvailabilityIntent = (text: string) =>
-    (includesWord(text, 'stock') || includesWord(text, 'disponible') || includesWord(text, 'hay'))
-    && includesAny(text, ['exacto', 'tiempo real', 'ahorita', 'reservar', 'reserva'])
+    includesAny(text, STOCK_EXACT_TERMS)
+    || (
+        (includesWord(text, 'stock') || includesWord(text, 'disponible') || includesWord(text, 'hay'))
+        && includesAny(text, ['exacto', 'tiempo real', 'ahorita', 'reservar', 'reserva'])
+    )
 
 const isHotContext = (text: string) => includesAny(text, HOT_CONTEXT_TERMS)
+
 const isGuanacasteContext = (text: string) => includesAny(text, GUANACASTE_TERMS)
+
 const isSkateUrbanContext = (text: string) => includesAny(text, SKATE_TERMS)
+
 const isColdContext = (text: string) => includesAny(text, COLD_CONTEXT_TERMS)
+
 const isFormalContext = (text: string) => includesAny(text, FORMAL_CONTEXT_TERMS)
 
 const buildProductReply = (text: string): StructuredReply | null => {
-    if (isHumanSupportIntent(text)) return getHumanSupportReply()
-    if (isAvailabilityIntent(text)) return getAvailabilityReply()
     if (isColdContext(text)) return getColdWeatherReply()
     if (isFormalContext(text)) return getFormalReply()
 
@@ -476,7 +953,9 @@ const buildProductReply = (text: string): StructuredReply | null => {
 
         return {
             content:
-                'Para un outfit urbano limpio, usá camisa oversized, pantalón recto y tenis sobrios.\nFunciona mejor para ciudad o la U que para clima caliente.\nPodés empezar revisando Camisas.',
+                'Para un outfit urbano limpio, usá camisa oversized, pantalón recto y tenis sobrios.\n' +
+                'Funciona mejor para ciudad o la U que para clima caliente.\n' +
+                'Podés empezar revisando Camisas.',
             action: buildAction('Ver catálogo masculino', '/hombre'),
         }
     }
@@ -545,52 +1024,24 @@ export const getStructuredReply = (rawText: string): StructuredReply | null => {
     const outOfCatalogReply = getOutOfCatalogReply(text)
     if (outOfCatalogReply) return outOfCatalogReply
 
+     if (isSmallTalkIntent(text)) return getSmallTalkReply()
+    if (isAttentionIntent(text)) return getAttentionReply()
+    if (isHoursIntent(text)) return getHoursReply()
+    if (isContactIntent(text)) return getContactReply()
+    if (isLocationIntent(text)) return getLocationReply()
+    if (isShippingIntent(text)) return getShippingReply(text)
+    if (isWarrantyIntent(text)) return getWarrantyReply()
+    if (isReturnIntent(text)) return getReturnReply(text)
+    if (isPaymentIntent(text)) return getPaymentReply(text)
+    if (isAvailabilityIntent(text)) return getAvailabilityReply()
+    if (isOrderIntent(text)) return getOrderReply()
+    if (isDiscountIntent(text)) return getDiscountReply()
+    if (isReservationIntent(text)) return getReservationReply()
+    if (isHumanSupportIntent(text)) return getHumanSupportReply()
+
+
     const productReply = buildProductReply(text)
     if (productReply) return productReply
-
-    if (includesAny(text, ['hay alguien atendiendo', 'alguien atiende', 'estan atendiendo', 'están atendiendo', 'horario de atencion', 'horario de atención'])) {
-        return {
-            content:
-                'Puede que en este momento no haya personal disponible.\nYo puedo ayudarte con productos, outfits, precios, envíos y categorías.\nSi ocupás atención humana, dejá el detalle para que el equipo lo revise luego.',
-        }
-    }
-
-    if (includesWord(text, 'envio') || includesWord(text, 'envíos') || includesWord(text, 'enviar') || includesWord(text, 'entrega')) {
-        const outsideTerms = ['san jose', 'san josé', 'cartago', 'heredia', 'alajuela', 'limon', 'limón', 'puntarenas', 'nacional', 'todo costa rica', 'fuera']
-
-        if (includesAny(text, outsideTerms)) {
-            return {
-                content:
-                    'Por ahora manejamos envíos dentro de Guanacaste.\nPara envíos fuera de la provincia, lo mejor es que un empleado de la tienda lo revise.\nPuedo ayudarte mientras tanto con productos o precios.',
-            }
-        }
-
-        return {
-            content:
-                'Realizamos envíos dentro de Guanacaste.\nSi tu dirección es en otra provincia, lo mejor es consultarlo con un empleado de la tienda.\nMientras tanto puedo ayudarte con productos, precios o categorías.',
-        }
-    }
-
-    if (includesAny(text, ['donde estan', 'dónde están', 'donde se ubican', 'dónde se ubican', 'ubicacion', 'ubicación', 'direccion', 'dirección', 'donde quedan', 'dónde quedan'])) {
-        return {
-            content:
-                'Estamos en Nicoya, Guanacaste, cerca del parque central de Nicoya.\nPor ahora realizamos envíos dentro de Guanacaste.\nSi querés, puedo ayudarte a revisar productos del catálogo.',
-        }
-    }
-
-    if (includesWord(text, 'devol')) {
-        return {
-            content:
-                'Puedo orientarte sobre devoluciones generales.\nSi es sobre un pedido específico, debe revisarlo un empleado.\nLa prenda debe conservar su estado original.',
-        }
-    }
-
-    if (includesWord(text, 'pago') || includesWord(text, 'tarjeta') || includesWord(text, 'transferencia')) {
-        return {
-            content:
-                'Aceptamos tarjeta, transferencia y pago contra entrega, según disponibilidad.\nSi hubo un problema de cobro, debe revisarlo un empleado.\nYo puedo ayudarte con productos o presupuestos mientras tanto.',
-        }
-    }
 
     return null
 }
