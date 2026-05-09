@@ -36,10 +36,33 @@ const normalizeText = (value: string) =>
         .toLowerCase()
         .trim()
 
-const includesWord = (text: string, value: string) => normalizeText(text).includes(normalizeText(value))
+const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
-const includesAny = (text: string, terms: string[]) =>
-    terms.some((term) => includesWord(text, term))
+const includesTerm = (text: string, term: string) => {
+    const normalizedText = normalizeText(text)
+    const normalizedTerm = normalizeText(term)
+
+    if (!normalizedText || !normalizedTerm) return false
+
+    const tokens = normalizedTerm.split(/[^a-z0-9]+/).filter(Boolean)
+    if (!tokens.length) return false
+
+    const pattern = tokens.map(escapeRegExp).join('[^a-z0-9]+')
+    const regex = new RegExp(`(^|[^a-z0-9])${pattern}($|[^a-z0-9])`)
+
+    return regex.test(normalizedText)
+}
+
+const includesAny = (text: string, terms: string[]) => terms.some((term) => includesTerm(text, term))
+
+const isStandaloneIntent = (text: string, terms: string[]) => {
+    const normalizedText = normalizeText(text)
+        .replace(/[^a-z0-9\s]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+
+    return terms.some((term) => normalizedText === normalizeText(term))
+}
 
 const COLOR_ALIASES = [
     { color: 'negro', terms: ['negro', 'black', 'blackout', 'oscuro'] },
@@ -223,8 +246,11 @@ const HOURS_TERMS = [
 
 const CONTACT_TERMS = [
     'contacto',
+    'contacto de la tienda',
     'contactarlos',
     'contactar',
+    'numero de telefono',
+    'numero de whatsapp',
     'telefono',
     'teléfono',
     'numero',
@@ -254,6 +280,7 @@ const SMALL_TALK_TERMS = [
     'pura vida',
     'entiendo',
     'comprendo',
+    'entendido',
     'genial',
     'excelente',
 ]
@@ -285,6 +312,7 @@ const SHIPPING_TERMS = [
     'mandan',
     'mandar',
     'delivery',
+    'entrega a domicilio',
 ]
 
 const OUTSIDE_GUANACASTE_TERMS = [
@@ -343,8 +371,14 @@ const PAYMENT_TERMS = [
     'tarjeta',
     'transferencia',
     'sinpe',
+    'sinpe movil',
+    'sinpe móvil',
+    'comprobante',
+    'factura',
+    'pago contra entrega',
     'contra entrega',
     'efectivo',
+    'cobro',
 ]
 
 const PAYMENT_PROBLEM_TERMS = [
@@ -357,6 +391,9 @@ const PAYMENT_PROBLEM_TERMS = [
     'me cobraron',
     'cobro doble',
     'cobro incorrecto',
+    'problema con el cobro',
+    'comprobante',
+    'factura',
     'transaccion fallida',
     'transacción fallida',
 ]
@@ -376,6 +413,7 @@ const ORDER_TERMS = [
     'número de pedido',
     'pedido que hice',
     'compra que hice',
+    'cancelar pedido',
 ]
 
 const DISCOUNT_TERMS = [
@@ -412,11 +450,28 @@ const STOCK_EXACT_TERMS = [
     'stock en tiempo real',
     'disponible ahorita',
     'hay ahorita',
+    'hay talla',
+    'queda talla',
+    'queda en talla',
     'queda disponible',
     'quedan disponibles',
     'cuantas quedan',
     'cuántas quedan',
     'confirmar stock',
+    'quedan 1',
+    'quedan 2',
+    'ultima unidad',
+    'última unidad',
+    'agotado',
+    'agotada',
+    'talla exacta',
+    'hay en 38',
+    'hay en 39',
+    'hay en 40',
+    'hay en 41',
+    'hay en 42',
+    'hay en 43',
+    'hay en 44',
 ]
 
 const SENSITIVE_TERMS = [
@@ -477,13 +532,13 @@ const formatNames = (items: Product[], limit = 2) =>
     items.slice(0, limit).map((item) => item.nombre).join(' o ')
 
 const detectCategoria = (text: string): Categoria | undefined =>
-    CATEGORY_KEYWORDS.find(({ terms }) => terms.some((term) => includesWord(text, term)))?.categoria
+    CATEGORY_KEYWORDS.find(({ terms }) => terms.some((term) => includesTerm(text, term)))?.categoria
 
 const detectStyle = (text: string): Estilo | undefined =>
-    STYLE_KEYWORDS.find(({ terms }) => terms.some((term) => includesWord(text, term)))?.estilo
+    STYLE_KEYWORDS.find(({ terms }) => terms.some((term) => includesTerm(text, term)))?.estilo
 
 const detectColor = (text: string): string | undefined =>
-    COLOR_ALIASES.find(({ terms }) => terms.some((term) => includesWord(text, term)))?.color
+    COLOR_ALIASES.find(({ terms }) => terms.some((term) => includesTerm(text, term)))?.color
 
 const detectBudget = (text: string): number | undefined => {
     const budgetMatch = normalizeText(text).match(/(?:₡|crc|colones|presupuesto|tengo|con)?\s*(\d{2,3})(?:[.,\s]?(\d{3}))?/)
@@ -517,6 +572,13 @@ const scoreMatch = (product: Product, tokens: string[]): number => {
     }
 
     return score / tokens.length
+}
+
+const hasSizeStockIntent = (text: string) => {
+    const normalizedText = normalizeText(text)
+
+    return /\b(hay|queda|quedan)\b[^.!?\n]*\b(talla|xs|s|m|l|xl|38|39|40|41|42|43|44)\b/.test(normalizedText)
+        || /\btalla\b[^.!?\n]*\b(exacta|xs|s|m|l|xl|38|39|40|41|42|43|44)\b/.test(normalizedText)
 }
 
 const MIN_SCORE = 0.45
@@ -734,6 +796,37 @@ const getFormalReply = (): StructuredReply => ({
 })
 
 const getOutOfCatalogReply = (text: string): StructuredReply | null => {
+    if (includesAny(text, ['zapatos de ganadero', 'zapato de ganadero'])) {
+        return {
+            content:
+                'En este momento no manejamos zapatos de ganadero.\n' +
+                'El catálogo está enfocado en moda masculina urbana, no en calzado de trabajo.\n' +
+                'Si querés, puedo mostrarte el catálogo masculino disponible.',
+            action: buildAction('Ver catálogo masculino', '/hombre'),
+        }
+    }
+
+    if (
+        includesAny(text, [
+            'botas ganaderas',
+            'bota ganadera',
+            'botas vaqueras',
+            'bota vaquera',
+            'botas de trabajo',
+            'bota de trabajo',
+            'botas de hule',
+            'bota de hule',
+        ])
+    ) {
+        return {
+            content:
+                'En este momento no manejamos botas en el catálogo.\n' +
+                'La tienda está enfocada en moda masculina urbana, no en botas de trabajo o vaqueras.\n' +
+                'Si querés, puedo mostrarte el catálogo masculino disponible.',
+            action: buildAction('Ver catálogo masculino', '/hombre'),
+        }
+    }
+
     if (
         includesAny(text, ['zapatos', 'zapato', 'calzado'])
         && !includesAny(text, ['tenis', 'sneakers', 'zapatillas', 'calzado urbano', 'zapatos casuales'])
@@ -876,13 +969,25 @@ const isAttentionIntent = (text: string) => includesAny(text, ATTENTION_TERMS)
 
 const isHoursIntent = (text: string) => includesAny(text, HOURS_TERMS)
 
-const isContactIntent = (text: string) => includesAny(text, CONTACT_TERMS)
+const isContactIntent = (text: string) =>
+    !isOrderIntent(text)
+    && (
+        includesAny(text, [
+            'contacto de la tienda',
+            'numero de telefono',
+            'número de teléfono',
+            'numero de whatsapp',
+            'número de WhatsApp',
+        ])
+        || (includesAny(text, CONTACT_TERMS) && !includesAny(text, ['numero', 'número']))
+    )
 
-const isSmallTalkIntent = (text: string) => includesAny(text, SMALL_TALK_TERMS)
+const isSmallTalkIntent = (text: string) => isStandaloneIntent(text, SMALL_TALK_TERMS)
 
 const isLocationIntent = (text: string) => includesAny(text, LOCATION_TERMS)
 
-const isShippingIntent = (text: string) => includesAny(text, SHIPPING_TERMS)
+const isShippingIntent = (text: string) =>
+    includesAny(text, SHIPPING_TERMS) && !includesAny(text, ['contra entrega', 'pago contra entrega'])
 
 const isWarrantyIntent = (text: string) => includesAny(text, WARRANTY_TERMS)
 
@@ -900,19 +1005,13 @@ const isSensitiveIntent = (text: string) => includesAny(text, SENSITIVE_TERMS)
 
 const isComplaintIntent = (text: string) => includesAny(text, COMPLAINT_TERMS)
 
-const isHumanSupportIntent = (text: string) =>
-    isOrderIntent(text)
-    || isDiscountIntent(text)
-    || isReservationIntent(text)
-    || isSensitiveIntent(text)
-    || isComplaintIntent(text)
-
 const isAvailabilityIntent = (text: string) =>
     includesAny(text, STOCK_EXACT_TERMS)
     || (
-        (includesWord(text, 'stock') || includesWord(text, 'disponible') || includesWord(text, 'hay'))
+        (includesTerm(text, 'stock') || includesTerm(text, 'disponible') || includesTerm(text, 'hay'))
         && includesAny(text, ['exacto', 'tiempo real', 'ahorita', 'reservar', 'reserva'])
-    )
+     )
+    || hasSizeStockIntent(text)
 
 const isHotContext = (text: string) => includesAny(text, HOT_CONTEXT_TERMS)
 
@@ -929,7 +1028,7 @@ const buildProductReply = (text: string): StructuredReply | null => {
     if (isFormalContext(text)) return getFormalReply()
 
     const budget = detectBudget(text)
-    if (budget && (includesWord(text, 'presupuesto') || includesWord(text, 'tengo') || includesWord(text, 'colones') || text.includes('₡'))) {
+    if (budget && (includesTerm(text, 'presupuesto') || includesTerm(text, 'tengo') || includesTerm(text, 'colones') || text.includes('₡'))) {
         return getBudgetReply(budget)
     }
 
@@ -948,7 +1047,7 @@ const buildProductReply = (text: string): StructuredReply | null => {
     const resolvedCategoria = categoria ?? inferredDirectProduct?.categoria ?? inferCategoriaFromStyle(estilo)
     const color = detectColor(text)
 
-    if (includesWord(text, 'outfit') || includesWord(text, 'fit') || includesWord(text, 'look') || includesWord(text, 'combinar')) {
+    if (includesTerm(text, 'outfit') || includesTerm(text, 'fit') || includesTerm(text, 'look') || includesTerm(text, 'combinar')) {
         if (estilo) return getStyleOutfitReply(estilo)
 
         return {
@@ -1019,25 +1118,25 @@ const buildProductReply = (text: string): StructuredReply | null => {
 }
 
 export const getStructuredReply = (rawText: string): StructuredReply | null => {
-    const text = rawText.toLowerCase()
+    const text = rawText
 
-    const outOfCatalogReply = getOutOfCatalogReply(text)
-    if (outOfCatalogReply) return outOfCatalogReply
-
-     if (isSmallTalkIntent(text)) return getSmallTalkReply()
+    if (isSmallTalkIntent(text)) return getSmallTalkReply()
+    if (isComplaintIntent(text) || isSensitiveIntent(text)) return getHumanSupportReply()
+    if (isOrderIntent(text)) return getOrderReply()
+    if (isPaymentIntent(text)) return getPaymentReply(text)
+    if (isReturnIntent(text)) return getReturnReply(text)
+    if (isWarrantyIntent(text)) return getWarrantyReply()
+    if (isDiscountIntent(text)) return getDiscountReply()
+    if (isReservationIntent(text)) return getReservationReply()
+    if (isAvailabilityIntent(text)) return getAvailabilityReply()
     if (isAttentionIntent(text)) return getAttentionReply()
     if (isHoursIntent(text)) return getHoursReply()
     if (isContactIntent(text)) return getContactReply()
     if (isLocationIntent(text)) return getLocationReply()
     if (isShippingIntent(text)) return getShippingReply(text)
-    if (isWarrantyIntent(text)) return getWarrantyReply()
-    if (isReturnIntent(text)) return getReturnReply(text)
-    if (isPaymentIntent(text)) return getPaymentReply(text)
-    if (isAvailabilityIntent(text)) return getAvailabilityReply()
-    if (isOrderIntent(text)) return getOrderReply()
-    if (isDiscountIntent(text)) return getDiscountReply()
-    if (isReservationIntent(text)) return getReservationReply()
-    if (isHumanSupportIntent(text)) return getHumanSupportReply()
+
+    const outOfCatalogReply = getOutOfCatalogReply(text)
+    if (outOfCatalogReply) return outOfCatalogReply
 
 
     const productReply = buildProductReply(text)
