@@ -1,10 +1,11 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createRoute } from '@tanstack/react-router'
 import FilterSidebar from '../../components/filters/FilterSidebar'
 import Pagination from '../../components/product/Pagination'
 import ProductGrid from '../../components/product/ProductGrid'
 import { CATEGORY_LABELS, GENDER_LABELS, getProductsByCategory } from '../../data/products'
-import { isValidCategoryForGender, parseCatalogSearch, useProductCatalog } from '../../hooks/useProductCatalog'
-import type { Categoria } from '../../models/types/product'
+import { getCategoryFilterConfig, isValidCategoryForGender, parseCatalogSearch, useProductCatalog } from '../../hooks/useProductCatalog'
+import type { Categoria } from '../../models/Index'
 import { rootRoute } from '../__root'
 
 const HombreCategoriaPage = () => {
@@ -14,7 +15,11 @@ const HombreCategoriaPage = () => {
     const categoryIsValid = isValidCategoryForGender('hombre', params.categoria)
     const category: Categoria = categoryIsValid ? (params.categoria as Categoria) : 'camisas'
     const items = getProductsByCategory('hombre', category)
-    const catalog = useProductCatalog(items, search)
+    const filterConfig = getCategoryFilterConfig(category)
+    const effectiveSearch = search.talla && !filterConfig.options.includes(search.talla)
+        ? { ...search, talla: undefined }
+        : search
+    const catalog = useProductCatalog(items, effectiveSearch)
 
     const updateSearch = (patch: Partial<typeof search>) => {
         navigate({
@@ -40,14 +45,15 @@ const HombreCategoriaPage = () => {
                 <p className="text-sm font-medium uppercase tracking-[0.2em] text-text-muted">{GENDER_LABELS.hombre}</p>
                 <h1 className="section-title">{CATEGORY_LABELS[category]}</h1>
                 <p className="section-copy">
-                    Catálogo de {CATEGORY_LABELS[category].toLowerCase()} con filtros por talla, color, rango de precio y
-                    paginación de 12 productos por página.
+                    Catálogo de {CATEGORY_LABELS[category].toLowerCase()} para outfits masculinos urbanos con filtros por
+                    {` ${filterConfig.label.toLowerCase()}`}, color, rango de precio y paginación.
                 </p>
             </div>
 
             <div className="grid gap-8 lg:grid-cols-[280px_minmax(0,1fr)]">
                 <FilterSidebar
                     search={search}
+                    category={category}
                     colorOptions={catalog.colors}
                     onChange={updateSearch}
                     onReset={resetFilters}

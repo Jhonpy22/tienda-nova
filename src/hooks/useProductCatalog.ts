@@ -1,10 +1,24 @@
 import { CATEGORY_BY_GENDER } from '../data/products'
-import type { CatalogSearch, Categoria, Genero, Product, SortOption, Talla } from '../models/Index';
+import type { CatalogSearch, Categoria, Genero, Product, SortOption, Talla } from '../models/Index'
 
 export const PRODUCTS_PER_PAGE = 6
 
 const SORT_OPTIONS: SortOption[] = ['newest', 'price-asc', 'price-desc']
-const SIZE_OPTIONS: Talla[] = ['S', 'M', 'L', 'XL']
+export const FILTER_OPTIONS_BY_CATEGORY: Record<Categoria, { label: string; allLabel: string; options: Talla[] }> = {
+    camisas: { label: 'Talla', allLabel: 'Todas', options: ['S', 'M', 'L', 'XL'] },
+    shorts: { label: 'Talla', allLabel: 'Todas', options: ['S', 'M', 'L', 'XL'] },
+    pantalones: { label: 'Talla', allLabel: 'Todas', options: ['S', 'M', 'L', 'XL'] },
+    tenis: { label: 'Talla de calzado', allLabel: 'Todas', options: ['38', '39', '40', '41', '42', '43', '44'] },
+    relojes: { label: 'Tipo', allLabel: 'Todos', options: ['Acero', 'Cuero', 'Deportivo', 'Minimalista', 'Clásico'] },
+    'lentes-sol': { label: 'Estilo', allLabel: 'Todos', options: ['Negros', 'Polarizados', 'Redondos', 'Rectangulares', 'Smoke'] },
+    accesorios: { label: 'Tipo', allLabel: 'Todos', options: ['Gorras', 'Cadenas', 'Bolsos', 'Billeteras', 'Cinturones'] },
+}
+
+const FILTER_OPTIONS = Array.from(
+    new Set(Object.values(FILTER_OPTIONS_BY_CATEGORY).flatMap((group) => group.options)),
+)
+
+export const getCategoryFilterConfig = (categoria: Categoria) => FILTER_OPTIONS_BY_CATEGORY[categoria]
 
 const toPositiveNumber = (value: unknown) => {
     const parsed = Number(value)
@@ -18,7 +32,7 @@ export const parseCatalogSearch = (search: Record<string, unknown>): CatalogSear
         ? (search.sort as SortOption)
         : 'newest'
 
-    const tallaValue = typeof search.talla === 'string' && SIZE_OPTIONS.includes(search.talla as Talla)
+    const tallaValue = typeof search.talla === 'string' && FILTER_OPTIONS.includes(search.talla as Talla)
         ? (search.talla as Talla)
         : undefined
 

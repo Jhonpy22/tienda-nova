@@ -7,15 +7,17 @@ import type { Message, QuickSuggestion } from '../models/Index'
 const WELCOME_MESSAGE: Message = {
     role: 'assistant',
     content:
-        '¡Hola! Soy NovaBot, el asistente virtual de Tienda Nova. Estoy aquí para ayudarte con información sobre nuestros productos, métodos de pago, envíos, política de devoluciones y horarios de atención. ¿En qué puedo ayudarte hoy?',
+        'Hola, soy NovaBot.\nTe ayudo a armar outfits masculinos urbanos para Costa Rica, según tu estilo, clima o presupuesto.',
     timestamp: new Date().toLocaleTimeString('es-CR', { hour: '2-digit', minute: '2-digit' }),
 }
 
 export const QUICK_SUGGESTIONS: QuickSuggestion[] = [
-    { label: 'Camisas hombre', message: '¿Tienen camisas para hombre?' },
-    { label: 'Blusas mujer', message: 'Quiero ver blusas para mujer' },
-    { label: 'Pantalones', message: '¿Tienen pantalones o jeans?' },
-    { label: 'Envíos', message: '¿Cuánto tarda el envío?' },
+    { label: 'Fit baggy', message: 'Fit baggy' },
+    { label: 'Algo fresco', message: 'Quiero algo fresco' },
+    { label: 'Outfit para la U', message: 'Outfit para la U' },
+    { label: 'Presupuesto ₡40.000', message: 'Tengo un presupuesto de ₡40.000' },
+    { label: 'Ver camisas', message: 'Ver camisas oversized' },
+    { label: 'Ver tenis', message: 'Ver tenis urbanos' },
 ]
 
 export const useChat = () => {
@@ -82,7 +84,7 @@ export const useChat = () => {
                 ...prev,
                 {
                     role: 'assistant',
-                    content: 'Puedo ayudarte con categorías de hombre y mujer, productos, envíos, pagos y devoluciones. Si quieres, intenta con una consulta más específica.',
+                    content: 'Puedo ayudarte con outfits, productos, envíos, pagos o presupuesto.\nProbá con: “fit baggy” o “tengo ₡40.000”.',
                     timestamp: new Date().toLocaleTimeString('es-CR', { hour: '2-digit', minute: '2-digit' }),
                 },
             ])

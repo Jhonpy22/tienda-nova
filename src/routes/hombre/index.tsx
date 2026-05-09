@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Link, createRoute } from '@tanstack/react-router'
 import { CATEGORY_BY_GENDER, CATEGORY_LABELS } from '../../data/products'
 import { rootRoute } from '../__root'
@@ -5,11 +6,11 @@ import { rootRoute } from '../__root'
 const HombrePage = () => (
     <div className="container-shell space-y-10 py-12">
         <div className="space-y-3">
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-text-muted">Colección</p>
-            <h1 className="section-title">Hombre</h1>
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-text-muted">Catálogo masculino</p>
+            <h1 className="section-title">Streetwear premium para hombre</h1>
             <p className="section-copy">
-                Explora subcategorías masculinas con navegación directa a catálogos paginados y filtros por talla, color,
-                precio y orden.
+                Explora camisas, shorts, pantalones, tenis, accesorios, relojes y lentes de sol con filtros coherentes por
+                categoría, color, precio y orden.
             </p>
         </div>
 
@@ -20,11 +21,11 @@ const HombrePage = () => (
                     to="/hombre/$categoria"
                     params={{ categoria }}
                     search={{ page: 1, sort: 'newest' }}
-                    className="panel-card p-6 transition-colors hover:border-primary"
+                    className="panel-card p-6 transition-all duration-200 hover:-translate-y-1 hover:border-accent"
                 >
                     <h2 className="text-xl font-medium text-text-main">{CATEGORY_LABELS[categoria]}</h2>
                     <p className="mt-3 text-sm leading-6 text-text-muted">
-                        Ver productos disponibles, aplicar filtros y revisar el catálogo por páginas.
+                        Ver productos disponibles, aplicar filtros y armar un fit con NovaBot.
                     </p>
                 </Link>
             ))}

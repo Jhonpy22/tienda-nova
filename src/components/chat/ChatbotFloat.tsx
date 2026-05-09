@@ -10,21 +10,19 @@ const ChatbotFloat = () => {
     const { messages, input, setInput, isLoading, sendMessage, clearChat } = useChat()
 
     return (
-        <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3 sm:bottom-7 sm:right-7">
+        <div className="fixed inset-x-3 bottom-4 z-40 flex flex-col items-end gap-3 sm:inset-x-auto sm:bottom-7 sm:right-7">
             {isOpen && (
-                <div className="flex w-[min(100vw-2.5rem,22rem)] flex-col overflow-hidden rounded-2xl border border-warm bg-card shadow-2xl">
-
-                    {/* Header del chat */}
-                    <div className="flex items-center justify-between bg-primary px-4 py-3">
+                <div className="mb-3 flex w-full max-w-none flex-col overflow-hidden rounded-2xl border border-warm/60 bg-card shadow-2xl sm:mb-0 sm:w-[380px] sm:max-w-[calc(100vw-2rem)] md:w-[400px] max-h-[72vh] sm:max-h-[calc(100vh-120px)]">
+                    <div className="shrink-0 flex items-center justify-between bg-primary px-4 py-3">
                         <div className="flex items-center gap-3">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-xs font-medium text-primary">
+                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-xs font-bold text-primary">
                                 NB
                             </div>
                             <div>
-                                <p className="text-sm font-medium text-card">NovaBot</p>
+                                <p className="text-sm font-medium text-white">NovaBot</p>
                                 <div className="flex items-center gap-1.5">
                                     <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
-                                    <p className="text-[11px] text-warm/80">En línea</p>
+                                    <p className="text-[11px] text-white/72">En linea</p>
                                 </div>
                             </div>
                         </div>
@@ -32,42 +30,39 @@ const ChatbotFloat = () => {
                             <button
                                 type="button"
                                 onClick={clearChat}
-                                className="rounded-full border border-warm/20 px-3 py-1.5 text-[11px] text-warm/70 transition-colors hover:border-warm/50 hover:text-warm"
+                                className="rounded-full border border-white/20 px-3 py-1.5 text-[11px] text-white/70 transition-colors hover:border-accent hover:text-accent"
                             >
                                 Limpiar
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setIsOpen(false)}
-                                className="flex h-7 w-7 items-center justify-center rounded-full border border-warm/20 text-warm/70 transition-colors hover:border-warm/50 hover:text-warm"
+                                className="flex h-7 w-7 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:border-accent hover:text-accent"
                                 aria-label="Cerrar chat"
                             >
-                                ✕
+                                X
                             </button>
                         </div>
                     </div>
 
-                    {/* Info panel */}
-                    <div className="border-b border-warm px-4 py-3">
+                    <div className="shrink-0 border-b border-warm/55 px-4 py-3">
                         <InfoPanel />
                     </div>
 
-                    {/* Sugerencias rápidas */}
-                    <QuickSuggestions suggestions={QUICK_SUGGESTIONS} isLoading={isLoading} onSelect={sendMessage} />
-
-                    {/* Área de mensajes */}
+                    <div className="shrink-0">
+                        <QuickSuggestions suggestions={QUICK_SUGGESTIONS} isLoading={isLoading} onSelect={sendMessage} />
+                    </div>
                     <ChatArea messages={messages} isLoading={isLoading} />
-
-                    {/* Input */}
-                    <InputChat input={input} isLoading={isLoading} onChange={setInput} onSend={sendMessage} />
+                    <div className="shrink-0">
+                        <InputChat input={input} isLoading={isLoading} onChange={setInput} onSend={sendMessage} />
+                    </div>
                 </div>
             )}
 
-            {/* Botón flotante */}
             <button
                 type="button"
                 onClick={() => setIsOpen((current) => !current)}
-                className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-card shadow-xl transition-all duration-200 hover:bg-secondary hover:shadow-2xl active:scale-95"
+                className="flex h-14 w-14 items-center justify-center rounded-full bg-accent text-primary shadow-xl transition-all duration-200 hover:bg-accent-dark hover:shadow-2xl active:scale-95"
                 aria-label={isOpen ? 'Cerrar NovaBot' : 'Abrir NovaBot'}
             >
                 {isOpen ? (

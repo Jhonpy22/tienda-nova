@@ -1,24 +1,34 @@
 import { Link } from '@tanstack/react-router'
 import { collectionSpotlights } from '../../data/homeContent'
 
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1100&h=1350&q=80'
+
 const FeaturedCollections = () => (
     <section className="container-shell space-y-8 py-8">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="space-y-3">
                 <p className="text-xs uppercase tracking-[0.32em] text-text-muted">Colecciones destacadas</p>
-                <h2 className="section-title max-w-2xl">Dos universos visuales, una misma lectura de marca.</h2>
+                <h2 className="section-title max-w-2xl">Streetwear masculino con dirección clara.</h2>
             </div>
             <p className="max-w-xl text-sm leading-6 text-text-muted sm:text-base">
-                Cada entrada conduce a un catalogo funcional, pero la primera impresion se construye desde una direccion
-                editorial mas fuerte y mejor jerarquizada.
+                Colecciones pensadas para armar outfits completos: prendas amplias, tenis correctos y accesorios sobrios.
             </p>
         </div>
 
         <div className="grid gap-8 lg:grid-cols-2">
             {collectionSpotlights.map((collection) => (
-                <article key={collection.genero} className="overflow-hidden rounded-[2rem] border border-warm bg-card shadow-[0_24px_70px_rgba(26,46,74,0.08)]">
+                <article key={collection.category} className="overflow-hidden rounded-[2rem] border border-warm bg-card shadow-[var(--shadow-panel)]">
                     <div className="aspect-[4/5] overflow-hidden">
-                        <img src={collection.image} alt={collection.title} className="h-full w-full object-cover" loading="lazy" />
+                        <img
+                            src={collection.image}
+                            alt={collection.title}
+                            className="h-full w-full object-cover grayscale-[12%] transition-transform duration-700 hover:scale-105"
+                            loading="lazy"
+                            onError={(event) => {
+                                event.currentTarget.onerror = null
+                                event.currentTarget.src = FALLBACK_IMAGE
+                            }}
+                        />
                     </div>
                     <div className="space-y-5 p-7">
                         <div className="space-y-3">
@@ -30,11 +40,11 @@ const FeaturedCollections = () => (
                         </div>
 
                         <div className="flex flex-col gap-3 sm:flex-row">
-                            <Link to={`/${collection.genero}`} className="button-primary">
-                                Ver coleccion
+                            <Link to="/hombre" className="button-primary">
+                                Ver catálogo
                             </Link>
                             <Link
-                                to={collection.genero === 'hombre' ? '/hombre/$categoria' : '/mujer/$categoria'}
+                                to="/hombre/$categoria"
                                 params={{ categoria: collection.category }}
                                 search={{ page: 1, sort: 'newest' }}
                                 className="button-secondary"

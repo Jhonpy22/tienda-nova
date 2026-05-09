@@ -1,22 +1,24 @@
 import { Link } from '@tanstack/react-router'
 import { curatedGroups } from '../../data/homeContent'
 
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&h=900&q=80'
+
 const CuratedSelection = () => (
     <section className="bg-sand">
         <div className="container-shell space-y-8 py-18">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div className="space-y-3">
-                    <p className="text-xs uppercase tracking-[0.32em] text-text-muted">Selecciones por linea</p>
-                    <h2 className="section-title max-w-3xl">Entradas separadas para hombre y mujer, con mejor criterio visual y sin mezclar recorrido.</h2>
+                    <p className="text-xs uppercase tracking-[0.32em] text-text-muted">Selecciones curadas</p>
+                    <h2 className="section-title max-w-3xl">Outfits base para moverte entre skate, surf, Y2K y urbano limpio.</h2>
                 </div>
-                <a href="#novabot" className="text-sm font-medium text-primary transition-colors hover:text-secondary">
-                    Ver experiencia asistida
+                <a href="#novabot" className="text-sm font-semibold text-accent transition-colors hover:text-accent-dark">
+                    Pedir asesoría a NovaBot
                 </a>
             </div>
 
             <div className="grid gap-8 xl:grid-cols-2">
                 {curatedGroups.map((group) => (
-                    <article key={group.genero} className="space-y-6 rounded-[2rem] border border-warm/80 bg-card p-6 shadow-[0_18px_50px_rgba(26,46,74,0.08)] sm:p-7">
+                    <article key={group.category} className="space-y-6 rounded-[2rem] border border-warm bg-card p-6 shadow-[var(--shadow-panel)] sm:p-7">
                         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                             <div className="space-y-3">
                                 <p className="text-xs uppercase tracking-[0.3em] text-text-muted">{group.eyebrow}</p>
@@ -25,16 +27,25 @@ const CuratedSelection = () => (
                                 </h3>
                                 <p className="max-w-2xl text-sm leading-7 text-text-muted sm:text-base">{group.description}</p>
                             </div>
-                            <Link to={group.ctaTo} className="button-secondary shrink-0">
+                            <Link to="/hombre/$categoria" params={{ categoria: group.category }} search={{ page: 1, sort: 'newest' }} className="button-secondary shrink-0">
                                 {group.ctaLabel}
                             </Link>
                         </div>
 
                         <div className="grid gap-6 sm:grid-cols-2">
                             {group.items.map((item) => (
-                                <article key={item.name} className="overflow-hidden rounded-[1.5rem] border border-warm/80 bg-card shadow-[0_12px_35px_rgba(26,46,74,0.07)]">
+                                <article key={item.name} className="overflow-hidden rounded-[1.5rem] border border-warm bg-background shadow-[var(--shadow-panel)]">
                                     <div className="aspect-[4/5] overflow-hidden">
-                                        <img src={item.image} alt={item.name} className="h-full w-full object-cover" loading="lazy" />
+                                        <img
+                                            src={item.image}
+                                            alt={item.name}
+                                            className="h-full w-full object-cover"
+                                            loading="lazy"
+                                            onError={(event) => {
+                                                event.currentTarget.onerror = null
+                                                event.currentTarget.src = FALLBACK_IMAGE
+                                            }}
+                                        />
                                     </div>
                                     <div className="space-y-3 p-5">
                                         <div>
@@ -43,7 +54,7 @@ const CuratedSelection = () => (
                                             </h4>
                                             <p className="mt-1 text-sm text-text-muted">{item.note}</p>
                                         </div>
-                                        <p className="text-sm font-medium uppercase tracking-[0.18em] text-primary">{item.price}</p>
+                                        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">{item.price}</p>
                                     </div>
                                 </article>
                             ))}

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Outlet, createRootRoute } from '@tanstack/react-router'
 import CartDrawer from '../components/cart/CartDrawer'
 import ChatbotFloat from '../components/chat/ChatbotFloat'

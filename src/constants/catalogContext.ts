@@ -1,22 +1,7 @@
 import { CATEGORY_LABELS, GENDER_LABELS, products } from '../data/products'
-import type { Categoria, Genero } from '../models/Index'
+import type { CategorySummary } from '../models/Index'
 
-const CRC = new Intl.NumberFormat('es-CR', {
-    style: 'currency',
-    currency: 'CRC',
-    maximumFractionDigits: 0,
-})
-
-type CategorySummary = {
-    genero: Genero
-    categoria: Categoria
-    total: number
-    precioMin: number
-    precioMax: number
-    colores: string[]
-    tallas: string[]
-    nombres: string[]
-}
+const formatCRC = (value: number) => `₡${value.toLocaleString('es-CR').replace(/\s/g, '.')}`
 
 const buildSummaries = (): CategorySummary[] => {
     const map = new Map<string, CategorySummary>()
@@ -33,6 +18,7 @@ const buildSummaries = (): CategorySummary[] => {
                 precioMax: product.precio,
                 colores: [],
                 tallas: [],
+                estilos: [],
                 nombres: [],
             })
         }
@@ -50,7 +36,10 @@ const buildSummaries = (): CategorySummary[] => {
             if (!entry.tallas.includes(talla)) entry.tallas.push(talla)
         }
 
-        // Guardamos hasta 6 nombres como muestra representativa
+        for (const estilo of product.estilos) {
+            if (!entry.estilos.includes(estilo)) entry.estilos.push(estilo)
+        }
+
         if (entry.nombres.length < 6) entry.nombres.push(product.nombre)
     }
 
@@ -62,22 +51,19 @@ const formatSummary = (summary: CategorySummary): string => {
     const categoriaLabel = CATEGORY_LABELS[summary.categoria]
     const rango =
         summary.precioMin === summary.precioMax
-            ? CRC.format(summary.precioMin)
-            : `${CRC.format(summary.precioMin)} – ${CRC.format(summary.precioMax)}`
+            ? formatCRC(summary.precioMin)
+            : `${formatCRC(summary.precioMin)} - ${formatCRC(summary.precioMax)}`
 
     return [
-        `### ${generoLabel} › ${categoriaLabel} (${summary.total} productos)`,
+        `### ${generoLabel} > ${categoriaLabel} (${summary.total} productos)`,
         `- Rango de precio: ${rango}`,
         `- Tallas disponibles: ${summary.tallas.join(', ')}`,
         `- Colores disponibles: ${summary.colores.join(', ')}`,
+        `- Estilos: ${summary.estilos.join(', ')}`,
         `- Ejemplos de productos: ${summary.nombres.join(', ')}`,
     ].join('\n')
 }
 
-/**
- * Texto con el inventario real del catálogo, listo para insertar en el
- * system prompt. Se genera una sola vez porque los datos son estáticos.
- */
 export const CATALOG_CONTEXT: string = (() => {
     const summaries = buildSummaries()
     const sections = summaries.map(formatSummary).join('\n\n')
@@ -86,8 +72,9 @@ export const CATALOG_CONTEXT: string = (() => {
         '## Inventario actual del catálogo',
         '',
         'Esta información refleja exactamente lo que está disponible en la tienda.',
-        'Úsala para responder con precisión. No afirmes que hay productos,',
-        'colores o tallas que no aparezcan aquí.',
+        'Todos los precios están en colones costarricenses.',
+        'Usala para responder con precisión.',
+        'No afirmes que hay productos, colores, estilos o tallas que no aparezcan aquí.',
         '',
         sections,
     ].join('\n')
