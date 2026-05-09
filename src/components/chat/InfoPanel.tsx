@@ -4,7 +4,7 @@ const InfoPanel = () => (
             <span className="text-[10px] font-bold text-accent">NB</span>
         </div>
         <p className="text-xs leading-5 text-text-muted">
-            Te ayudo con outfits, categorías y presupuesto sin salir del catálogo.
+            Te ayudo con productos, envios, ubicacion, pagos y garantias, y derivo a un empleado cuando hace falta.
         </p>
     </div>
 )
