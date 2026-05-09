@@ -36,14 +36,14 @@ const Header = () => {
     const closeMenu = () => setIsMenuOpen(false)
 
     return (
-        <header className="sticky top-0 z-30 border-b border-warm bg-background/92 backdrop-blur-xl">
+        <header className="sticky top-0 z-30 border-b border-warm bg-card/95 backdrop-blur-xl">
             <div className="container-shell py-3 lg:py-4">
-                <div className="flex min-h-14 items-center justify-between gap-3 lg:min-h-18">
-                    <Link to="/" onClick={closeMenu} className="min-w-0 flex flex-col leading-none">
-                        <span className="truncate text-2xl tracking-[0.14em] text-text-main sm:text-3xl" style={{ fontFamily: 'var(--font-display)' }}>
+                <div className="flex min-h-14 items-center justify-between gap-2 lg:min-h-18">
+                    <Link to="/" onClick={closeMenu} className="shrink-0 flex flex-col leading-none">
+                        <span className="text-xl tracking-[0.14em] text-text-main sm:text-3xl" style={{ fontFamily: 'var(--font-display)' }}>
                             NOVA STREET
                         </span>
-                        <span className="mt-1 truncate text-[9px] uppercase tracking-[0.26em] text-accent sm:text-[10px] sm:tracking-[0.34em]">
+                        <span className="hidden sm:block mt-1 text-[9px] uppercase tracking-[0.26em] text-accent sm:text-[10px] sm:tracking-[0.34em]">
                             Moda masculina premium
                         </span>
                     </Link>
@@ -81,7 +81,7 @@ const Header = () => {
                         <CartIcon />
                     </div>
 
-                    <div className="flex shrink-0 items-center gap-2 lg:hidden">
+                    <div className="flex shrink-0 items-center gap-1.5 lg:hidden">
                         <ThemeToggle />
                         <CartIcon />
                         <button
