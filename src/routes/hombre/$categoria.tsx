@@ -4,7 +4,7 @@ import Pagination from '../../components/product/Pagination'
 import ProductGrid from '../../components/product/ProductGrid'
 import { CATEGORY_LABELS, GENDER_LABELS, getProductsByCategory } from '../../data/products'
 import { isValidCategoryForGender, parseCatalogSearch, useProductCatalog } from '../../hooks/useProductCatalog'
-import type { Categoria } from '../../types/product'
+import type { Categoria } from '../../models/types/product'
 import { rootRoute } from '../__root'
 
 const HombreCategoriaPage = () => {

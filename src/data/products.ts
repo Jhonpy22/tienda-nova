@@ -1,4 +1,4 @@
-import type { Categoria, Genero, Product, Talla } from '../types/product'
+import type { Categoria, Genero, Product, Talla } from '../models/Index';
 
 export const CATEGORY_LABELS: Record<Categoria, string> = {
     camisas: 'Camisas',
@@ -49,35 +49,64 @@ const createCategoryProducts = (
     }))
 
 const hombreCamisas: ProductSeed[] = [
-    { nombre: 'Camisa Oxford Blanca', precio: 21990, tallas: ['M', 'L', 'XL'], colores: ['Blanco'], imagen: 'https://img.pacifiko.com/PROD/resize/1/500x500/ZTA4NDcxMT.jpg', descripcion: 'Camisa clásica para oficina o eventos.', nuevo: true },
-    { nombre: 'Camisa Lino Arena', precio: 24990, tallas: ['S', 'M', 'L'], colores: ['Arena'], imagen: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Prenda fresca con acabado ligero.' },
-    { nombre: 'Camisa Manga Larga Azul', precio: 22990, tallas: ['M', 'L'], colores: ['Azul'], imagen: 'https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Camisa versátil para uso diario.' },
-    { nombre: 'Camisa Cuello Mao Verde Oliva', precio: 23990, tallas: ['S', 'M', 'L'], colores: ['Verde oliva'], imagen: 'https://images.unsplash.com/photo-1602810316693-3667c854239a?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Corte moderno con cuello mao.' },
-    { nombre: 'Camisa Formal Celeste', precio: 25990, tallas: ['M', 'L', 'XL'], colores: ['Celeste'], imagen: 'https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Camisa sobria para reuniones y oficina.', nuevo: true },
-    { nombre: 'Camisa Slim Fit Azul Claro', precio: 26990, tallas: ['S', 'M', 'L'], colores: ['Azul claro'], imagen: 'https://images.unsplash.com/photo-1588359348347-9bc6cbbb689e?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Ajuste slim con presencia elegante.' },
-    { nombre: 'Camisa Denim Casual', precio: 24490, tallas: ['M', 'L'], colores: ['Azul denim'], imagen: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Camisa casual de apariencia moderna.' },
-    { nombre: 'Camisa Casual Azul Índigo', precio: 27990, tallas: ['M', 'L', 'XL'], colores: ['Índigo'], imagen: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Camisa de estilo casual con estructura suave.' },
-    { nombre: 'Camisa Lino Blanca Premium', precio: 28990, tallas: ['S', 'M', 'L'], colores: ['Blanco'], imagen: 'https://images.unsplash.com/photo-1598032895397-b9472444bf93?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Lino premium de apariencia limpia.' },
-    { nombre: 'Camisa Casual Terracota', precio: 23490, tallas: ['S', 'M', 'L'], colores: ['Terracota'], imagen: 'https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Toque cálido para outfits casuales.' },
-    { nombre: 'Camisa Formal Azul Marino', precio: 25990, tallas: ['M', 'L', 'XL'], colores: ['Azul marino'], imagen: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Popelina firme para un look pulido.' },
-    { nombre: 'Camisa Casual Beige', precio: 24990, tallas: ['M', 'L'], colores: ['Beige'], imagen: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Diseño suave para combinar con chinos.' },
-    { nombre: 'Camisa Formal Gris', precio: 26990, tallas: ['M', 'L', 'XL'], colores: ['Gris humo'], imagen: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Prenda formal de tono neutro.' },
-    { nombre: 'Camisa Casual Mostaza', precio: 22990, tallas: ['S', 'M'], colores: ['Mostaza'], imagen: 'https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Camisa casual con color destacado.' },
-    { nombre: 'Camisa Regular Fit Blanca', precio: 21990, tallas: ['M', 'L', 'XL'], colores: ['Blanco'], imagen: 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Básico masculino de corte regular.' },
-    { nombre: 'Camisa Popelina Azul Niebla', precio: 23990, tallas: ['S', 'M', 'L'], colores: ['Azul niebla'], imagen: 'https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Popelina ligera para jornadas de oficina.' },
+    { nombre: 'Camisa Oxford Blanca', precio: 21990, tallas: ['M', 'L', 'XL'], colores: ['Blanco'], imagen: 'https://cdn.cafecoton.com/cafecoton_images/produits/11nbls-nice-oxford-1-e25-2.jpg', descripcion: 'Camisa clásica para oficina o eventos.', nuevo: true },
+    
+    { nombre: 'Camisa Lino Arena', precio: 24990, tallas: ['S', 'M', 'L'], colores: ['Arena'], imagen: 'https://cocojamboocr.com/cdn/shop/files/Camisa_de_lino_triblend_manga_corta_color_arena.jpg?v=1761320410&width=1946', descripcion: 'Prenda fresca con acabado ligero.' },
+    
+    { nombre: 'Camisa Manga Larga Azul', precio: 22990, tallas: ['M', 'L'], colores: ['Azul'], imagen: 'https://m.media-amazon.com/images/I/51injx98KGL._AC_UY1000_.jpg', descripcion: 'Camisa versátil para uso diario.' },
+    
+    { nombre: 'Camisa Cuello Mao Verde Oliva', precio: 23990, tallas: ['S', 'M', 'L'], colores: ['Verde oliva'], imagen: 'https://img01.ztat.net/article/spp-media-p1/edb62b4e4407417583a43e539f3596b6/5f899cd0cce048399ec4224236f96f5b.jpg?imwidth=780', descripcion: 'Corte moderno con cuello mao.' },
+    
+    { nombre: 'Camisa Formal Celeste', precio: 25990, tallas: ['M', 'L', 'XL'], colores: ['Celeste'], imagen: 'https://germanionline.cl/cdn/shop/files/camisa-formal-texturada-arrow.jpg?v=1717078208', descripcion: 'Camisa sobria para reuniones y oficina.', nuevo: true },
+    
+    { nombre: 'Camisa Slim Fit Verde Claro', precio: 26990, tallas: ['S', 'M', 'L'], colores: ['Verde claro'], imagen: 'https://img.pacifiko.com/PROD/resize/1/500x500/ZGQ5NDE5N2.jpg', descripcion: 'Ajuste slim con presencia elegante.' },
+    
+    { nombre: 'Camisa Denim Casual', precio: 24490, tallas: ['M', 'L'], colores: ['Azul denim'], imagen: 'https://www.ostu.com/dw/image/v2/BHFM_PRD/on/demandware.static/-/Sites-storefront_catalog_ostu/default/dw8a1d5aac/images/hi-res/Todo/camisas-para-hombre-60010704-51_1.jpg?sw=800&sh=960', descripcion: 'Camisa casual de apariencia moderna.' },
+    
+    { nombre: 'Camisa Casual Roja Índigo', precio: 27990, tallas: ['M', 'L', 'XL'], colores: ['Roja Indigo'], imagen: 'https://img.pacifiko.com/PROD/resize/1/500x500/OWQ1MjQyMz.jpg', descripcion: 'Camisa de estilo casual con estructura suave.' },
+    
+    { nombre: 'Camisa Lino Blanca Premium', precio: 28990, tallas: ['S', 'M', 'L'], colores: ['Blanco'], imagen: 'https://www.98coastav.mx/cdn/shop/files/1_b129a2a4-ed7c-4dc4-a558-53187fab9fa2.jpg?v=1751390337&width=2048', descripcion: 'Lino premium de apariencia limpia.' },
+
+    { nombre: 'Camisa Casual Terracota', precio: 23490, tallas: ['S', 'M', 'L'], colores: ['Terracota'], imagen: 'https://mbo.com.pe/cdn/shop/files/Mbo_EcommerceCampana9947_1800x1800.jpg?v=1756154471', descripcion: 'Toque cálido para outfits casuales.' },
+
+    { nombre: 'Camisa Formal Borgoña', precio: 25990, tallas: ['M', 'L', 'XL'], colores: ['Borgoña'], imagen: 'https://i.etsystatic.com/7716521/r/il/01bf98/7717952954/il_570xN.7717952954_1809.jpg', descripcion: 'Popelina firme para un look pulido.' },
+
+    { nombre: 'Camisa Casual Beige', precio: 24990, tallas: ['M', 'L'], colores: ['Beige'], imagen: 'https://siman.vtexassets.com/arquivos/ids/7274891/104867677-1.jpg?v=638933381332200000', descripcion: 'Diseño suave para combinar con chinos.' },
+
+    { nombre: 'Camisa Formal Gris Grafito', precio: 26990, tallas: ['M', 'L', 'XL'], colores: ['Gris grafito'], imagen: 'https://m.media-amazon.com/images/I/51IGA4n04eL.jpg', descripcion: 'Prenda formal de tono neutro.' },
+
+    { nombre: 'Camisa Casual Mostaza', precio: 22990, tallas: ['S', 'M'], colores: ['Mostaza'], imagen: 'https://m.media-amazon.com/images/I/61zkPp-1WcL._AC_UY1000_.jpg', descripcion: 'Camisa casual con color destacado.' },
+
+    { nombre: 'Camisa Regular Verde Salvia', precio: 21990, tallas: ['M', 'L', 'XL'], colores: ['Verde salvia'], imagen: 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Básico masculino de corte regular.' },
+
+    { nombre: 'Camisa Popelina Coral Claro', precio: 23990, tallas: ['S', 'M', 'L'], colores: ['Coral claro'], imagen: 'https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Popelina ligera para jornadas de oficina.' },
+
     { nombre: 'Camisa Resort Marfil', precio: 22990, tallas: ['S', 'M', 'L'], colores: ['Marfil'], imagen: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Camisa fresca con aire relajado.' },
-    { nombre: 'Camisa Rayas Azul Pizarra', precio: 25990, tallas: ['M', 'L', 'XL'], colores: ['Azul pizarra'], imagen: 'https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Rayas finas con perfil ejecutivo.', nuevo: true },
+
+    { nombre: 'Camisa Rayas Verde Bosque', precio: 25990, tallas: ['M', 'L', 'XL'], colores: ['Verde bosque'], imagen: 'https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Rayas finas con perfil ejecutivo.', nuevo: true },
+
     { nombre: 'Camisa Textura Arena Clara', precio: 24990, tallas: ['S', 'M', 'L'], colores: ['Arena clara'], imagen: 'https://images.unsplash.com/photo-1598032895397-b9472444bf93?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Textura suave para looks de temporada.' },
-    { nombre: 'Camisa Slim Verde Musgo', precio: 26490, tallas: ['M', 'L'], colores: ['Verde musgo'], imagen: 'https://images.unsplash.com/photo-1602810316693-3667c854239a?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Slim fit con tono sobrio.' },
-    { nombre: 'Camisa Cuadros Azul Humo', precio: 25490, tallas: ['S', 'M', 'L'], colores: ['Azul humo'], imagen: 'https://images.unsplash.com/photo-1588359348347-9bc6cbbb689e?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Cuadros discretos de lectura moderna.' },
-    { nombre: 'Camisa Lino Verde Claro', precio: 27990, tallas: ['S', 'M', 'L'], colores: ['Verde claro'], imagen: 'https://images.unsplash.com/photo-1598032895397-b9472444bf93?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Lino liviano para clima calido.' },
+
+    { nombre: 'Camisa Slim Ciruela', precio: 26490, tallas: ['M', 'L'], colores: ['Ciruela'], imagen: 'https://images.unsplash.com/photo-1602810316693-3667c854239a?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Slim fit con tono sobrio.' },
+
+    { nombre: 'Camisa Cuadros Café Oscuro', precio: 25490, tallas: ['S', 'M', 'L'], colores: ['Café oscuro'], imagen: 'https://images.unsplash.com/photo-1588359348347-9bc6cbbb689e?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Cuadros discretos de lectura moderna.' },
+
+    { nombre: 'Camisa Lino Verde Menta', precio: 27990, tallas: ['S', 'M', 'L'], colores: ['Verde menta'], imagen: 'https://images.unsplash.com/photo-1598032895397-b9472444bf93?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Lino liviano para clima calido.' },
+
     { nombre: 'Camisa Oxford Rosa Palo', precio: 24990, tallas: ['M', 'L', 'XL'], colores: ['Rosa palo'], imagen: 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Oxford suave con presencia actual.' },
+
     { nombre: 'Camisa Denim Gris Medio', precio: 25990, tallas: ['M', 'L'], colores: ['Gris medio'], imagen: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Denim liviano para uso urbano.' },
+
     { nombre: 'Camisa Formal Lavanda', precio: 26990, tallas: ['S', 'M', 'L'], colores: ['Lavanda'], imagen: 'https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Color refinado para oficina o cena.' },
+
     { nombre: 'Camisa Casual Cobre', precio: 23490, tallas: ['S', 'M'], colores: ['Cobre'], imagen: 'https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Toque calido con estructura ligera.' },
-    { nombre: 'Camisa Regular Azul Petroleo', precio: 25990, tallas: ['M', 'L', 'XL'], colores: ['Azul petroleo'], imagen: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Regular fit para combinaciones formales.' },
+
+    { nombre: 'Camisa Regular Vino Tinto', precio: 25990, tallas: ['M', 'L', 'XL'], colores: ['Vino tinto'], imagen: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Regular fit para combinaciones formales.' },
+
     { nombre: 'Camisa Cuello Mao Beige Humo', precio: 24490, tallas: ['S', 'M', 'L'], colores: ['Beige humo'], imagen: 'https://images.unsplash.com/photo-1602810316693-3667c854239a?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Cuello mao con tono neutro.' },
-    { nombre: 'Camisa Satin Navy Premium', precio: 28990, tallas: ['M', 'L', 'XL'], colores: ['Navy'], imagen: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Acabado premium con brillo discreto.', nuevo: true },
+
+    { nombre: 'Camisa Satin Chocolate Premium', precio: 28990, tallas: ['M', 'L', 'XL'], colores: ['Chocolate'], imagen: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Acabado premium con brillo discreto.', nuevo: true },
+
     { nombre: 'Camisa Casual Gris Perla', precio: 23990, tallas: ['S', 'M', 'L'], colores: ['Gris perla'], imagen: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=400&h=500&q=80', descripcion: 'Camisa versatil para rotacion diaria.' },
 ]
 

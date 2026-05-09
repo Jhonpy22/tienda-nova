@@ -1,4 +1,4 @@
-import type { QuickSuggestion } from '../../types'
+import type { QuickSuggestion } from '../../models/Index'
 
 interface Props {
     suggestions: QuickSuggestion[]

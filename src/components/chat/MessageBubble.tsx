@@ -1,5 +1,5 @@
 import { useNavigate } from '@tanstack/react-router'
-import type { Message } from '../../types'
+import type { Message } from '../../models/Index'
 
 interface Props {
     message: Message

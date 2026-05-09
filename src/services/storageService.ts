@@ -1,4 +1,4 @@
-import type { ChatSession } from '../types'
+import type { ChatSession } from '../models/Index'
 
 const KEY = "novabot_session"
 

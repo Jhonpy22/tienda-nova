@@ -1,4 +1,4 @@
-import type { Categoria, Genero } from '../types/product'
+import type { Categoria, Genero } from '../models/Index'
 
 export type CollectionSpotlight = {
     genero: Genero

@@ -1,6 +1,6 @@
 import { aiClient } from '../api/apiConfig'
 import { SYSTEM_PROMPT } from '../constants/chatPrompt'
-import type { Message } from '../types'
+import type { Message } from '../models/Index'
 
 export const geminiService = {
     sendMessage: async (history: Message[]): Promise<string> => {
