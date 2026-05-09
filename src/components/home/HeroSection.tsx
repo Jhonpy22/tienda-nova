@@ -7,14 +7,14 @@ const HeroSection = () => (
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background to-transparent" />
         <div className="container-shell relative grid gap-12 py-18 lg:grid-cols-[1.08fr_0.92fr] lg:items-end lg:py-24">
             <div className="space-y-8">
-                <p className="text-xs uppercase tracking-[0.35em] text-accent">Nueva colección 2026 / Streetwear masculino</p>
+                <p className="text-xs uppercase tracking-[0.35em] text-accent">Nueva colección 2026 / Moda urbana masculina Guanacaste</p>
                 <div className="space-y-5">
                     <h1 className="max-w-3xl text-5xl leading-[0.95] sm:text-6xl lg:text-7xl" style={{ fontFamily: 'var(--font-display)' }}>
-                        Fits urbanos con presencia premium.
+                        Streetwear para Guanacaste, sin renunciar al estilo.
                     </h1>
                     <p className="max-w-xl text-base leading-7 text-white/75 sm:text-lg">
-                        Camisas oversized, pantalones baggy, tenis, relojes y lentes oscuros para construir outfits masculinos
-                        limpios, comerciales y listos para ciudad.
+                        Camisetas oversized, cargos baggy, bañadores, tenis skate y lentes oscuros para construir outfits masculinos
+                        urbanos listos para playa, skate o ciudad en Nicoya.
                     </p>
                 </div>
 

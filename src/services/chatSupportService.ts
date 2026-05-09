@@ -70,7 +70,9 @@ const STYLE_KEYWORDS: Array<{ estilo: Estilo; terms: string[] }> = [
     { estilo: 'Urban Essentials', terms: ['essential', 'essentials', 'basico', 'básico', 'limpio', 'minimal', 'universidad', 'u'] },
 ]
 
-const HOT_CONTEXT_TERMS = ['guanacaste', 'playa', 'calor', 'caliente', 'tropical', 'verano', 'fresco', 'fresca']
+const HOT_CONTEXT_TERMS = ['playa', 'calor', 'caliente', 'tropical', 'verano', 'fresco', 'fresca']
+const SKATE_TERMS = ['skate', 'skater', 'patineta', 'cargo', 'baggy', 'jogger', 'corte bota', 'pantalon', 'pantalones', 'streetwear', 'urbano']
+const GUANACASTE_TERMS = ['guanacaste', 'nicoya', 'liberia', 'nosara', 'samara', 'tamarindo', 'flamingo']
 const COLD_CONTEXT_TERMS = ['frio', 'frío', 'fria', 'fría', 'frente frio', 'frente frío', 'mucho frio', 'mucho frío']
 const FORMAL_CONTEXT_TERMS = ['formal', 'traje', 'oficina formal', 'boda', 'corbata']
 const HUMAN_SUPPORT_TERMS = [
@@ -213,11 +215,11 @@ const getAvailabilityReply = (): StructuredReply => ({
 
 const getHotClimateReply = (): StructuredReply => {
     const shortPick = getProductByName('Short Nylon Surf Black')
-    const lensesPick = getProductByName('Lentes Shield Y2K Smoke') ?? getProductByName('Lentes Rectangulares Blackout')
+    const lensesPick = getProductByName('Lentes Smoke Urban') ?? getProductByName('Lentes Shield Y2K Smoke')
     const picks = [shortPick, lensesPick].filter(Boolean) as Product[]
 
     return {
-        content: `Para Guanacaste o clima caliente, buscaría algo fresco y ligero.\nEvitaría sobrecamisas, pantalones pesados o denim grueso como primera opción.\nTe puede servir: ${formatNames(picks)}.`,
+        content: `Para Guanacaste podés ir por algo fresco o con estilo skate, según el plan.\nPara playa o comodidad: shorts o bañador; para look urbano: cargo o baggy también funciona.\nTe puede servir: ${formatNames(picks)}.`,
         action: buildCatalogAction('Ver shorts', 'shorts'),
     }
 }
@@ -304,6 +306,8 @@ const isHumanSupportIntent = (text: string) => includesAny(text, HUMAN_SUPPORT_T
 const isAvailabilityIntent = (text: string) =>
     (includesWord(text, 'stock') || includesWord(text, 'disponible') || includesWord(text, 'hay')) && includesAny(text, ['exacto', 'tiempo real', 'ahorita', 'reservar', 'reserva'])
 const isHotContext = (text: string) => includesAny(text, HOT_CONTEXT_TERMS)
+const isGuanacasteContext = (text: string) => includesAny(text, GUANACASTE_TERMS)
+const isSkateUrbanContext = (text: string) => includesAny(text, SKATE_TERMS)
 const isColdContext = (text: string) => includesAny(text, COLD_CONTEXT_TERMS)
 const isFormalContext = (text: string) => includesAny(text, FORMAL_CONTEXT_TERMS)
 
@@ -319,7 +323,10 @@ const buildProductReply = (text: string): StructuredReply | null => {
     }
 
     const categoria = detectCategoria(text)
-    if (isHotContext(text) && (!categoria || ['shorts', 'camisas', 'lentes-sol', 'accesorios'].includes(categoria))) {
+    const isHot = isHotContext(text) || isGuanacasteContext(text)
+    const isSkate = isSkateUrbanContext(text)
+
+    if (isHot && !isSkate && (!categoria || ['shorts', 'camisas', 'lentes-sol', 'accesorios'].includes(categoria))) {
         return getHotClimateReply()
     }
 
@@ -411,9 +418,23 @@ export const getStructuredReply = (rawText: string): StructuredReply | null => {
         }
     }
 
-    if (includesWord(text, 'envio') || includesWord(text, 'envíos')) {
+    if (includesWord(text, 'envio') || includesWord(text, 'envíos') || includesWord(text, 'enviar') || includesWord(text, 'entrega')) {
+        const outsideTerms = ['san jose', 'san josé', 'cartago', 'heredia', 'alajuela', 'limon', 'limón', 'puntarenas', 'nacional', 'todo costa rica', 'fuera']
+        if (includesAny(text, outsideTerms)) {
+            return {
+                content:
+                    'Por ahora manejamos envíos dentro de Guanacaste.\nPara envíos fuera de la provincia, lo mejor es que un empleado de la tienda lo revise.\nPuedo ayudarte mientras tanto con productos o precios.',
+            }
+        }
         return {
-            content: 'Los envíos en Costa Rica tardan de 2 a 5 días hábiles, según la zona.\nSi ocupás ayuda, indicá tu provincia o cantón.',
+            content: 'Realizamos envíos dentro de Guanacaste.\nSi tu dirección es en otra provincia, lo mejor es consultarlo con un empleado de la tienda.\nMientras tanto puedo ayudarte con productos, precios o categorías.',
+        }
+    }
+
+    if (includesAny(text, ['donde estan', 'dónde están', 'donde se ubican', 'dónde se ubican', 'ubicacion', 'ubicación', 'direccion', 'dirección', 'donde quedan', 'dónde quedan'])) {
+        return {
+            content:
+                'Estamos en Nicoya, Guanacaste, cerca del parque central de Nicoya.\nPor ahora realizamos envíos dentro de Guanacaste.\nSi querés, puedo ayudarte a revisar productos del catálogo.',
         }
     }
 

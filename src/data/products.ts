@@ -15,7 +15,7 @@ export const GENDER_LABELS: Record<Genero, string> = {
 }
 
 export const GENDER_DESCRIPTIONS: Record<Genero, string> = {
-    hombre: 'Moda urbana masculina con fits oversized, baggy, skate, surf y Y2K en una lectura premium.',
+    hombre: 'Moda urbana masculina para Guanacaste: fits holgados, estilo skate/surf/streetwear y accesorios premium.',
 }
 
 export const CATEGORY_BY_GENDER: Record<Genero, Categoria[]> = {
@@ -38,13 +38,13 @@ const createCategoryProducts = (
 
 const hombreCamisas: ProductSeed[] = [
     {
-        nombre: 'Camisa Oversized Washed Black',
+        nombre: 'Camiseta Oversized Washed Black',
         precio: 24990,
         tallas: ['S', 'M', 'L', 'XL'],
         colores: ['Negro lavado'],
         estilos: ['Oversized', 'Skate', 'New Drop'],
         imagen: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Fit amplio, algodón pesado y acabado lavado para outfits urbanos en San José.',
+        descripcion: 'Fit amplio y acabado lavado para looks streetwear en Guanacaste. Combina con cargo, baggy o shorts.',
         nuevo: true,
     },
     {
@@ -54,16 +54,16 @@ const hombreCamisas: ProductSeed[] = [
         colores: ['Beige arena'],
         estilos: ['Oversized', 'Urban Essentials'],
         imagen: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Corte boxy con textura ligera para combinar con denim baggy o shorts en clima cálido.',
+        descripcion: 'Corte boxy con tela ligera para clima cálido. Ideal con denim baggy, cargo o bañador en Nicoya.',
     },
     {
-        nombre: 'Sobrecamisa Grafito Workwear',
-        precio: 27990,
-        tallas: ['M', 'L', 'XL'],
-        colores: ['Grafito'],
-        estilos: ['Baggy', 'Urban Essentials', 'Trending'],
-        imagen: 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Capa estructurada de look workwear para elevar un fit casual de ciudad.',
+        nombre: 'Camiseta Gráfica Skate Negra',
+        precio: 22990,
+        tallas: ['S', 'M', 'L', 'XL'],
+        colores: ['Negro'],
+        estilos: ['Skate', 'Urban Essentials', 'Trending'],
+        imagen: 'https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=700&h=900&q=80',
+        descripcion: 'Camiseta de algodón con gráfico discreto estilo skate. Base ideal para un look urbano en Guanacaste con cargo o baggy.',
         nuevo: true,
     },
     {
@@ -73,7 +73,7 @@ const hombreCamisas: ProductSeed[] = [
         colores: ['Oliva oscuro'],
         estilos: ['Surf', 'Urban Essentials'],
         imagen: 'https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Camisa ligera con cuello abierto para paseos, playa o fines de semana.',
+        descripcion: 'Camisa ligera con cuello abierto para paseos, playa o fines de semana en Guanacaste.',
     },
     {
         nombre: 'Camisa Denim Box Fit',
@@ -82,7 +82,7 @@ const hombreCamisas: ProductSeed[] = [
         colores: ['Denim oscuro'],
         estilos: ['Skate', 'Baggy', 'Y2K'],
         imagen: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Denim resistente con silueta amplia y lectura Y2K para salir o ir a la U.',
+        descripcion: 'Denim con silueta amplia y estética Y2K para salir con estilo skate o urbano.',
     },
     {
         nombre: 'Camisa Minimal Blanco Humo',
@@ -91,7 +91,7 @@ const hombreCamisas: ProductSeed[] = [
         colores: ['Blanco humo'],
         estilos: ['Urban Essentials', 'Trending'],
         imagen: 'https://images.unsplash.com/photo-1598032895397-b9472444bf93?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Base premium para outfits limpios con reloj metálico y lentes oscuros.',
+        descripcion: 'Base limpia y versátil para outfits urbanos con reloj metálico y lentes oscuros.',
     },
 ]
 
@@ -103,7 +103,7 @@ const hombreShorts: ProductSeed[] = [
         colores: ['Carbon'],
         estilos: ['Baggy', 'Skate', 'Trending'],
         imagen: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Cargo amplio con bolsillos funcionales para ciudad, U y salidas casuales.',
+        descripcion: 'Cargo amplio con bolsillos funcionales para estilo skate en Guanacaste sin ir pesado.',
         nuevo: true,
     },
     {
@@ -113,7 +113,17 @@ const hombreShorts: ProductSeed[] = [
         colores: ['Negro'],
         estilos: ['Surf', 'Urban Essentials'],
         imagen: 'https://images.unsplash.com/photo-1506629905607-d9a297d0f5a8?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Nylon liviano para fits surf/street con tenis blancos.',
+        descripcion: 'Nylon liviano para fits surf/street. Perfecto para playa o salidas en Nicoya.',
+    },
+    {
+        nombre: 'Bañador Surf Arena',
+        precio: 26990,
+        tallas: ['S', 'M', 'L', 'XL'],
+        colores: ['Arena'],
+        estilos: ['Surf', 'Urban Essentials'],
+        imagen: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=700&h=900&q=80',
+        descripcion: 'Bañador de secado rápido con tono arena para playa, piscina o paseos frescos en Guanacaste.',
+        nuevo: true,
     },
     {
         nombre: 'Short Denim Y2K Washed',
@@ -122,7 +132,7 @@ const hombreShorts: ProductSeed[] = [
         colores: ['Denim lavado'],
         estilos: ['Y2K', 'Skate', 'Baggy'],
         imagen: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Denim holgado con lavado vintage para verano urbano en Costa Rica.',
+        descripcion: 'Denim holgado con lavado vintage para verano urbano y salidas casuales.',
     },
     {
         nombre: 'Short Tech Cemento',
@@ -131,16 +141,7 @@ const hombreShorts: ProductSeed[] = [
         colores: ['Gris cemento'],
         estilos: ['Urban Essentials', 'Trending'],
         imagen: 'https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Tela técnica mate, cintura cómoda y acabado minimal para clima tropical.',
-    },
-    {
-        nombre: 'Short Sweat Oversized Arena',
-        precio: 27990,
-        tallas: ['S', 'M', 'L'],
-        colores: ['Arena'],
-        estilos: ['Oversized', 'Surf'],
-        imagen: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'French terry suave para outfits relajados sin perder presencia.',
+        descripcion: 'Tela técnica mate y cintura cómoda para clima tropical. Funcional y urbano.',
     },
     {
         nombre: 'Short Ripstop Oliva',
@@ -149,57 +150,57 @@ const hombreShorts: ProductSeed[] = [
         colores: ['Oliva oscuro'],
         estilos: ['Skate', 'Urban Essentials'],
         imagen: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Ripstop resistente con ajuste relajado para uso diario y paseos de fin de semana.',
+        descripcion: 'Ripstop con ajuste relajado para uso diario, patineta o paseos de fin de semana en Guanacaste.',
     },
 ]
 
 const hombrePantalones: ProductSeed[] = [
     {
-        nombre: 'Pantalon Baggy Denim Black',
+        nombre: 'Pantalón Baggy Denim Black',
         precio: 45990,
         tallas: ['S', 'M', 'L', 'XL'],
         colores: ['Negro'],
         estilos: ['Baggy', 'Skate', 'New Drop'],
         imagen: 'https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Denim loose fit con caída amplia para fits cómodos de ciudad.',
+        descripcion: 'Denim loose fit para looks streetwear en Guanacaste. Baggy liviano que funciona para estilo skate sin ir pesado.',
         nuevo: true,
     },
     {
-        nombre: 'Cargo Loose Fit Grafito',
+        nombre: 'Cargo Baggy Olive',
         precio: 42990,
         tallas: ['S', 'M', 'L', 'XL'],
-        colores: ['Grafito'],
-        estilos: ['Baggy', 'Urban Essentials', 'Trending'],
-        imagen: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Cargo urbano con estructura limpia, ideal con tenis robustos para salir.',
-    },
-    {
-        nombre: 'Pantalon Skate Carpenter Oliva',
-        precio: 39990,
-        tallas: ['M', 'L', 'XL'],
         colores: ['Oliva oscuro'],
-        estilos: ['Skate', 'Baggy'],
-        imagen: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Carpenter pant resistente con detalles utilitarios discretos para uso diario.',
+        estilos: ['Baggy', 'Skate', 'Trending'],
+        imagen: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=700&h=900&q=80',
+        descripcion: 'Cargo holgado en oliva con bolsillos funcionales para looks skate/streetwear en Nicoya.',
+        nuevo: true,
     },
     {
-        nombre: 'Jeans Straight Indigo Y2K',
+        nombre: 'Jogger Urban Carbon',
         precio: 38990,
+        tallas: ['S', 'M', 'L', 'XL'],
+        colores: ['Carbon'],
+        estilos: ['Urban Essentials', 'Skate', 'Trending'],
+        imagen: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=700&h=900&q=80',
+        descripcion: 'Jogger con caída suelta y puño al tobillo para fits urbanos cómodos y relajados.',
+    },
+    {
+        nombre: 'Pantalón Corte Bota Denim',
+        precio: 41990,
         tallas: ['S', 'M', 'L', 'XL'],
         colores: ['Indigo'],
         estilos: ['Y2K', 'Urban Essentials'],
         imagen: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Recto, cómodo y fácil de elevar con camisa boxy para la U o salidas casuales.',
+        descripcion: 'Corte bota clásico en denim indigo. Fácil de combinar con tenis skate o camisa oversized para looks urbanos.',
     },
     {
-        nombre: 'Pantalon Parachute Cemento',
-        precio: 41990,
-        tallas: ['S', 'M', 'L'],
-        colores: ['Gris cemento'],
-        estilos: ['Y2K', 'Baggy', 'Trending'],
+        nombre: 'Pantalón Skate Carpenter Grafito',
+        precio: 39990,
+        tallas: ['M', 'L', 'XL'],
+        colores: ['Grafito'],
+        estilos: ['Skate', 'Baggy'],
         imagen: 'https://images.unsplash.com/photo-1517445312882-bc9910d016b7?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Volumen controlado, ajuste en tobillo y estética Y2K.',
-        nuevo: true,
+        descripcion: 'Carpenter pant con detalles utilitarios discretos para skate o uso diario en ciudad.',
     },
     {
         nombre: 'Chino Relaxed Arena',
@@ -208,7 +209,7 @@ const hombrePantalones: ProductSeed[] = [
         colores: ['Beige arena'],
         estilos: ['Urban Essentials', 'Surf'],
         imagen: 'https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Chino relajado para un outfit limpio, urbano y comercial.',
+        descripcion: 'Chino relajado en tono arena para un outfit limpio y comercial. Va bien con camisa surf camp.',
     },
 ]
 
@@ -220,17 +221,17 @@ const hombreTenis: ProductSeed[] = [
         colores: ['Carbon'],
         estilos: ['Y2K', 'Trending'],
         imagen: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Silueta robusta con suela alta para fits baggy y Y2K.',
+        descripcion: 'Silueta robusta con suela alta para fits baggy y Y2K. Presencia fuerte en cualquier look urbano.',
         nuevo: true,
     },
     {
-        nombre: 'Tenis Skate Low Black Gum',
+        nombre: 'Tenis Skate Low Black',
         precio: 58990,
         tallas: ['38', '39', '40', '41', '42', '43', '44'],
         colores: ['Negro'],
         estilos: ['Skate', 'Urban Essentials'],
         imagen: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Perfil bajo, suela gum y lectura clásica de skate para uso diario.',
+        descripcion: 'Perfil bajo con suela gum y lectura clásica de skate. Va perfecto con cargo o baggy en Guanacaste.',
     },
     {
         nombre: 'Tenis Court Blanco Humo',
@@ -239,7 +240,7 @@ const hombreTenis: ProductSeed[] = [
         colores: ['Blanco humo'],
         estilos: ['Urban Essentials', 'Trending'],
         imagen: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Tenis limpios para outfits premium con accesorios sobrios.',
+        descripcion: 'Tenis limpios para outfits premium con accesorios sobrios. Versátil para ciudad o salidas casuales.',
     },
     {
         nombre: 'Tenis Trail Oliva Street',
@@ -248,7 +249,7 @@ const hombreTenis: ProductSeed[] = [
         colores: ['Oliva oscuro'],
         estilos: ['Surf', 'Y2K', 'New Drop'],
         imagen: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Runner outdoor con lectura urbana para paseos y ciudad.',
+        descripcion: 'Runner outdoor con lectura urbana para paseos en Nicoya y salidas de fin de semana.',
         nuevo: true,
     },
     {
@@ -258,7 +259,7 @@ const hombreTenis: ProductSeed[] = [
         colores: ['Negro y blanco'],
         estilos: ['Skate', 'Oversized'],
         imagen: 'https://images.unsplash.com/photo-1521093470119-a3acdc43374a?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Bota canvas para combinaciones con denim recto o shorts cargo.',
+        descripcion: 'Bota canvas para looks skate con denim baggy o shorts cargo. Estilo clásico para Guanacaste.',
     },
     {
         nombre: 'Tenis Retro Wave Arena',
@@ -267,7 +268,7 @@ const hombreTenis: ProductSeed[] = [
         colores: ['Arena'],
         estilos: ['Y2K', 'Surf'],
         imagen: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Runner retro en tonos neutros para un fit relajado y premium.',
+        descripcion: 'Runner retro en tonos neutros para un fit relajado y premium. Fácil de combinar en clima cálido.',
     },
 ]
 
@@ -390,13 +391,13 @@ const hombreRelojes: ProductSeed[] = [
 
 const hombreLentes: ProductSeed[] = [
     {
-        nombre: 'Lentes Rectangulares Blackout',
+        nombre: 'Lentes Smoke Urban',
         precio: 34990,
         tallas: ['Negros', 'Rectangulares', 'Smoke'],
         colores: ['Negro'],
         estilos: ['Y2K', 'Trending'],
         imagen: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Marco rectangular oscuro para outfits Y2K, ciudad y salidas casuales.',
+        descripcion: 'Marco rectangular oscuro con lente smoke para el sol fuerte de Guanacaste. Cierra cualquier look urbano.',
         nuevo: true,
     },
     {
@@ -406,7 +407,7 @@ const hombreLentes: ProductSeed[] = [
         colores: ['Grafito'],
         estilos: ['Urban Essentials', 'Surf'],
         imagen: 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Aviador sobrio con lente humo para sol fuerte y verano urbano.',
+        descripcion: 'Aviador sobrio con lente humo para sol fuerte en playa o ciudad. Ideal para verano en Nicoya.',
     },
     {
         nombre: 'Lentes Shield Y2K Smoke',
@@ -415,7 +416,7 @@ const hombreLentes: ProductSeed[] = [
         colores: ['Humo'],
         estilos: ['Y2K', 'New Drop'],
         imagen: 'https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Silueta shield con energía Y2K y acabado comercial.',
+        descripcion: 'Silueta shield con energía Y2K. Presencia fuerte para looks skate o streetwear en Guanacaste.',
         nuevo: true,
     },
     {
@@ -425,7 +426,7 @@ const hombreLentes: ProductSeed[] = [
         colores: ['Carey oscuro'],
         estilos: ['Surf', 'Urban Essentials'],
         imagen: 'https://images.unsplash.com/photo-1556306535-38febf6782e7?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Marco redondo en carey oscuro para playa, paseos y fits frescos.',
+        descripcion: 'Marco redondo en carey oscuro para playa, paseos o fits frescos. Clásico surf urbano.',
     },
     {
         nombre: 'Lentes Square Cemento',
@@ -434,7 +435,7 @@ const hombreLentes: ProductSeed[] = [
         colores: ['Gris cemento'],
         estilos: ['Skate', 'Trending'],
         imagen: 'https://images.unsplash.com/photo-1509695507497-903c140c43b0?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Marco cuadrado y lente smoke para cerrar outfits baggy.',
+        descripcion: 'Marco cuadrado y lente smoke para cerrar outfits baggy o cargo en el calor guanacasteco.',
     },
     {
         nombre: 'Lentes Minimal Matte Black',
@@ -443,7 +444,7 @@ const hombreLentes: ProductSeed[] = [
         colores: ['Negro mate'],
         estilos: ['Urban Essentials'],
         imagen: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=700&h=900&q=80',
-        descripcion: 'Lentes limpios y fáciles de combinar con cualquier fit urbano.',
+        descripcion: 'Lentes limpios fáciles de combinar con cualquier fit. Una base esencial para el sol de Guanacaste.',
     },
 ]
 
