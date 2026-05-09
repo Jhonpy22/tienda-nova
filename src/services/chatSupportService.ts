@@ -37,7 +37,9 @@ const normalizeText = (value: string) =>
         .trim()
 
 const includesWord = (text: string, value: string) => normalizeText(text).includes(normalizeText(value))
-const includesAny = (text: string, terms: string[]) => terms.some((term) => includesWord(text, term))
+
+const includesAny = (text: string, terms: string[]) =>
+    terms.some((term) => includesWord(text, term))
 
 const COLOR_ALIASES = [
     { color: 'negro', terms: ['negro', 'black', 'blackout', 'oscuro'] },
@@ -50,13 +52,45 @@ const COLOR_ALIASES = [
 ]
 
 const CATEGORY_KEYWORDS: Array<{ categoria: Categoria; terms: string[] }> = [
-    { categoria: 'camisas', terms: ['camisa', 'camisas', 'sobrecamisa', 'shirt', 'boxy', 'oversized'] },
-    { categoria: 'shorts', terms: ['short', 'shorts', 'bermuda', 'nylon'] },
-    { categoria: 'pantalones', terms: ['pantalon', 'pantalones', 'jean', 'jeans', 'denim', 'cargo', 'baggy', 'parachute'] },
-    { categoria: 'tenis', terms: ['tenis', 'sneaker', 'sneakers', 'zapato', 'zapatilla', 'runner'] },
-    { categoria: 'accesorios', terms: ['accesorio', 'accesorios', 'gorra', 'crossbody', 'cinturon', 'cadena', 'beanie', 'mochila'] },
-    { categoria: 'relojes', terms: ['reloj', 'relojes', 'chrono', 'digital'] },
-    { categoria: 'lentes-sol', terms: ['lentes', 'lente', 'anteojos', 'gafas', 'sol', 'sunglasses'] },
+    {
+        categoria: 'camisas',
+        terms: ['camisa', 'camisas', 'sobrecamisa', 'shirt', 'boxy', 'oversized'],
+    },
+    {
+        categoria: 'shorts',
+        terms: ['short', 'shorts', 'bermuda', 'nylon', 'bañador', 'banador'],
+    },
+    {
+        categoria: 'pantalones',
+        terms: [
+            'pantalon',
+            'pantalones',
+            'jean',
+            'jeans',
+            'denim',
+            'cargo',
+            'baggy',
+            'parachute',
+            'jogger',
+            'corte bota',
+        ],
+    },
+    {
+        categoria: 'tenis',
+        terms: ['tenis', 'sneaker', 'sneakers', 'zapatilla', 'zapatillas', 'runner', 'calzado urbano', 'zapatos casuales'],
+    },
+    {
+        categoria: 'accesorios',
+        terms: ['accesorio', 'accesorios', 'gorra', 'crossbody', 'cinturon', 'cinturón', 'cadena', 'beanie', 'mochila', 'billetera'],
+    },
+    {
+        categoria: 'relojes',
+        terms: ['reloj', 'relojes', 'chrono', 'digital'],
+    },
+    {
+        categoria: 'lentes-sol',
+        terms: ['lentes', 'lente', 'anteojos', 'gafas', 'sol', 'sunglasses'],
+    },
 ]
 
 const STYLE_KEYWORDS: Array<{ estilo: Estilo; terms: string[] }> = [
@@ -72,9 +106,10 @@ const STYLE_KEYWORDS: Array<{ estilo: Estilo; terms: string[] }> = [
 
 const HOT_CONTEXT_TERMS = ['playa', 'calor', 'caliente', 'tropical', 'verano', 'fresco', 'fresca']
 const SKATE_TERMS = ['skate', 'skater', 'patineta', 'cargo', 'baggy', 'jogger', 'corte bota', 'pantalon', 'pantalones', 'streetwear', 'urbano']
-const GUANACASTE_TERMS = ['guanacaste', 'nicoya', 'liberia', 'nosara', 'samara', 'tamarindo', 'flamingo']
+const GUANACASTE_TERMS = ['guanacaste', 'nicoya', 'liberia', 'nosara', 'samara', 'sámara', 'tamarindo', 'flamingo']
 const COLD_CONTEXT_TERMS = ['frio', 'frío', 'fria', 'fría', 'frente frio', 'frente frío', 'mucho frio', 'mucho frío']
 const FORMAL_CONTEXT_TERMS = ['formal', 'traje', 'oficina formal', 'boda', 'corbata']
+
 const HUMAN_SUPPORT_TERMS = [
     'donde esta mi pedido',
     'dónde está mi pedido',
@@ -104,7 +139,38 @@ const HUMAN_SUPPORT_TERMS = [
     'tarjeta completa',
 ]
 
-const formatNames = (items: Product[], limit = 2) => items.slice(0, limit).map((item) => item.nombre).join(' o ')
+const OUT_OF_CATALOG_TERMS = [
+    'zapatos de ganadero',
+    'zapato de ganadero',
+    'botas vaqueras',
+    'bota vaquera',
+    'botas de trabajo',
+    'bota de trabajo',
+    'botas de hule',
+    'bota de hule',
+    'zapatos de trabajo',
+    'calzado de trabajo',
+    'ropa agrícola',
+    'ropa agricola',
+    'ropa industrial',
+    'equipo agrícola',
+    'equipo agricola',
+    'ropa de invierno',
+    'abrigo',
+    'sueter',
+    'suéter',
+    'chaqueta pesada',
+    'ropa formal',
+    'traje formal',
+    'ropa de mujer',
+    'ropa femenina',
+    'vestido',
+    'falda',
+    'blusa',
+]
+
+const formatNames = (items: Product[], limit = 2) =>
+    items.slice(0, limit).map((item) => item.nombre).join(' o ')
 
 const detectCategoria = (text: string): Categoria | undefined =>
     CATEGORY_KEYWORDS.find(({ terms }) => terms.some((term) => includesWord(text, term)))?.categoria
@@ -219,7 +285,10 @@ const getHotClimateReply = (): StructuredReply => {
     const picks = [shortPick, lensesPick].filter(Boolean) as Product[]
 
     return {
-        content: `Para Guanacaste podés ir por algo fresco o con estilo skate, según el plan.\nPara playa o comodidad: shorts o bañador; para look urbano: cargo o baggy también funciona.\nTe puede servir: ${formatNames(picks)}.`,
+        content:
+            `Para Guanacaste podés ir por algo fresco o con estilo skate, según el plan.\n` +
+            `Para playa o comodidad: shorts o bañador; para look urbano: cargo o baggy también funciona.\n` +
+            `Te puede servir: ${formatNames(picks)}.`,
         action: buildCatalogAction('Ver shorts', 'shorts'),
     }
 }
@@ -235,6 +304,68 @@ const getFormalReply = (): StructuredReply => ({
         'Este catálogo no está enfocado en ropa formal.\nSí puedo ayudarte con un look casual premium masculino.\nTe recomiendo camisas limpias, pantalón recto y reloj.',
     action: buildCatalogAction('Ver camisas', 'camisas'),
 })
+
+const getOutOfCatalogReply = (text: string): StructuredReply | null => {
+
+    if (
+        includesAny(text, ['zapatos', 'zapato', 'calzado'])
+        && !includesAny(text, ['tenis', 'sneakers', 'zapatillas', 'calzado urbano', 'zapatos casuales'])
+    ) {
+        return {
+            content:
+                '¿Te referís a tenis casuales o a otro tipo de calzado?\n' +
+                'En el catálogo manejamos tenis urbanos, no zapatos formales ni botas.\n' +
+                'Puedo mostrarte la categoría Tenis si querés.',
+            action: buildCatalogAction('Ver tenis', 'tenis'),
+        }
+    }
+    if (!includesAny(text, OUT_OF_CATALOG_TERMS)) return null
+
+    if (includesAny(text, ['zapatos de ganadero', 'zapato de ganadero'])) {
+        return {
+            content:
+                'En este momento no manejamos zapatos de ganadero.\n' +
+                'El catálogo está enfocado en tenis urbanos, skate y streetwear masculino.\n' +
+                'Si querés algo casual, puedo mostrarte tenis.',
+            action: buildCatalogAction('Ver tenis', 'tenis'),
+        }
+    }
+
+    if (includesAny(text, ['botas vaqueras', 'bota vaquera', 'botas de trabajo', 'bota de trabajo', 'botas de hule', 'bota de hule'])) {
+        return {
+            content:
+                'En este momento no manejamos botas en el catálogo.\n' +
+                'Tenemos tenis urbanos y opciones tipo skate para looks casuales.\n' +
+                'Si querés, puedo mostrarte la categoría Tenis.',
+            action: buildCatalogAction('Ver tenis', 'tenis'),
+        }
+    }
+
+    if (includesAny(text, ['ropa formal', 'traje formal'])) {
+        return getFormalReply()
+    }
+
+    if (includesAny(text, ['ropa de invierno', 'abrigo', 'sueter', 'suéter', 'chaqueta pesada'])) {
+        return getColdWeatherReply()
+    }
+
+    if (includesAny(text, ['ropa de mujer', 'ropa femenina', 'vestido', 'falda', 'blusa'])) {
+        return {
+            content:
+                'Actualmente la tienda está enfocada en moda masculina urbana.\n' +
+                'Puedo ayudarte con camisas, shorts, pantalones, tenis, accesorios, relojes o lentes de sol.',
+            action: buildAction('Ver catálogo masculino', '/hombre'),
+        }
+    }
+
+    return {
+        content:
+            'Ese producto no está disponible en el catálogo actual.\n' +
+            'La tienda está enfocada en moda masculina urbana para Guanacaste.\n' +
+            'Puedo ayudarte con camisas, shorts, pantalones, tenis, accesorios, relojes o lentes de sol.',
+        action: buildAction('Ver catálogo masculino', '/hombre'),
+    }
+}
 
 const getStyleOutfitReply = (estilo: Estilo): StructuredReply => {
     const styleProducts = products.filter((product) => product.estilos.includes(estilo))
@@ -303,8 +434,11 @@ const getProductReply = (product: Product, label?: string): StructuredReply => (
 })
 
 const isHumanSupportIntent = (text: string) => includesAny(text, HUMAN_SUPPORT_TERMS)
+
 const isAvailabilityIntent = (text: string) =>
-    (includesWord(text, 'stock') || includesWord(text, 'disponible') || includesWord(text, 'hay')) && includesAny(text, ['exacto', 'tiempo real', 'ahorita', 'reservar', 'reserva'])
+    (includesWord(text, 'stock') || includesWord(text, 'disponible') || includesWord(text, 'hay'))
+    && includesAny(text, ['exacto', 'tiempo real', 'ahorita', 'reservar', 'reserva'])
+
 const isHotContext = (text: string) => includesAny(text, HOT_CONTEXT_TERMS)
 const isGuanacasteContext = (text: string) => includesAny(text, GUANACASTE_TERMS)
 const isSkateUrbanContext = (text: string) => includesAny(text, SKATE_TERMS)
@@ -407,8 +541,11 @@ const buildProductReply = (text: string): StructuredReply | null => {
 
 export const getStructuredReply = (rawText: string): StructuredReply | null => {
     const text = rawText.toLowerCase()
-    const productReply = buildProductReply(text)
 
+    const outOfCatalogReply = getOutOfCatalogReply(text)
+    if (outOfCatalogReply) return outOfCatalogReply
+
+    const productReply = buildProductReply(text)
     if (productReply) return productReply
 
     if (includesAny(text, ['hay alguien atendiendo', 'alguien atiende', 'estan atendiendo', 'están atendiendo', 'horario de atencion', 'horario de atención'])) {
@@ -420,14 +557,17 @@ export const getStructuredReply = (rawText: string): StructuredReply | null => {
 
     if (includesWord(text, 'envio') || includesWord(text, 'envíos') || includesWord(text, 'enviar') || includesWord(text, 'entrega')) {
         const outsideTerms = ['san jose', 'san josé', 'cartago', 'heredia', 'alajuela', 'limon', 'limón', 'puntarenas', 'nacional', 'todo costa rica', 'fuera']
+
         if (includesAny(text, outsideTerms)) {
             return {
                 content:
                     'Por ahora manejamos envíos dentro de Guanacaste.\nPara envíos fuera de la provincia, lo mejor es que un empleado de la tienda lo revise.\nPuedo ayudarte mientras tanto con productos o precios.',
             }
         }
+
         return {
-            content: 'Realizamos envíos dentro de Guanacaste.\nSi tu dirección es en otra provincia, lo mejor es consultarlo con un empleado de la tienda.\nMientras tanto puedo ayudarte con productos, precios o categorías.',
+            content:
+                'Realizamos envíos dentro de Guanacaste.\nSi tu dirección es en otra provincia, lo mejor es consultarlo con un empleado de la tienda.\nMientras tanto puedo ayudarte con productos, precios o categorías.',
         }
     }
 
@@ -440,13 +580,15 @@ export const getStructuredReply = (rawText: string): StructuredReply | null => {
 
     if (includesWord(text, 'devol')) {
         return {
-            content: 'Puedo orientarte sobre devoluciones generales.\nSi es sobre un pedido específico, debe revisarlo un empleado.\nLa prenda debe conservar su estado original.',
+            content:
+                'Puedo orientarte sobre devoluciones generales.\nSi es sobre un pedido específico, debe revisarlo un empleado.\nLa prenda debe conservar su estado original.',
         }
     }
 
     if (includesWord(text, 'pago') || includesWord(text, 'tarjeta') || includesWord(text, 'transferencia')) {
         return {
-            content: 'Aceptamos tarjeta, transferencia y pago contra entrega, según disponibilidad.\nSi hubo un problema de cobro, debe revisarlo un empleado.\nYo puedo ayudarte con productos o presupuestos mientras tanto.',
+            content:
+                'Aceptamos tarjeta, transferencia y pago contra entrega, según disponibilidad.\nSi hubo un problema de cobro, debe revisarlo un empleado.\nYo puedo ayudarte con productos o presupuestos mientras tanto.',
         }
     }
 
