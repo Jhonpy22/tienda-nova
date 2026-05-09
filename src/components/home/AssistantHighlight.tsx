@@ -17,8 +17,8 @@ const AssistantHighlight = () => (
                 <div className="rounded-[1.5rem] border border-white/12 bg-white/6 p-5">
                     <p className="text-sm uppercase tracking-[0.22em] text-accent">Capacidades</p>
                     <ul className="mt-4 space-y-3 text-sm leading-6 text-white/80">
-                        <li>Arma outfits oversized, baggy, skate, surf y Y2K.</li>
-                        <li>Guía sobre envíos, pagos, devoluciones y horarios.</li>
+                        <li>Arma outfits skate, baggy, surf, cargo y bañadores para Guanacaste.</li>
+                        <li>Guía sobre envíos dentro de Guanacaste, pagos y devoluciones.</li>
                         <li>Acceso directo a categorías concretas con un solo clic.</li>
                     </ul>
                 </div>

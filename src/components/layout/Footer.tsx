@@ -10,7 +10,7 @@ const Footer = () => (
                         NOVA STREET
                     </p>
                     <p className="mt-2 max-w-xs text-sm leading-6 text-white/72">
-                        Streetwear masculino premium: fits amplios, tonos oscuros y piezas listas para ciudad.
+                        Moda urbana masculina en Nicoya, Guanacaste. Fits amplios, tonos oscuros, estilo skate y surf.
                     </p>
                 </div>
                 <div className="rounded-[1.25rem] border border-white/12 bg-white/6 p-4">
@@ -52,7 +52,7 @@ const Footer = () => (
             <div className="space-y-4">
                 <p className="text-sm uppercase tracking-[0.22em] text-accent">Confianza</p>
                 <div className="space-y-3 text-sm leading-6 text-white/75">
-                    <p>Envíos nacionales entre 2 y 5 días hábiles según ubicación.</p>
+                    <p>Envíos dentro de Guanacaste. Para otras provincias, consultá con un empleado.</p>
                     <p>Métodos de pago y devoluciones explicados desde el asistente.</p>
                     <p>Catálogo responsive pensado para explorar desde móvil y escritorio.</p>
                 </div>
