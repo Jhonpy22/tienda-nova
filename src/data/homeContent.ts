@@ -9,7 +9,7 @@ export const collectionSpotlights: CollectionSpotlight[] = [
         category: 'camisas',
         categoryLabel: 'Ver camisas',
         image:
-            'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1100&h=1350&q=80',
+            'https://cdn.shopify.com/s/files/1/0156/6146/files/images-PowerOriginalsT_ShirtGSConditioningRedA4B9W_RBWV_0002_V1.jpg?v=1775722272',
     },
     {
         eyebrow: 'Skate / Streetwear',
@@ -35,13 +35,13 @@ export const curatedGroups: CuratedGroup[] = [
                 name: 'Cargo Baggy Olive',
                 price: '₡42.990',
                 note: 'Cargo holgado que va con camiseta oversized y tenis skate. Urbano para Guanacaste sin ir pesado.',
-                image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=700&h=900&q=80',
+                image: 'https://assets.myntassets.com/assets/images/2025/OCTOBER/14/hsYQ8xt1_512034d4573a41189223a7479ed5f669.jpg',
             },
             {
                 name: 'Tenis Skate Low Black',
                 price: '₡58.990',
                 note: 'Perfil bajo y suela gum para cerrar un fit skate. Clásico y fácil de usar.',
-                image: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=700&h=900&q=80',
+                image: 'https://www.skatemarket.cl/wp-content/uploads/2022/07/MN-SK8-LOW-BKWH-2NEW.webp',
             },
         ],
     },
@@ -56,7 +56,7 @@ export const curatedGroups: CuratedGroup[] = [
                 name: 'Short Nylon Surf Black',
                 price: '₡28.990',
                 note: 'Funciona con camisa camp y tenis blancos para paseo o fin de semana en la playa.',
-                image: 'https://images.unsplash.com/photo-1506629905607-d9a297d0f5a8?auto=format&fit=crop&w=700&h=900&q=80',
+                image: 'https://kinoclothing.com/cdn/shop/files/JSLP5550copy_e66ad4f7-3887-4134-81ba-07ba37b10a42.jpg?v=1729105344',
             },
             {
                 name: 'Lentes Smoke Urban',

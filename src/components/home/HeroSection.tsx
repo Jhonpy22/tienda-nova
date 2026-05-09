@@ -37,14 +37,14 @@ const HeroSection = () => (
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-                <article className="flex min-h-[18rem] flex-col justify-end rounded-[2rem] border border-white/18 bg-[linear-gradient(180deg,rgba(10,10,10,0.05),rgba(10,10,10,0.64)),url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&h=1100&q=80')] bg-cover bg-center p-6 shadow-[0_28px_90px_rgba(0,0,0,0.45)]">
+                <article className="flex min-h-[18rem] flex-col justify-end rounded-[2rem] border border-white/18 bg-[linear-gradient(180deg,rgba(10,10,10,0.05),rgba(10,10,10,0.64)),url('https://fastcolors.in/cdn/shop/files/Oversize_Back_Printed_oversize_t_shirt_for_men_-_FastColors_-_Oversize_Back_Printed_T-Shirt_-_FastColors_-_tag1_-_tag2_-_tag3_-_-6266647.jpg?v=1751898677&width=2048')] bg-cover bg-center p-6 shadow-[0_28px_90px_rgba(0,0,0,0.45)]">
                     <p className="text-xs uppercase tracking-[0.28em] text-accent">Oversized</p>
                     <p className="mt-3 max-w-[14rem] text-2xl leading-tight text-white" style={{ fontFamily: 'var(--font-display)' }}>
                         Camisas boxy y denim amplio para una silueta fuerte.
                     </p>
                 </article>
 
-                <article className="flex min-h-[18rem] flex-col justify-end rounded-[2rem] border border-white/18 bg-[linear-gradient(180deg,rgba(10,10,10,0.05),rgba(10,10,10,0.64)),url('https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=900&h=1100&q=80')] bg-cover bg-center p-6 shadow-[0_28px_90px_rgba(0,0,0,0.45)] sm:translate-y-10">
+                <article className="flex min-h-[18rem] flex-col justify-end rounded-[2rem] border border-white/18 bg-[linear-gradient(180deg,rgba(10,10,10,0.05),rgba(10,10,10,0.64)),url('https://i.pinimg.com/564x/45/6d/7f/456d7fbbc494b824ea3e6943763d37ce.jpg')] bg-cover bg-center p-6 shadow-[0_28px_90px_rgba(0,0,0,0.45)] sm:translate-y-10">
                     <p className="text-xs uppercase tracking-[0.28em] text-accent">Skate / Y2K</p>
                     <p className="mt-3 max-w-[14rem] text-2xl leading-tight text-white" style={{ fontFamily: 'var(--font-display)' }}>
                         Tenis robustos, accesorios metálicos y actitud urbana.
