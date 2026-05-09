@@ -1,4 +1,5 @@
 import { RouterProvider, createRouter } from '@tanstack/react-router'
+import useLenisScroll from './hooks/useLenisScroll'
 import { rootRoute } from './routes/__root'
 import { homeRoute } from './routes/index'
 import { hombreRoute } from './routes/hombre/index'
@@ -22,6 +23,10 @@ declare module '@tanstack/react-router' {
     }
 }
 
-const App = () => <RouterProvider router={router} />
+const App = () => {
+    useLenisScroll()
+
+    return <RouterProvider router={router} />
+}
 
 export default App

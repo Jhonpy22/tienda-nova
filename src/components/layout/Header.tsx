@@ -1,11 +1,11 @@
 import { Link } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CartIcon from '../cart/CartIcon'
 import ThemeToggle from './ThemeToggle'
 
 const navItems = [
     { label: 'Inicio', to: '/' },
-    { label: 'Catálogo', to: '/hombre' },
+    { label: 'Catalogo', to: '/hombre' },
 ] as const
 
 const desktopCategoryItems = [
@@ -32,11 +32,32 @@ const mobileLinkClass =
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false)
 
     const closeMenu = () => setIsMenuOpen(false)
 
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 18)
+        }
+
+        handleScroll()
+        window.addEventListener('scroll', handleScroll, { passive: true })
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
+
     return (
-        <header className="sticky top-0 z-30 border-b border-warm bg-card/95 backdrop-blur-xl">
+        <header
+            className={[
+                'sticky top-0 z-30 border-b backdrop-blur-xl transition-all duration-300',
+                isScrolled
+                    ? 'border-accent/20 bg-card shadow-[0_16px_40px_rgba(0,0,0,0.24)]'
+                    : 'border-warm bg-card/95 shadow-none',
+            ].join(' ')}
+        >
             <div className="container-shell py-3 lg:py-4">
                 <div className="flex min-h-14 items-center justify-between gap-2 lg:min-h-18">
                     <Link to="/" onClick={closeMenu} className="shrink-0 flex flex-col leading-none">
@@ -86,13 +107,13 @@ const Header = () => {
                         <CartIcon />
                         <button
                             type="button"
-                            aria-label={isMenuOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'}
+                            aria-label={isMenuOpen ? 'Cerrar menu de navegacion' : 'Abrir menu de navegacion'}
                             aria-expanded={isMenuOpen}
                             aria-controls="mobile-navigation"
                             onClick={() => setIsMenuOpen((current) => !current)}
                             className="flex h-11 w-11 items-center justify-center rounded-full border border-warm bg-card text-text-main transition-all duration-200 hover:border-accent hover:text-accent"
                         >
-                            <span className="sr-only">{isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}</span>
+                            <span className="sr-only">{isMenuOpen ? 'Cerrar menu' : 'Abrir menu'}</span>
                             <span className="relative h-4 w-5" aria-hidden="true">
                                 <span
                                     className={`absolute left-0 top-0 h-0.5 w-5 rounded-full bg-current transition-transform duration-200 ${
@@ -117,7 +138,7 @@ const Header = () => {
                 <div
                     id="mobile-navigation"
                     className={`grid overflow-hidden transition-[grid-template-rows,opacity,transform] duration-200 lg:hidden ${
-                        isMenuOpen ? 'grid-rows-[1fr] opacity-100 translate-y-0' : 'grid-rows-[0fr] opacity-0 -translate-y-2'
+                        isMenuOpen ? 'grid-rows-[1fr] translate-y-0 opacity-100' : 'grid-rows-[0fr] -translate-y-2 opacity-0'
                     }`}
                 >
                     <nav className="min-h-0">
