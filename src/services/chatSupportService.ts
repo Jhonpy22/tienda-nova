@@ -1,6 +1,6 @@
 import { CATEGORY_LABELS, products } from '../data/products'
-import type { ChatAction } from '../types'
-import type { Categoria, Genero, Product } from '../types/product'
+import type { ChatAction } from '../models/Index'
+import type { Categoria, Genero, Product } from '../models/types/product'
 
 type StructuredReply = {
     content: string

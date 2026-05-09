@@ -1,5 +1,5 @@
 import { CATEGORY_BY_GENDER } from '../data/products'
-import type { CatalogSearch, Categoria, Genero, Product, SortOption, Talla } from '../types/product'
+import type { CatalogSearch, Categoria, Genero, Product, SortOption, Talla } from '../models/Index';
 
 export const PRODUCTS_PER_PAGE = 6
 

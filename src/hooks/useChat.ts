@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { geminiService } from '../services/geminiService'
 import { getStructuredReply } from '../services/chatSupportService'
 import { storageService } from '../services/storageService'
-import type { Message, QuickSuggestion } from '../types'
+import type { Message, QuickSuggestion } from '../models/Index'
 
 const WELCOME_MESSAGE: Message = {
     role: 'assistant',

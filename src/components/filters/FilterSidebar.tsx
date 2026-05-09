@@ -1,4 +1,4 @@
-import type { CatalogSearch, SortOption, Talla } from '../../types/product'
+import type { CatalogSearch, SortOption, Talla } from '../../models/Index'
 
 interface Props {
     search: CatalogSearch
