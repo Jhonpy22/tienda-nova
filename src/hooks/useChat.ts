@@ -53,7 +53,7 @@ export const useChat = () => {
         setMessages(updatedHistory)
         setInput('')
 
-        const structuredReply = getStructuredReply(text)
+        const structuredReply = getStructuredReply(text, messages.slice(-8))
         if (structuredReply) {
             setMessages((prev) => [
                 ...prev,

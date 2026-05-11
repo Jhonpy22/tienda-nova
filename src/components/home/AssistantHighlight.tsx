@@ -24,7 +24,7 @@ const AssistantHighlight = () => {
                         <p className="text-sm uppercase tracking-[0.22em] text-accent">Capacidades</p>
                         <ul className="mt-4 space-y-3 text-sm leading-6 text-white/80">
                             <li>Arma outfits skate, baggy, surf, cargo y banadores para Guanacaste.</li>
-                            <li>Guia sobre envios dentro de Guanacaste, pagos y devoluciones.</li>
+                            <li>Guia sobre horario, contacto, envios dentro de Guanacaste y garantias generales.</li>
                             <li>Acceso directo a categorias concretas con un solo clic.</li>
                         </ul>
                     </div>

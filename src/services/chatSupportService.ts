@@ -1,9 +1,11 @@
 import { CATEGORY_LABELS, products } from '../data/products'
+import { STORE_CONTACT_LINKS, STORE_SUPPORT_RESPONSES } from '../constants/storeInfo'
 import type {
     CatalogMatches,
     Categoria,
     ChatAction,
     Estilo,
+    Message,
     Product,
     ProductIntent,
     ScoredProduct,
@@ -269,6 +271,10 @@ const CONTACT_TERMS = [
 const SMALL_TALK_TERMS = [
     'gracias',
     'muchas gracias',
+    'gracias por la ayuda',
+    'ok gracias',
+    'listo gracias',
+    'perfecto gracias',
     'ok',
     'okay',
     'esta bien',
@@ -283,6 +289,13 @@ const SMALL_TALK_TERMS = [
     'entendido',
     'genial',
     'excelente',
+    'que atentos',
+    'qué atentos',
+    'muy atentos',
+    'excelente atención',
+    'excelente atencion',
+    'buena atención',
+    'buena atencion',
 ]
 
 const LOCATION_TERMS = [
@@ -331,6 +344,28 @@ const OUTSIDE_GUANACASTE_TERMS = [
     'fuera',
 ]
 
+const BROKEN_PRODUCT_TERMS = [
+    'roto',
+    'rota',
+    'se rompio',
+    'se rompió',
+    'se me rompio',
+    'se me rompió',
+    'rompio',
+    'rompió',
+    'rompieron',
+    'quebrado',
+    'quebrada',
+    'se quebro',
+    'se quebró',
+    'se me quebro',
+    'se me quebró',
+    'descosido',
+    'descosida',
+    'rasgado',
+    'rasgada',
+]
+
 const WARRANTY_TERMS = [
     'garantia',
     'garantía',
@@ -348,6 +383,14 @@ const WARRANTY_TERMS = [
     'dañada',
     'fallo de fabrica',
     'fallo de fábrica',
+    'problema con un producto',
+    'producto con problema',
+    'producto malo',
+    'salio malo',
+    'salió malo',
+    'me salio malo',
+    'me salió malo',
+    ...BROKEN_PRODUCT_TERMS,
 ]
 
 const RETURN_TERMS = [
@@ -361,8 +404,87 @@ const RETURN_TERMS = [
     'quiero devolver',
     'devolver producto',
     'reembolso',
+    'devolucion de dinero',
+    'devolución de dinero',
+    'devolucion del dinero',
+    'devolución del dinero',
+    'devolver dinero',
+    'devolver el dinero',
     'me arrepenti',
     'me arrepentí',
+]
+
+const MONEY_REFUND_TERMS = [
+    'reembolso',
+    'para mi dinero',
+    'mi dinero',
+    'y mi plata',
+    'quiero mi plata',
+    'quiero mi plata de vuelta',
+    'mi plata',
+    'mi plata de vuelta',
+    'me devuelven la plata',
+    'plata de vuelta',
+    'devolucion de dinero',
+    'devolución de dinero',
+    'devolucion del dinero',
+    'devolución del dinero',
+    'devolver dinero',
+    'devolver el dinero',
+]
+
+const DISTANCE_FOLLOW_UP_TERMS = [
+    'vivo lejos',
+    'vivo lejos de nicoya',
+    'estoy lejos',
+    'no puedo ir',
+    'no puedo ir a la tienda',
+    'no puedo ir a nicoya',
+    'soy de lejos',
+    'me queda lejos',
+    'queda lejos',
+]
+
+const SHIPPING_DAMAGE_TERMS = [
+    'creo que fue en el envio',
+    'creo que fue en el envío',
+    'fue en el envio',
+    'fue en el envío',
+    'daño en envio',
+    'daño en envío',
+    'dano en envio',
+    'dano en envío',
+    'se dañó en el envío',
+    'se dano en el envio',
+    'se daño en el envio',
+    'venía dañado por el envío',
+    'venia dañado por el envio',
+    'venía dañado',
+    'venia dañado',
+    'me llegó dañado',
+    'me llego dañado',
+    'llegó dañado',
+    'llego dañado',
+    'llegó roto',
+    'llego roto',
+    'llegó mal',
+    'llego mal',
+    'paquete dañado',
+    'paquete danado',
+    'empaque dañado',
+    'empaque danado',
+]
+
+const WARRANTY_CONTEXT_TERMS = [
+    ...WARRANTY_TERMS,
+    ...RETURN_TERMS,
+    ...MONEY_REFUND_TERMS,
+    ...SHIPPING_DAMAGE_TERMS,
+    'reclamo',
+    'fotos claras',
+    'fotos del problema',
+    'problema con mi compra',
+    'plata de vuelta',
 ]
 
 const PAYMENT_TERMS = [
@@ -650,30 +772,33 @@ const getAttentionReply = (): StructuredReply => ({
 })
 
 const getHoursReply = (): StructuredReply => ({
-    content:
-        'El horario puede variar según la disponibilidad del equipo.\n' +
-        'Podés dejar tu consulta y un empleado la revisará en horario de atención.\n' +
-        'Mientras tanto, puedo ayudarte con productos, precios, envíos o categorías.',
+    content: STORE_SUPPORT_RESPONSES.hours,
 })
 
-const getContactReply = (): StructuredReply => ({
-    content:
-        'Para contacto directo, lo mejor es que un empleado de la tienda revise tu consulta.\n' +
-        'Yo no puedo confirmar teléfonos, WhatsApp o redes si no están definidos en el sistema.\n' +
-        'Mientras tanto, puedo ayudarte con productos, precios, envíos o categorías.',
-})
+const getContactReply = (text: string): StructuredReply => {
+    if (includesAny(text, ['whatsapp', 'numero de whatsapp', 'número de whatsapp'])) {
+        return { content: STORE_SUPPORT_RESPONSES.whatsapp }
+    }
+
+    if (includesAny(text, ['instagram', 'insta'])) {
+        return { content: STORE_SUPPORT_RESPONSES.instagram }
+    }
+
+    if (includesTerm(text, 'facebook')) {
+        return { content: STORE_SUPPORT_RESPONSES.facebook }
+    }
+
+    return { content: STORE_SUPPORT_RESPONSES.contactGeneral }
+}
 
 const getSmallTalkReply = (): StructuredReply => ({
     content:
-        '¡Pura vida!\n' +
-        'Si ocupás algo más, puedo ayudarte con productos, precios, outfits, envíos o categorías.',
+        '¡Con gusto, pura vida!\n' +
+        'Si necesitás algo más, puedo ayudarte con productos, garantías, envíos o contacto.',
 })
 
 const getLocationReply = (): StructuredReply => ({
-    content:
-        'Estamos en Nicoya, Guanacaste, cerca del parque central de Nicoya.\n' +
-        'Por ahora realizamos envíos dentro de Guanacaste.\n' +
-        'Si querés, puedo ayudarte a revisar productos del catálogo.',
+    content: STORE_SUPPORT_RESPONSES.location,
 })
 
 const getShippingReply = (text: string): StructuredReply => {
@@ -694,28 +819,76 @@ const getShippingReply = (text: string): StructuredReply => {
     }
 }
 
-const getWarrantyReply = (): StructuredReply => ({
+const isBrokenProductIntent = (text: string) => includesAny(text, BROKEN_PRODUCT_TERMS)
+
+const getBrokenProductReply = (text: string): StructuredReply => {
+    const item = includesAny(text, ['camisa', 'camisas']) ? 'camisa' : 'producto'
+
+    return {
+        content:
+            `Lamento lo de tu ${item}.\n` +
+            'Si fue por defecto, tiene 1 mes de garantía.\n' +
+            'Enviá fotos por WhatsApp, Instagram o Facebook para que el equipo revise si aplica.',
+    }
+}
+
+const getWarrantyReply = (text: string): StructuredReply => {
+    if (isBrokenProductIntent(text)) return getBrokenProductReply(text)
+
+    return { content: STORE_SUPPORT_RESPONSES.warranty }
+}
+
+const getDistanceWarrantyReply = (): StructuredReply => ({
     content:
-        'Sí, puedo orientarte con garantías generales.\n' +
-        'Si el producto presenta un defecto, debe revisarlo un empleado de la tienda.\n' +
-        'Dejá el detalle para que el equipo lo revise en horario de atención.',
+        'Si vivís lejos de Nicoya, podés enviar fotos claras del problema por WhatsApp, Instagram o Facebook.\n' +
+        'El equipo revisará si aplica la garantía antes de aprobar cambio o devolución.\n' +
+        `WhatsApp: ${STORE_CONTACT_LINKS.whatsapp.phone}.`,
 })
 
+const getDistanceContactReply = (): StructuredReply => ({
+    content:
+        'Si no podés ir a la tienda, podés contactarnos por WhatsApp, Instagram o Facebook.\n' +
+        `WhatsApp: ${STORE_CONTACT_LINKS.whatsapp.phone}.\n` +
+        'Si es por garantía, enviá fotos claras del problema para que el equipo revise si aplica.',
+})
+
+const getShippingDamageWarrantyReply = (): StructuredReply => ({
+    content:
+        'Si creés que el daño ocurrió durante el envío, enviá fotos claras del producto y del empaque por WhatsApp, Instagram o Facebook.\n' +
+        'El equipo revisará el caso para confirmar si aplica garantía, cambio o devolución.\n' +
+        `WhatsApp: ${STORE_CONTACT_LINKS.whatsapp.phone}.`,
+})
+
+const getMoneyBackFollowUpReply = (recentMessages: Message[] = []): StructuredReply => {
+    if (!isWarrantyOrReturnContext(recentMessages)) return { content: STORE_SUPPORT_RESPONSES.refund }
+
+    return {
+        content:
+            'La devolución del dinero solo puede aprobarse después de revisar el caso.\n' +
+            'Enviá fotos claras del problema por WhatsApp, Instagram o Facebook.\n' +
+            'Un empleado confirmará si aplica según la garantía.',
+    }
+}
+
 const getReturnReply = (text: string): StructuredReply => {
-    if (includesAny(text, ['mi pedido', 'mi compra', 'orden', 'reembolso', 'quiero devolver', 'quiero cambiar'])) {
+    if (includesAny(text, MONEY_REFUND_TERMS)) {
+        return { content: STORE_SUPPORT_RESPONSES.refund }
+    }
+
+    if (includesAny(text, ['mi pedido', 'mi compra', 'orden', 'quiero devolver', 'quiero cambiar'])) {
         return {
             content:
-                'Para cambios o devoluciones de una compra específica, debe ayudarte un empleado.\n' +
-                'Yo puedo orientarte de forma general, pero no revisar pedidos.\n' +
-                'Dejá el detalle para que el equipo lo revise en horario de atención.',
+                'Los productos cuentan con 1 mes de garantía por defectos.\n' +
+                'Para cambios o devoluciones, enviá fotos por WhatsApp, Instagram o Facebook, o acercate a la tienda.\n' +
+                'Un empleado debe revisar el caso antes de aprobar cambio o devolución.',
         }
     }
 
     return {
         content:
-            'Puedo orientarte sobre cambios y devoluciones generales.\n' +
-            'La prenda debe conservar su estado original y cumplir las condiciones de la tienda.\n' +
-            'Si es un caso específico, debe revisarlo un empleado.',
+            'Los productos cuentan con 1 mes de garantía por defectos.\n' +
+            'Para revisar cambios o devoluciones, enviá fotos claras por WhatsApp, Instagram o Facebook.\n' +
+            'Un empleado debe validar el caso antes de aprobar cambio o devolución.',
     }
 }
 
@@ -971,16 +1144,7 @@ const isHoursIntent = (text: string) => includesAny(text, HOURS_TERMS)
 
 const isContactIntent = (text: string) =>
     !isOrderIntent(text)
-    && (
-        includesAny(text, [
-            'contacto de la tienda',
-            'numero de telefono',
-            'número de teléfono',
-            'numero de whatsapp',
-            'número de WhatsApp',
-        ])
-        || (includesAny(text, CONTACT_TERMS) && !includesAny(text, ['numero', 'número']))
-    )
+    && includesAny(text, CONTACT_TERMS)
 
 const isSmallTalkIntent = (text: string) => isStandaloneIntent(text, SMALL_TALK_TERMS)
 
@@ -1004,6 +1168,39 @@ const isReservationIntent = (text: string) => includesAny(text, RESERVATION_TERM
 const isSensitiveIntent = (text: string) => includesAny(text, SENSITIVE_TERMS)
 
 const isComplaintIntent = (text: string) => includesAny(text, COMPLAINT_TERMS)
+
+const isMoneyBackFollowUp = (text: string) => includesAny(text, MONEY_REFUND_TERMS)
+
+const isDistanceFollowUp = (text: string) => includesAny(text, DISTANCE_FOLLOW_UP_TERMS)
+
+const isShippingDamageFollowUp = (text: string) => includesAny(text, SHIPPING_DAMAGE_TERMS)
+
+const isWarrantyOrReturnContext = (recentMessages: Message[] = []) => {
+    const contextText = recentMessages
+        .slice(-8)
+        .map((message) => message.content)
+        .join('\n')
+
+    return includesAny(contextText, WARRANTY_CONTEXT_TERMS) || includesAny(contextText, COMPLAINT_TERMS)
+}
+
+const getWarrantyFollowUpReply = (text: string, recentMessages: Message[] = []): StructuredReply | null => {
+    if (isShippingDamageFollowUp(text)) {
+        return isWarrantyOrReturnContext(recentMessages) || !isShippingIntent(text)
+            ? getShippingDamageWarrantyReply()
+            : null
+    }
+
+    if (isMoneyBackFollowUp(text)) return getMoneyBackFollowUpReply(recentMessages)
+
+    if (isDistanceFollowUp(text)) {
+        return isWarrantyOrReturnContext(recentMessages)
+            ? getDistanceWarrantyReply()
+            : getDistanceContactReply()
+    }
+
+    return null
+}
 
 const isAvailabilityIntent = (text: string) =>
     includesAny(text, STOCK_EXACT_TERMS)
@@ -1117,21 +1314,23 @@ const buildProductReply = (text: string): StructuredReply | null => {
     return null
 }
 
-export const getStructuredReply = (rawText: string): StructuredReply | null => {
+export const getStructuredReply = (rawText: string, recentMessages: Message[] = []): StructuredReply | null => {
     const text = rawText
 
     if (isSmallTalkIntent(text)) return getSmallTalkReply()
+    const warrantyFollowUpReply = getWarrantyFollowUpReply(text, recentMessages)
+    if (warrantyFollowUpReply) return warrantyFollowUpReply
     if (isComplaintIntent(text) || isSensitiveIntent(text)) return getHumanSupportReply()
     if (isOrderIntent(text)) return getOrderReply()
     if (isPaymentIntent(text)) return getPaymentReply(text)
     if (isReturnIntent(text)) return getReturnReply(text)
-    if (isWarrantyIntent(text)) return getWarrantyReply()
+    if (isWarrantyIntent(text)) return getWarrantyReply(text)
     if (isDiscountIntent(text)) return getDiscountReply()
     if (isReservationIntent(text)) return getReservationReply()
     if (isAvailabilityIntent(text)) return getAvailabilityReply()
     if (isAttentionIntent(text)) return getAttentionReply()
     if (isHoursIntent(text)) return getHoursReply()
-    if (isContactIntent(text)) return getContactReply()
+    if (isContactIntent(text)) return getContactReply(text)
     if (isLocationIntent(text)) return getLocationReply()
     if (isShippingIntent(text)) return getShippingReply(text)
 
