@@ -57,6 +57,30 @@ const includesTerm = (text: string, term: string) => {
 
 const includesAny = (text: string, terms: string[]) => terms.some((term) => includesTerm(text, term))
 
+const AVAILABLE_BRANDS = Array.from(new Set(products.map((product) => product.marca))).sort((left, right) =>
+    left.localeCompare(right, 'es'),
+)
+
+const REQUESTED_BRANDS = [
+    'Stüssy',
+    'Zayin',
+    'Volcom',
+    'Vans',
+    'DC',
+    'Nike',
+    'Adidas',
+    'Converse',
+    'Quiksilver',
+] as const
+
+const detectBrand = (text: string) =>
+    REQUESTED_BRANDS.find((brand) => includesTerm(text, brand) || normalizeText(text).includes(normalizeText(brand)))
+
+const brandExists = (brand: string) => AVAILABLE_BRANDS.some((availableBrand) => normalizeText(availableBrand) === normalizeText(brand))
+
+const isBrandListIntent = (text: string) =>
+    includesAny(text, ['marcas', 'marca streetwear', 'marcas streetwear', 'que marcas', 'qué marcas'])
+
 const isStandaloneIntent = (text: string, terms: string[]) => {
     const normalizedText = normalizeText(text)
         .replace(/[^a-z0-9\s]+/g, ' ')
@@ -79,7 +103,7 @@ const COLOR_ALIASES = [
 const CATEGORY_KEYWORDS: Array<{ categoria: Categoria; terms: string[] }> = [
     {
         categoria: 'camisas',
-        terms: ['camisa', 'camisas', 'sobrecamisa', 'shirt', 'boxy', 'oversized'],
+        terms: ['camisa', 'camisas', 'camiseta', 'camisetas', 'shirt', 'boxy', 'oversized', 'fresca', 'frescas'],
     },
     {
         categoria: 'shorts',
@@ -108,10 +132,13 @@ const CATEGORY_KEYWORDS: Array<{ categoria: Categoria; terms: string[] }> = [
             'sneakers',
             'zapatilla',
             'zapatillas',
-            'runner',
             'calzado urbano',
             'zapatos casuales',
         ],
+    },
+    {
+        categoria: 'hoodies',
+        terms: ['hoodie', 'hoodies', 'sudadera', 'sudaderas', 'sueter', 'suéter'],
     },
     {
         categoria: 'accesorios',
@@ -119,19 +146,30 @@ const CATEGORY_KEYWORDS: Array<{ categoria: Categoria; terms: string[] }> = [
             'accesorio',
             'accesorios',
             'gorra',
-            'crossbody',
-            'cinturon',
-            'cinturón',
-            'cadena',
-            'beanie',
-            'mochila',
-            'billetera',
+            'gorras',
             'lentes',
             'lente',
             'anteojos',
             'gafas',
-            'sol',
             'sunglasses',
+            'bolso',
+            'bolsos',
+            'bolso cruzado',
+            'crossbody',
+            'medias',
+            'media',
+            'calcetines',
+            'calcetin',
+            'calcetín',
+            'socks',
+            'cadena',
+            'cadenas',
+            'billetera',
+            'billeteras',
+            'cinturon',
+            'cinturón',
+            'mochila',
+            'beanie',
         ],
     },
 ]
@@ -360,20 +398,18 @@ const PRODUCT_TERMS = [
     'zapato',
     'zapatos',
     'calzado',
-    'reloj',
-    'relojes',
     'lentes',
     'lente',
     'accesorio',
     'accesorios',
     'gorra',
     'billetera',
-            'lentes',
-            'lente',
-            'anteojos',
-            'gafas',
-            'sol',
-            'sunglasses',
+    'lentes',
+    'lente',
+    'anteojos',
+    'gafas',
+    'sol',
+    'sunglasses',
     'cargo',
     'jogger',
     'jeans',
@@ -782,6 +818,21 @@ const SENSITIVE_TERMS = [
     'datos personales',
     'cedula',
     'cédula',
+    'numero de cedula',
+    'número de cédula',
+    'cuenta bancaria',
+    'iban',
+    'pin',
+    'clave',
+    'contrasena',
+    'contraseña',
+    'cvv',
+    'codigo de seguridad',
+    'código de seguridad',
+    'numero de cuenta',
+    'número de cuenta',
+    'te paso mi tarjeta',
+    'mi tarjeta es',
     'tarjeta completa',
     'numero de tarjeta',
     'número de tarjeta',
@@ -880,10 +931,22 @@ const getRelevantTokens = (text: string) =>
         .split(/[^a-z0-9]+/)
         .filter((token) => token.length >= 3)
 
+const getProductSearchText = (product: Product) =>
+    normalizeText([
+        product.nombre,
+        product.marca,
+        product.subcategoria,
+        product.categoria,
+        product.descripcion,
+        product.colores.join(' '),
+        product.estilos.join(' '),
+        product.tags.join(' '),
+    ].join(' '))
+
 const scoreMatch = (product: Product, tokens: string[]): number => {
     if (!tokens.length) return 0
 
-    const haystack = normalizeText(`${product.nombre} ${product.descripcion} ${product.colores.join(' ')} ${product.estilos.join(' ')}`)
+    const haystack = getProductSearchText(product)
 
     let score = 0
     for (const token of tokens) {
@@ -919,6 +982,12 @@ const getBestMatch = (ranked: ScoredProduct[]): Product | null => {
 
 const findGlobalDirectMatches = (text: string) => rankProducts(products, getRelevantTokens(text))
 
+const productsByBrand = (brand: string, categoria?: Categoria) =>
+    products.filter((product) =>
+        normalizeText(product.marca) === normalizeText(brand)
+        && (!categoria || product.categoria === categoria),
+    )
+
 const findCatalogMatches = ({ categoria, color, estilo }: ProductIntent, text: string): CatalogMatches => {
     const base = products.filter((product) => {
         if (categoria && product.categoria !== categoria) return false
@@ -942,13 +1011,14 @@ const findCatalogMatches = ({ categoria, color, estilo }: ProductIntent, text: s
     return { base, exactColorMatches, directMatches }
 }
 
-const getProductByName = (name: string) => products.find((product) => product.nombre === name)
+
 
 const productReason = (product: Product) => {
     if (product.categoria === 'camisas') return 'Sirve para combinar con shorts, pantalón baggy o tenis limpios.'
     if (product.categoria === 'shorts') return 'Funciona bien para clima cálido, playa o salidas casuales.'
     if (product.categoria === 'pantalones') return 'Va bien con camisas oversized y tenis urbanos.'
     if (product.categoria === 'tenis') return 'Tiene sentido para ciudad o salida casual, no como primera opción de playa.'
+    if (product.categoria === 'hoodies') return 'Es una capa ligera para noche fresca, lluvia, viaje o aire acondicionado.'
     return 'Es un detalle fácil para completar un outfit masculino urbano.'
 }
 
@@ -959,6 +1029,20 @@ const getHumanSupportReply = (): StructuredReply => ({
         'Dejá el detalle para que el equipo lo revise en horario de atención.',
 })
 
+const getSensitiveReply = (): StructuredReply => ({
+    content:
+        'Por seguridad, no compartás datos personales, tarjetas, claves ni información bancaria por este chat.\n' +
+        'Para pagos o pedidos, contactá a un empleado por los canales oficiales.\n' +
+        'Mientras tanto, puedo ayudarte con productos, precios o categorías.',
+})
+
+const getBrandListReply = (): StructuredReply => ({
+    content:
+        `En el catálogo actual veo estas marcas: ${AVAILABLE_BRANDS.join(', ')}.\n` +
+        'Puedo recomendarte por marca, estilo urbano, skate, playa o presupuesto.\n' +
+        'Decime una marca o el tipo de fit que buscás.',
+    action: buildAction('Ver catálogo masculino', '/hombre'),
+})
 const getAttentionReply = (): StructuredReply => ({
     content:
         'Puede que en este momento no haya personal disponible.\n' +
@@ -1083,6 +1167,36 @@ const getSupportNextStepReply = (): StructuredReply => ({
         `WhatsApp: ${STORE_CONTACT_LINKS.whatsapp.phone}.`,
 })
 
+const getSocksReply = (): StructuredReply => {
+    const socks = products.filter(
+        (product) =>
+            product.categoria === 'accesorios' &&
+            (product.subcategoria === 'Medias urbanas' ||
+                normalizeText(product.nombre).includes('media') ||
+                normalizeText(product.nombre).includes('medias') ||
+                normalizeText(product.nombre).includes('calcetin') ||
+                normalizeText(product.nombre).includes('calcetines') ||
+                normalizeText(product.nombre).includes('sock') ||
+                normalizeText(product.nombre).includes('socks')),
+    )
+
+    if (!socks.length) {
+        return {
+            content:
+                'Sí, las medias entran dentro de accesorios.\n' +
+                'Podés revisar la categoría Accesorios para ver opciones disponibles.',
+            action: buildCatalogAction('Ver accesorios', 'accesorios'),
+        }
+    }
+
+    return {
+        content:
+            'Sí, tenemos medias urbanas dentro de accesorios.\n' +
+            `Te puede servir: ${formatNames(socks)}.\n` +
+            'Podés revisar Accesorios para ver más opciones.',
+        action: buildCatalogAction('Ver accesorios', 'accesorios'),
+    }
+}
 const getMoneyBackFollowUpReply = (recentMessages: Message[] = []): StructuredReply => {
     if (!isWarrantyOrReturnContext(recentMessages)) return { content: STORE_SUPPORT_RESPONSES.refund }
 
@@ -1171,15 +1285,83 @@ const getAvailabilityReply = (): StructuredReply => ({
         'Mientras tanto, puedo mostrarte productos, precios o categorías.',
 })
 
-const getHotClimateReply = (): StructuredReply => {
-    const shortPick = getProductByName('Short Nylon Surf Black')
-    const lensesPick = getProductByName('Lentes Smoke Urban') ?? getProductByName('Lentes Shield Y2K Smoke')
-    const picks = [shortPick, lensesPick].filter(Boolean) as Product[]
+const productHasAny = (product: Product, terms: string[]) => {
+    const haystack = getProductSearchText(product)
+    return terms.some((term) => haystack.includes(normalizeText(term)))
+}
+
+const getProductsByTerms = (terms: string[], categorias?: Categoria[]) =>
+    products.filter((product) =>
+        (!categorias || categorias.includes(product.categoria))
+        && productHasAny(product, terms),
+    )
+
+const getUnavailableBrandReply = (brand: string, text: string): StructuredReply => {
+    const beachTerms = ['playa', 'surf', 'fresco', 'clima caliente', 'guanacaste']
+    const alternatives = getProductsByTerms(beachTerms, ['camisas', 'shorts', 'accesorios'])
+
+    if (normalizeText(brand) === 'quiksilver' || includesAny(text, beachTerms)) {
+        return {
+            content:
+                `No veo ${brand} en el catálogo actual.\n` +
+                `Para playa o clima caliente, te puede servir: ${formatNames(alternatives)}.\n` +
+                'Podés revisar Shorts o Accesorios.',
+            action: buildCatalogAction('Ver shorts', 'shorts'),
+        }
+    }
 
     return {
         content:
-            `Para Guanacaste podés ir por algo fresco o con estilo skate, según el plan.\n` +
-            `Para playa o comodidad: shorts o bañador; para look urbano: cargo o baggy también funciona.\n` +
+            `No veo ${brand} en el catálogo actual.\n` +
+            'Puedo recomendarte opciones similares por estilo urbano, skate o playa.\n' +
+            'Podés revisar el catálogo masculino.',
+        action: buildAction('Ver catálogo masculino', '/hombre'),
+    }
+}
+
+const getBrandReply = (brand: string, text: string): StructuredReply => {
+    if (!brandExists(brand)) return getUnavailableBrandReply(brand, text)
+
+    const categoria = detectCategoria(text)
+    const brandProducts = productsByBrand(brand, categoria)
+    const picks = rankProducts(brandProducts, getRelevantTokens(text)).map(({ product }) => product)
+    const fallback = brandProducts.length ? brandProducts : productsByBrand(brand)
+    const recommended = picks.length ? picks : fallback
+    const targetCategory = recommended[0]?.categoria ?? categoria ?? 'camisas'
+
+    return {
+        content:
+            `Sí, tenemos productos ${brand} en el catálogo.\n` +
+            `Te puede servir: ${formatNames(recommended)}.\n` +
+            'Podés revisar la categoría correspondiente para ver precios y colores.',
+        action: buildCatalogAction(`Ver ${CATEGORY_LABELS[targetCategory].toLowerCase()}`, targetCategory),
+    }
+}
+
+const getRunningRequestReply = (brand?: string): StructuredReply => {
+    const adidasUrban = brand && brandExists(brand)
+        ? productsByBrand(brand, 'tenis')
+        : productsByBrand('Adidas', 'tenis')
+    const picks = adidasUrban.length ? adidasUrban : products.filter((product) => product.categoria === 'tenis')
+
+    return {
+        content:
+            'El enfoque del catálogo es urbano, casual, skate y canvas; no running ni entrenamiento.\n' +
+            `Si buscás algo ${brand ?? 'urbano'}, te puede servir: ${formatNames(picks)}.\n` +
+            'Podés revisar Tenis.',
+        action: buildCatalogAction('Ver tenis', 'tenis'),
+    }
+}
+const getHotClimateReply = (): StructuredReply => {
+    const picks = getProductsByTerms(
+        ['playa', 'fresco', 'clima caliente', 'guanacaste', 'surf'],
+        ['camisas', 'shorts', 'accesorios'],
+    )
+
+    return {
+        content:
+            'Para Guanacaste te conviene algo liviano y fácil de combinar.\n' +
+            'Una camiseta fresca con short de playa o short cargo funciona muy bien.\n' +
             `Te puede servir: ${formatNames(picks)}.`,
         action: buildCatalogAction('Ver shorts', 'shorts'),
     }
@@ -1188,16 +1370,16 @@ const getHotClimateReply = (): StructuredReply => {
 const getColdWeatherReply = (): StructuredReply => ({
     content:
         'En este catálogo no veo prendas pensadas para frío fuerte.\n' +
-        'Lo más cercano sería una camisa amplia o sobrecamisa, si buscás algo más cubierto.\n' +
-        'Te puedo mostrar Camisas.',
-    action: buildCatalogAction('Ver camisas', 'camisas'),
+        'Lo más cercano sería un hoodie ligero para lluvia, viaje o aire acondicionado.\n' +
+        'Te puedo mostrar Hoodies ligeros.',
+    action: buildCatalogAction('Ver hoodies ligeros', 'hoodies'),
 })
 
 const getFormalReply = (): StructuredReply => ({
     content:
         'Este catálogo no está enfocado en ropa formal.\n' +
         'Sí puedo ayudarte con un look casual premium masculino.\n' +
-        'Te recomiendo camisas limpias, pantalón recto y reloj.',
+        'Te recomiendo camiseta limpia, pantalón urbano y tenis sobrios.',
     action: buildCatalogAction('Ver camisas', 'camisas'),
 })
 
@@ -1305,6 +1487,49 @@ const getOutOfCatalogReply = (text: string): StructuredReply | null => {
     }
 }
 
+const getOutfitReply = (text: string, estilo?: Estilo): StructuredReply => {
+    const isBeach = includesAny(text, ['playa', 'surf', 'calor', 'guanacaste', 'fresco']) || estilo === 'Surf'
+    const isSkate = includesAny(text, ['skate', 'skater', 'patineta']) || estilo === 'Skate'
+    const isGoingOut = includesAny(text, ['salir', 'salida', 'noche'])
+
+    if (isBeach) {
+        const picks = getProductsByTerms(['playa', 'fresco', 'clima caliente', 'lentes', 'gorra'], ['camisas', 'shorts', 'accesorios'])
+
+        return {
+            content:
+                'Para playa, priorizá camiseta fresca, short de playa y lentes o gorra.\n' +
+                `Te puede servir: ${formatNames(picks)}.\n` +
+                'Podés revisar Shorts o Accesorios.',
+            action: buildCatalogAction('Ver shorts', 'shorts'),
+        }
+    }
+
+    if (isSkate) {
+        const picks = getProductsByTerms(['skate', 'baggy', 'cargo', 'canvas'], ['camisas', 'pantalones', 'tenis'])
+
+        return {
+            content:
+                'Para un outfit skate, usaría camiseta gráfica, pantalón baggy o cargo y tenis skate.\n' +
+                `Te puede servir: ${formatNames(picks)}.\n` +
+                'Podés revisar Pantalones o Tenis.',
+            action: buildCatalogAction('Ver tenis', 'tenis'),
+        }
+    }
+
+    const picks = getProductsByTerms(
+        isGoingOut ? ['salida', 'urbano', 'streetwear'] : ['urbano', 'casual', 'diario'],
+        ['camisas', 'shorts', 'pantalones', 'tenis', 'accesorios'],
+    )
+
+    return {
+        content:
+            'Para un outfit urbano limpio, armá base con camiseta, short o pantalón y tenis casuales.\n' +
+            `Te puede servir: ${formatNames(picks)}.\n` +
+            'Podés empezar por Camisas o Tenis.',
+        action: buildAction('Ver catálogo masculino', '/hombre'),
+    }
+}
+
 const getStyleOutfitReply = (estilo: Estilo): StructuredReply => {
     const styleProducts = products.filter((product) => product.estilos.includes(estilo))
     const targetCategory = inferCategoriaFromStyle(estilo) ?? styleProducts[0]?.categoria ?? 'camisas'
@@ -1317,7 +1542,7 @@ const getStyleOutfitReply = (estilo: Estilo): StructuredReply => {
         Y2K: `Para un outfit Y2K, usá tenis chunky con pantalón amplio y lentes rectangulares.\nMantené tonos neutros para que se vea premium.\nTe puede servir: ${formatNames(styleProducts)}.`,
         'New Drop': `Si buscás novedades, priorizá piezas nuevas con siluetas amplias y tonos sobrios.\nSon fáciles de combinar sin perder presencia.\nTe puede servir: ${formatNames(styleProducts)}.`,
         Trending: `Para un look en tendencia, elegí una pieza fuerte y mantené el resto sobrio.\nTenis robustos, pantalón amplio y accesorios oscuros funcionan bien.\nTe puede servir: ${formatNames(styleProducts)}.`,
-        'Urban Essentials': `Para un outfit limpio de ciudad, usá camisa básica, pantalón recto, reloj y tenis sobrios.\nFunciona para la U, ciudad o uso diario.\nTe puede servir: ${formatNames(styleProducts)}.`,
+        'Urban Essentials': `Para un outfit limpio de ciudad, usá camiseta básica, pantalón urbano, tenis sobrios y un accesorio discreto.\nFunciona para la U, ciudad o uso diario.\nTe puede servir: ${formatNames(styleProducts)}.`,
     }
 
     return {
@@ -1326,8 +1551,11 @@ const getStyleOutfitReply = (estilo: Estilo): StructuredReply => {
     }
 }
 
-const getBudgetCombo = (budget: number) => {
-    const categoryPriority: Categoria[] = ['camisas', 'hoodies', 'pantalones', 'shorts', 'tenis', 'accesorios']
+const getBudgetCombo = (budget: number, text = '') => {
+    const wantsHoodie = detectCategoria(text) === 'hoodies'
+    const categoryPriority: Categoria[] = wantsHoodie
+        ? ['hoodies', 'camisas', 'shorts', 'accesorios', 'pantalones', 'tenis']
+        : ['camisas', 'shorts', 'accesorios', 'pantalones', 'tenis', 'hoodies']
     const affordable = products
         .filter((product) => product.precio <= budget)
         .sort((left, right) => right.precio - left.precio)
@@ -1347,12 +1575,12 @@ const getBudgetCombo = (budget: number) => {
     return secondary ? [main, secondary] : [main]
 }
 
-const getBudgetReply = (budget: number): StructuredReply => {
-    const picks = getBudgetCombo(budget)
+const getBudgetReply = (budget: number, text = ''): StructuredReply => {
+    const picks = getBudgetCombo(budget, text)
 
     if (!picks.length) {
         return {
-            content: `Con ${formatCRC(budget)}, no veo una opción ideal dentro del catálogo.\nLo más cercano sería revisar accesorios o lentes de sol.\nPodés empezar por Accesorios.`,
+            content: `Con ${formatCRC(budget)}, no veo una opción ideal dentro del catálogo.\nLo más cercano sería revisar accesorios o camisas frescas.\nPodés empezar por Accesorios.`,
             action: buildCatalogAction('Ver accesorios', 'accesorios'),
         }
     }
@@ -1482,7 +1710,7 @@ const isAvailabilityIntent = (text: string) =>
     || (
         (includesTerm(text, 'stock') || includesTerm(text, 'disponible') || includesTerm(text, 'hay'))
         && includesAny(text, ['exacto', 'tiempo real', 'ahorita', 'reservar', 'reserva'])
-     )
+    )
     || hasSizeStockIntent(text)
 
 const isHotContext = (text: string) => includesAny(text, HOT_CONTEXT_TERMS)
@@ -1501,10 +1729,20 @@ const buildProductReply = (text: string): StructuredReply | null => {
 
     const budget = detectBudget(text)
     if (budget && (includesTerm(text, 'presupuesto') || includesTerm(text, 'tengo') || includesTerm(text, 'colones') || text.includes('₡'))) {
-        return getBudgetReply(budget)
+        return getBudgetReply(budget, text)
     }
 
     const categoria = detectCategoria(text)
+    const requestedBrand = detectBrand(text)
+
+    if (includesAny(text, ['running', 'runner', 'correr', 'corro', 'para correr', 'entrenamiento', 'gimnasio'])) {
+        return getRunningRequestReply(requestedBrand)
+    }
+
+    if (requestedBrand) return getBrandReply(requestedBrand, text)
+
+    if (isBrandListIntent(text)) return getBrandListReply()
+
     const isHot = isHotContext(text) || isGuanacasteContext(text)
     const isSkate = isSkateUrbanContext(text)
 
@@ -1519,17 +1757,22 @@ const buildProductReply = (text: string): StructuredReply | null => {
     const resolvedCategoria = categoria ?? inferredDirectProduct?.categoria ?? inferCategoriaFromStyle(estilo)
     const color = detectColor(text)
 
-    if (includesTerm(text, 'outfit') || includesTerm(text, 'fit') || includesTerm(text, 'look') || includesTerm(text, 'combinar')) {
-        if (estilo) return getStyleOutfitReply(estilo)
+    const isOutfitIntent = includesAny(text, [
+        'outfit',
+        'fit',
+        'look',
+        'combinar',
+        'combinacion',
+        'combinación',
+        'algo para salir',
+        'para salir',
+        'algo skate',
+        'algo urbano',
+        'algo para playa',
+        'para playa',
+    ])
 
-        return {
-            content:
-                'Para un outfit urbano limpio, usá camisa oversized, pantalón recto y tenis sobrios.\n' +
-                'Funciona mejor para ciudad o la U que para clima caliente.\n' +
-                'Podés empezar revisando Camisas.',
-            action: buildAction('Ver catálogo masculino', '/hombre'),
-        }
-    }
+    if (isOutfitIntent) return getOutfitReply(text, estilo)
 
     if (!resolvedCategoria && !color && !estilo) {
         if (globalBestMatch) return getProductReply(globalBestMatch)
@@ -1596,7 +1839,8 @@ export const getStructuredReply = (rawText: string, recentMessages: Message[] = 
     const warrantyFollowUpReply = getWarrantyFollowUpReply(text, recentMessages)
     if (warrantyFollowUpReply) return warrantyFollowUpReply
     if (isProductIssueIntent(text)) return getProductIssueReply(text)
-    if (isComplaintIntent(text) || isSensitiveIntent(text)) return getHumanSupportReply()
+    if (isSensitiveIntent(text)) return getSensitiveReply()
+    if (isComplaintIntent(text)) return getHumanSupportReply()
     if (isOrderIntent(text)) return getOrderReply()
     if (isPaymentIntent(text)) return getPaymentReply(text)
     if (isReturnIntent(text)) return getReturnReply(text)
@@ -1609,6 +1853,9 @@ export const getStructuredReply = (rawText: string, recentMessages: Message[] = 
     if (isContactIntent(text)) return getContactReply(text)
     if (isLocationIntent(text)) return getLocationReply()
     if (isShippingIntent(text)) return getShippingReply(text)
+    if (includesAny(text, ['medias', 'media', 'calcetines', 'calcetin', 'calcetín', 'socks'])) {
+        return getSocksReply()
+    }
 
     const outOfCatalogReply = getOutOfCatalogReply(text)
     if (outOfCatalogReply) return outOfCatalogReply

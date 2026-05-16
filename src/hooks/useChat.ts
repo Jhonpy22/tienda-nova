@@ -7,19 +7,18 @@ import type { Message, QuickSuggestion } from '../models/Index'
 const WELCOME_MESSAGE: Message = {
     role: 'assistant',
     content:
-        'Hola, soy NovaBot.\nTe ayudo a armar outfits masculinos urbanos para Guanacaste y toda la provincia, según tu estilo o clima.',
+        'Hola, soy NovaBot.\nTe ayudo a encontrar ropa urbana, skate y playa para Guanacaste: camisetas, shorts, tenis, accesorios y outfits por marca, estilo o presupuesto.',
     timestamp: new Date().toLocaleTimeString('es-CR', { hour: '2-digit', minute: '2-digit' }),
 }
 
 export const QUICK_SUGGESTIONS: QuickSuggestion[] = [
-    { label: 'Fit skate Guanacaste', message: 'Quiero un fit skate para Guanacaste' },
     { label: 'Algo para playa', message: 'Algo para playa' },
-    { label: 'Fit baggy', message: 'Fit baggy' },
+    { label: 'Tenis urbanos', message: 'Qué tenis urbanos tienen' },
+    { label: 'Outfit skate', message: 'Quiero un outfit skate' },
     { label: 'Presupuesto ₡40.000', message: 'Tengo un presupuesto de ₡40.000' },
-    { label: 'Ver pantalones', message: 'Ver pantalones cargo o baggy' },
-    { label: 'Ver tenis skate', message: 'Ver tenis urbanos estilo skate' },
+    { label: 'Ver shorts', message: 'Ver shorts' },
+    { label: 'Marcas streetwear', message: 'Qué marcas streetwear tienen' },
 ]
-
 export const useChat = () => {
     const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE])
     const [input, setInput] = useState('')
