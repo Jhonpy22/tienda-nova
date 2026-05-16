@@ -126,15 +126,13 @@ const CATEGORY_KEYWORDS: Array<{ categoria: Categoria; terms: string[] }> = [
             'beanie',
             'mochila',
             'billetera',
+            'lentes',
+            'lente',
+            'anteojos',
+            'gafas',
+            'sol',
+            'sunglasses',
         ],
-    },
-    {
-        categoria: 'relojes',
-        terms: ['reloj', 'relojes', 'chrono', 'digital'],
-    },
-    {
-        categoria: 'lentes-sol',
-        terms: ['lentes', 'lente', 'anteojos', 'gafas', 'sol', 'sunglasses'],
     },
 ]
 
@@ -344,6 +342,53 @@ const OUTSIDE_GUANACASTE_TERMS = [
     'fuera',
 ]
 
+const PRODUCT_TERMS = [
+    'producto',
+    'productos',
+    'camisa',
+    'camisas',
+    'camiseta',
+    'camisetas',
+    'pantalon',
+    'pantalón',
+    'pantalones',
+    'short',
+    'shorts',
+    'bañador',
+    'banador',
+    'tenis',
+    'zapato',
+    'zapatos',
+    'calzado',
+    'reloj',
+    'relojes',
+    'lentes',
+    'lente',
+    'accesorio',
+    'accesorios',
+    'gorra',
+    'billetera',
+            'lentes',
+            'lente',
+            'anteojos',
+            'gafas',
+            'sol',
+            'sunglasses',
+    'cargo',
+    'jogger',
+    'jeans',
+    'suela',
+    'boton',
+    'botón',
+    'cordon',
+    'cordón',
+    'costura',
+    'pieza',
+    'empaque',
+    'paquete',
+    'caja',
+]
+
 const BROKEN_PRODUCT_TERMS = [
     'roto',
     'rota',
@@ -364,6 +409,85 @@ const BROKEN_PRODUCT_TERMS = [
     'descosida',
     'rasgado',
     'rasgada',
+]
+
+const DAMAGE_TERMS = [
+    ...BROKEN_PRODUCT_TERMS,
+    'rotos',
+    'rotas',
+    'dañado',
+    'dañada',
+    'dañados',
+    'dañadas',
+    'dano',
+    'daño',
+    'defectuoso',
+    'defectuosa',
+    'defectuosos',
+    'defectuosas',
+    'defecto',
+    'malo',
+    'mala',
+    'malos',
+    'malas',
+    'falló',
+    'fallo',
+    'falla',
+    'fallando',
+    'no sirve',
+    'no funciona',
+    'se dañó',
+    'se dano',
+    'se daño',
+    'se despegó',
+    'se despego',
+    'despegado',
+    'despegada',
+    'despegados',
+    'despegadas',
+    'despegaron',
+    'costura abierta',
+    'manchado',
+    'manchada',
+    'manchados',
+    'manchadas',
+    'desteñido',
+    'destenido',
+    'pelado',
+    'pelada',
+    'pelados',
+    'peladas',
+    'rayado',
+    'rayada',
+    'rayados',
+    'rayadas',
+]
+
+const INCOMPLETE_TERMS = [
+    'venía sin',
+    'venia sin',
+    'llegó sin',
+    'llego sin',
+    'sin cordón',
+    'sin cordon',
+    'sin botón',
+    'sin boton',
+    'falta',
+    'faltó',
+    'falto',
+    'le falta',
+    'incompleto',
+    'incompleta',
+    'venía incompleto',
+    'venia incompleto',
+    'llegó incompleto',
+    'llego incompleto',
+    'no trae',
+    'no venía',
+    'no venia',
+    'no llegó',
+    'no llego',
+    'pieza faltante',
 ]
 
 const WARRANTY_TERMS = [
@@ -390,7 +514,8 @@ const WARRANTY_TERMS = [
     'salió malo',
     'me salio malo',
     'me salió malo',
-    ...BROKEN_PRODUCT_TERMS,
+    ...DAMAGE_TERMS,
+    ...INCOMPLETE_TERMS,
 ]
 
 const RETURN_TERMS = [
@@ -414,7 +539,14 @@ const RETURN_TERMS = [
     'me arrepentí',
 ]
 
-const MONEY_REFUND_TERMS = [
+const RETURN_MONEY_TERMS = [
+    'devolución',
+    'devolucion',
+    'devolver',
+    'cambio',
+    'cambiar',
+    'garantía',
+    'garantia',
     'reembolso',
     'para mi dinero',
     'mi dinero',
@@ -433,6 +565,42 @@ const MONEY_REFUND_TERMS = [
     'devolver el dinero',
 ]
 
+const MONEY_BACK_TERMS = [
+    'reembolso',
+    'para mi dinero',
+    'mi dinero',
+    'y mi plata',
+    'quiero mi plata',
+    'quiero mi plata de vuelta',
+    'quiero mi dinero',
+    'mi plata',
+    'mi plata de vuelta',
+    'plata de vuelta',
+    'dinero de vuelta',
+    'me devuelven',
+    'me devuelven la plata',
+    'devolucion de dinero',
+    'devolución de dinero',
+    'devolucion del dinero',
+    'devolución del dinero',
+    'devolver dinero',
+    'devolver el dinero',
+]
+
+const EXCHANGE_FOLLOW_UP_TERMS = [
+    'quiero otra',
+    'quiero otro',
+    'otra camisa',
+    'otro producto',
+    'otra prenda',
+    'y si lo cambio',
+    'si lo cambio',
+    'cambiarlo',
+    'cambiarla',
+    'quiero cambio',
+    'quiero cambiar',
+]
+
 const DISTANCE_FOLLOW_UP_TERMS = [
     'vivo lejos',
     'vivo lejos de nicoya',
@@ -445,7 +613,18 @@ const DISTANCE_FOLLOW_UP_TERMS = [
     'queda lejos',
 ]
 
-const SHIPPING_DAMAGE_TERMS = [
+const SUPPORT_NEXT_STEP_TERMS = [
+    'que hago',
+    'qué hago',
+    'ahora que',
+    'ahora qué',
+    'venía así',
+    'venia asi',
+    'me llegó así',
+    'me llego asi',
+]
+
+const DELIVERY_DAMAGE_TERMS = [
     'creo que fue en el envio',
     'creo que fue en el envío',
     'fue en el envio',
@@ -473,13 +652,16 @@ const SHIPPING_DAMAGE_TERMS = [
     'paquete danado',
     'empaque dañado',
     'empaque danado',
+    'caja dañada',
+    'caja danada',
 ]
 
 const WARRANTY_CONTEXT_TERMS = [
     ...WARRANTY_TERMS,
     ...RETURN_TERMS,
-    ...MONEY_REFUND_TERMS,
-    ...SHIPPING_DAMAGE_TERMS,
+    ...RETURN_MONEY_TERMS,
+    ...EXCHANGE_FOLLOW_UP_TERMS,
+    ...DELIVERY_DAMAGE_TERMS,
     'reclamo',
     'fotos claras',
     'fotos del problema',
@@ -610,12 +792,27 @@ const SENSITIVE_TERMS = [
 const COMPLAINT_TERMS = [
     'reclamo',
     'queja',
+    'molestia',
     'molesto',
     'molesta',
+    'estoy molesto',
+    'estoy molesta',
     'mala experiencia',
     'no me resolvieron',
     'problema con mi compra',
     'quiero reclamar',
+    'no era lo que pedí',
+    'no era lo que pedi',
+    'me llegó otra cosa',
+    'me llego otra cosa',
+    'no es lo que compré',
+    'no es lo que compre',
+    'no me gustó',
+    'no me gusto',
+    'salió malo',
+    'salio malo',
+    'me salió malo',
+    'me salio malo',
 ]
 
 const OUT_OF_CATALOG_TERMS = [
@@ -752,8 +949,6 @@ const productReason = (product: Product) => {
     if (product.categoria === 'shorts') return 'Funciona bien para clima cálido, playa o salidas casuales.'
     if (product.categoria === 'pantalones') return 'Va bien con camisas oversized y tenis urbanos.'
     if (product.categoria === 'tenis') return 'Tiene sentido para ciudad o salida casual, no como primera opción de playa.'
-    if (product.categoria === 'relojes') return 'Le da un cierre más premium a un outfit casual.'
-    if (product.categoria === 'lentes-sol') return 'Es útil para sol fuerte y completa looks urbanos.'
     return 'Es un detalle fácil para completar un outfit masculino urbano.'
 }
 
@@ -832,6 +1027,28 @@ const getBrokenProductReply = (text: string): StructuredReply => {
     }
 }
 
+const getProductDamageReply = (): StructuredReply => ({
+    content:
+        'Lamento lo del producto.\n' +
+        'Si fue por defecto, tiene 1 mes de garantía.\n' +
+        'Enviá fotos claras por WhatsApp, Instagram o Facebook para que el equipo revise si aplica.',
+})
+
+const getIncompleteProductReply = (): StructuredReply => ({
+    content:
+        'Lamento eso, parece un producto incompleto.\n' +
+        'Enviá fotos claras por WhatsApp, Instagram o Facebook para que el equipo revise el caso.\n' +
+        'Un empleado confirmará si aplica cambio, garantía o devolución.',
+})
+
+const getProductIssueReply = (text: string): StructuredReply => {
+    if (hasDeliveryDamageTerm(text)) return getShippingDamageWarrantyReply()
+    if (hasIncompleteTerm(text)) return getIncompleteProductReply()
+    if (isBrokenProductIntent(text) && includesAny(text, ['camisa', 'camisas'])) return getBrokenProductReply(text)
+
+    return getProductDamageReply()
+}
+
 const getWarrantyReply = (text: string): StructuredReply => {
     if (isBrokenProductIntent(text)) return getBrokenProductReply(text)
 
@@ -859,6 +1076,13 @@ const getShippingDamageWarrantyReply = (): StructuredReply => ({
         `WhatsApp: ${STORE_CONTACT_LINKS.whatsapp.phone}.`,
 })
 
+const getSupportNextStepReply = (): StructuredReply => ({
+    content:
+        'Enviá fotos claras del problema por WhatsApp, Instagram o Facebook para que el equipo revise el caso.\n' +
+        'Un empleado confirmará si aplica garantía, cambio o devolución.\n' +
+        `WhatsApp: ${STORE_CONTACT_LINKS.whatsapp.phone}.`,
+})
+
 const getMoneyBackFollowUpReply = (recentMessages: Message[] = []): StructuredReply => {
     if (!isWarrantyOrReturnContext(recentMessages)) return { content: STORE_SUPPORT_RESPONSES.refund }
 
@@ -870,10 +1094,19 @@ const getMoneyBackFollowUpReply = (recentMessages: Message[] = []): StructuredRe
     }
 }
 
+const getExchangeReply = (): StructuredReply => ({
+    content:
+        'El cambio debe revisarlo un empleado de la tienda.\n' +
+        'Enviá fotos claras del problema por WhatsApp, Instagram o Facebook, o acercate a la tienda.\n' +
+        'El equipo confirmará si aplica según la garantía.',
+})
+
 const getReturnReply = (text: string): StructuredReply => {
-    if (includesAny(text, MONEY_REFUND_TERMS)) {
+    if (includesAny(text, MONEY_BACK_TERMS)) {
         return { content: STORE_SUPPORT_RESPONSES.refund }
     }
+
+    if (hasExchangeFollowUpTerm(text)) return getExchangeReply()
 
     if (includesAny(text, ['mi pedido', 'mi compra', 'orden', 'quiero devolver', 'quiero cambiar'])) {
         return {
@@ -1058,7 +1291,7 @@ const getOutOfCatalogReply = (text: string): StructuredReply | null => {
         return {
             content:
                 'Actualmente la tienda está enfocada en moda masculina urbana.\n' +
-                'Puedo ayudarte con camisas, shorts, pantalones, tenis, accesorios, relojes o lentes de sol.',
+                'Puedo ayudarte con camisas, hoodies, pantalones, shorts, tenis o accesorios.',
             action: buildAction('Ver catálogo masculino', '/hombre'),
         }
     }
@@ -1067,7 +1300,7 @@ const getOutOfCatalogReply = (text: string): StructuredReply | null => {
         content:
             'Ese producto no está disponible en el catálogo actual.\n' +
             'La tienda está enfocada en moda masculina urbana para Guanacaste.\n' +
-            'Puedo ayudarte con camisas, shorts, pantalones, tenis, accesorios, relojes o lentes de sol.',
+            'Puedo ayudarte con camisas, hoodies, pantalones, shorts, tenis o accesorios.',
         action: buildAction('Ver catálogo masculino', '/hombre'),
     }
 }
@@ -1094,7 +1327,7 @@ const getStyleOutfitReply = (estilo: Estilo): StructuredReply => {
 }
 
 const getBudgetCombo = (budget: number) => {
-    const categoryPriority: Categoria[] = ['camisas', 'shorts', 'lentes-sol', 'accesorios', 'pantalones', 'tenis', 'relojes']
+    const categoryPriority: Categoria[] = ['camisas', 'hoodies', 'pantalones', 'shorts', 'tenis', 'accesorios']
     const affordable = products
         .filter((product) => product.precio <= budget)
         .sort((left, right) => right.precio - left.precio)
@@ -1107,7 +1340,7 @@ const getBudgetCombo = (budget: number) => {
 
     const secondary = affordable.find((product) =>
         product.id !== main.id
-        && ['lentes-sol', 'accesorios', 'camisas', 'shorts'].includes(product.categoria)
+        && ['accesorios', 'camisas', 'shorts'].includes(product.categoria)
         && main.precio + product.precio <= budget
     )
 
@@ -1138,6 +1371,44 @@ const getProductReply = (product: Product, label?: string): StructuredReply => (
     action: buildCatalogAction(label ?? `Ver ${CATEGORY_LABELS[product.categoria].toLowerCase()}`, product.categoria, product.colores[0]),
 })
 
+const hasProductTerm = (text: string) => includesAny(text, PRODUCT_TERMS)
+
+const hasDamageTerm = (text: string) => includesAny(text, DAMAGE_TERMS)
+
+const hasIncompleteTerm = (text: string) => includesAny(text, INCOMPLETE_TERMS)
+
+const hasDeliveryDamageTerm = (text: string) => includesAny(text, DELIVERY_DAMAGE_TERMS)
+
+const hasReturnMoneyTerm = (text: string) => includesAny(text, RETURN_MONEY_TERMS)
+
+const hasComplaintTerm = (text: string) => includesAny(text, COMPLAINT_TERMS)
+
+const hasExchangeFollowUpTerm = (text: string) => includesAny(text, EXCHANGE_FOLLOW_UP_TERMS)
+
+const isProductIssueIntent = (text: string) =>
+    hasDeliveryDamageTerm(text)
+    || hasIncompleteTerm(text)
+    || (hasProductTerm(text) && hasDamageTerm(text))
+    || (
+        hasDamageTerm(text)
+        && includesAny(text, [
+            'costura abierta',
+            'se despegó',
+            'se despego',
+            'despegaron',
+            'no funciona',
+            'no sirve',
+            'me llegó',
+            'me llego',
+            'llegó',
+            'llego',
+            'venía',
+            'venia',
+            'salió malo',
+            'salio malo',
+        ])
+    )
+
 const isAttentionIntent = (text: string) => includesAny(text, ATTENTION_TERMS)
 
 const isHoursIntent = (text: string) => includesAny(text, HOURS_TERMS)
@@ -1167,37 +1438,41 @@ const isReservationIntent = (text: string) => includesAny(text, RESERVATION_TERM
 
 const isSensitiveIntent = (text: string) => includesAny(text, SENSITIVE_TERMS)
 
-const isComplaintIntent = (text: string) => includesAny(text, COMPLAINT_TERMS)
+const isComplaintIntent = (text: string) => hasComplaintTerm(text)
 
-const isMoneyBackFollowUp = (text: string) => includesAny(text, MONEY_REFUND_TERMS)
+const isMoneyBackFollowUp = (text: string) => includesAny(text, MONEY_BACK_TERMS)
+
+const isExchangeFollowUp = (text: string) => hasExchangeFollowUpTerm(text)
 
 const isDistanceFollowUp = (text: string) => includesAny(text, DISTANCE_FOLLOW_UP_TERMS)
 
-const isShippingDamageFollowUp = (text: string) => includesAny(text, SHIPPING_DAMAGE_TERMS)
+const isShippingDamageFollowUp = (text: string) => hasDeliveryDamageTerm(text)
+
+const isSupportNextStepFollowUp = (text: string) => includesAny(text, SUPPORT_NEXT_STEP_TERMS)
 
 const isWarrantyOrReturnContext = (recentMessages: Message[] = []) => {
-    const contextText = recentMessages
-        .slice(-8)
-        .map((message) => message.content)
-        .join('\n')
+    const recentContents = recentMessages.slice(-8).map((message) => message.content)
+    const contextText = recentContents.join('\n')
 
-    return includesAny(contextText, WARRANTY_CONTEXT_TERMS) || includesAny(contextText, COMPLAINT_TERMS)
+    return recentContents.some((content) => hasReturnMoneyTerm(content))
+        || includesAny(contextText, WARRANTY_CONTEXT_TERMS)
+        || includesAny(contextText, COMPLAINT_TERMS)
 }
 
 const getWarrantyFollowUpReply = (text: string, recentMessages: Message[] = []): StructuredReply | null => {
-    if (isShippingDamageFollowUp(text)) {
-        return isWarrantyOrReturnContext(recentMessages) || !isShippingIntent(text)
-            ? getShippingDamageWarrantyReply()
-            : null
-    }
+    if (isShippingDamageFollowUp(text)) return getShippingDamageWarrantyReply()
 
     if (isMoneyBackFollowUp(text)) return getMoneyBackFollowUpReply(recentMessages)
+
+    if (isExchangeFollowUp(text)) return getExchangeReply()
 
     if (isDistanceFollowUp(text)) {
         return isWarrantyOrReturnContext(recentMessages)
             ? getDistanceWarrantyReply()
             : getDistanceContactReply()
     }
+
+    if (isSupportNextStepFollowUp(text) && isWarrantyOrReturnContext(recentMessages)) return getSupportNextStepReply()
 
     return null
 }
@@ -1233,7 +1508,7 @@ const buildProductReply = (text: string): StructuredReply | null => {
     const isHot = isHotContext(text) || isGuanacasteContext(text)
     const isSkate = isSkateUrbanContext(text)
 
-    if (isHot && !isSkate && (!categoria || ['shorts', 'camisas', 'lentes-sol', 'accesorios'].includes(categoria))) {
+    if (isHot && !isSkate && (!categoria || ['shorts', 'camisas', 'accesorios'].includes(categoria))) {
         return getHotClimateReply()
     }
 
@@ -1320,6 +1595,7 @@ export const getStructuredReply = (rawText: string, recentMessages: Message[] = 
     if (isSmallTalkIntent(text)) return getSmallTalkReply()
     const warrantyFollowUpReply = getWarrantyFollowUpReply(text, recentMessages)
     if (warrantyFollowUpReply) return warrantyFollowUpReply
+    if (isProductIssueIntent(text)) return getProductIssueReply(text)
     if (isComplaintIntent(text) || isSensitiveIntent(text)) return getHumanSupportReply()
     if (isOrderIntent(text)) return getOrderReply()
     if (isPaymentIntent(text)) return getPaymentReply(text)

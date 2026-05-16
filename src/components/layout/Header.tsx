@@ -10,18 +10,17 @@ const navItems = [
 
 const desktopCategoryItems = [
     { label: 'Camisas', categoria: 'camisas' },
+    { label: 'Hoodies', categoria: 'hoodies' },
     { label: 'Tenis', categoria: 'tenis' },
-    { label: 'Relojes', categoria: 'relojes' },
 ] as const
 
 const mobileCategoryItems = [
     { label: 'Camisas', categoria: 'camisas' },
-    { label: 'Shorts', categoria: 'shorts' },
+    { label: 'Hoodies', categoria: 'hoodies' },
     { label: 'Pantalones', categoria: 'pantalones' },
+    { label: 'Shorts', categoria: 'shorts' },
     { label: 'Tenis', categoria: 'tenis' },
     { label: 'Accesorios', categoria: 'accesorios' },
-    { label: 'Relojes', categoria: 'relojes' },
-    { label: 'Lentes de sol', categoria: 'lentes-sol' },
 ] as const
 
 const desktopLinkClass =

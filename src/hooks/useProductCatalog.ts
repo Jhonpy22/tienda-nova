@@ -6,12 +6,11 @@ export const PRODUCTS_PER_PAGE = 6
 const SORT_OPTIONS: SortOption[] = ['newest', 'price-asc', 'price-desc']
 export const FILTER_OPTIONS_BY_CATEGORY: Record<Categoria, { label: string; allLabel: string; options: Talla[] }> = {
     camisas: { label: 'Talla', allLabel: 'Todas', options: ['S', 'M', 'L', 'XL'] },
-    shorts: { label: 'Talla', allLabel: 'Todas', options: ['S', 'M', 'L', 'XL'] },
+    hoodies: { label: 'Talla', allLabel: 'Todas', options: ['S', 'M', 'L', 'XL'] },
     pantalones: { label: 'Talla', allLabel: 'Todas', options: ['S', 'M', 'L', 'XL'] },
+    shorts: { label: 'Talla', allLabel: 'Todas', options: ['S', 'M', 'L', 'XL'] },
     tenis: { label: 'Talla de calzado', allLabel: 'Todas', options: ['38', '39', '40', '41', '42', '43', '44'] },
-    relojes: { label: 'Tipo', allLabel: 'Todos', options: ['Acero', 'Cuero', 'Deportivo', 'Minimalista', 'Clásico'] },
-    'lentes-sol': { label: 'Estilo', allLabel: 'Todos', options: ['Negros', 'Polarizados', 'Redondos', 'Rectangulares', 'Smoke'] },
-    accesorios: { label: 'Tipo', allLabel: 'Todos', options: ['Gorras', 'Cadenas', 'Bolsos', 'Billeteras', 'Cinturones'] },
+    accesorios: { label: 'Talla', allLabel: 'Todas', options: ['Única'] },
 }
 
 const FILTER_OPTIONS = Array.from(

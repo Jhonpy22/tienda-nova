@@ -18,7 +18,7 @@ const BrandStatement = () => {
                 <div data-reveal className="grid gap-6 text-sm leading-7 text-text-muted sm:grid-cols-2 sm:text-base">
                     <p>
                         La propuesta combina una presentacion editorial oscura con navegacion clara para encontrar prendas,
-                        tenis, relojes, lentes y accesorios sin exceso visual.
+                        hoodies, tenis y accesorios sin exceso visual.
                     </p>
                     <p>
                         El resultado se siente premium desde el primer scroll: composicion cuidada, tono sobrio y una experiencia
