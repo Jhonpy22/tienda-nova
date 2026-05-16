@@ -9,7 +9,7 @@ const HombrePage = () => (
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-text-muted">Catálogo masculino</p>
             <h1 className="section-title">Streetwear premium para hombre</h1>
             <p className="section-copy">
-                Explora camisas, shorts, pantalones, tenis, accesorios, relojes y lentes de sol con filtros coherentes por
+                Explora camisas, shorts, pantalones, tenis, accesorios y hoodies ligeros con filtros coherentes por
                 categoría, color, precio y orden.
             </p>
         </div>

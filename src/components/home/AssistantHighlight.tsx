@@ -37,8 +37,8 @@ const AssistantHighlight = () => {
                                 <Link to="/hombre" className="button-accent mt-2 flex-1 justify-center">
                                     Ver catalogo
                                 </Link>
-                                <Link to="/hombre/$categoria" params={{ categoria: 'lentes-sol' }} search={{ page: 1, sort: 'newest' }} className="button-ghost-light mt-2 flex-1 justify-center">
-                                    Ver lentes
+                                <Link to="/hombre/$categoria" params={{ categoria: 'accesorios' }} search={{ page: 1, sort: 'newest' }} className="button-ghost-light mt-2 flex-1 justify-center">
+                                    Ver accesorios
                                 </Link>
                             </div>
                         </div>

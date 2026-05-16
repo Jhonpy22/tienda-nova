@@ -1,41 +1,60 @@
 export type Genero = 'hombre'
 export type Categoria =
     | 'camisas'
-    | 'shorts'
+    | 'hoodies'
     | 'pantalones'
+    | 'shorts'
     | 'tenis'
     | 'accesorios'
-    | 'relojes'
-    | 'lentes-sol'
 
 export type Estilo = 'Oversized' | 'Baggy' | 'Skate' | 'Surf' | 'Y2K' | 'New Drop' | 'Trending' | 'Urban Essentials'
-export type Talla =
-    | 'S'
-    | 'M'
-    | 'L'
-    | 'XL'
-    | '38'
-    | '39'
-    | '40'
-    | '41'
-    | '42'
-    | '43'
-    | '44'
-    | 'Acero'
-    | 'Cuero'
-    | 'Deportivo'
-    | 'Minimalista'
-    | 'Clásico'
-    | 'Negros'
-    | 'Polarizados'
-    | 'Redondos'
-    | 'Rectangulares'
-    | 'Smoke'
+export type Marca = 'Stüssy' | 'Zayin' | 'Volcom' | 'Vans' | 'DC' | 'Nike' | 'Adidas' | 'Converse'| 'Quiksilver'
+export type Subcategoria =
+    | 'Camisetas gráficas'
+    | 'Camisetas oversized'
+    | 'Camisetas básicas'
+    | 'Camisetas skate'
+    | 'Camisetas frescas'
+    | 'Hoodies ligeros'
+    | 'Sudaderas urbanas ligeras'
+    | 'Baggy jeans'
+    | 'Cargo pants'
+    | 'Denim urbano'
+    | 'Pantalones skate'
+    | 'Shorts urbanos'
+    | 'Shorts de playa'
+    | 'Shorts cargo'
+    | 'Shorts skate'
+    | 'Tenis skate'
+    | 'Tenis casuales'
+    | 'Tenis canvas'
+    | 'Tenis urbanos'
     | 'Gorras'
+    | 'Lentes'
+    | 'Bolsos cruzados'
+    | 'Medias urbanas'
     | 'Cadenas'
-    | 'Bolsos'
     | 'Billeteras'
-    | 'Cinturones'
+export type ProductTag =
+    | 'streetwear'
+    | 'skate'
+    | 'urbano'
+    | 'casual'
+    | 'playa'
+    | 'fresco'
+    | 'oversized'
+    | 'baggy'
+    | 'Guanacaste'
+    | 'salida'
+    | 'diario'
+    | 'clima caliente'
+    | 'canvas'
+    | 'gráfico'
+    | 'básico'
+export type TallaRopa = 'S' | 'M' | 'L' | 'XL'
+export type TallaTenis = '38' | '39' | '40' | '41' | '42' | '43' | '44'
+export type TallaAccesorio = 'Única'
+export type Talla = TallaRopa | TallaTenis | TallaAccesorio
 export type SortOption = 'newest' | 'price-asc' | 'price-desc'
 
 export interface Product {
@@ -43,10 +62,13 @@ export interface Product {
     nombre: string
     genero: Genero
     categoria: Categoria
+    subcategoria: Subcategoria
+    marca: Marca
     precio: number
     tallas: Talla[]
     colores: string[]
     estilos: Estilo[]
+    tags: ProductTag[]
     imagen: string
     descripcion: string
     nuevo: boolean
@@ -54,10 +76,13 @@ export interface Product {
 
 export type ProductSeed = {
     nombre: string
+    marca: Marca
+    subcategoria: Subcategoria
     precio: number
     tallas: Talla[]
     colores: string[]
     estilos: Estilo[]
+    tags: ProductTag[]
     imagen: string
     descripcion: string
     nuevo?: boolean
