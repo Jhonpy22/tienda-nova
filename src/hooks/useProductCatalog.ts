@@ -5,7 +5,7 @@ export const PRODUCTS_PER_PAGE = 6
 
 const SORT_OPTIONS: SortOption[] = ['newest', 'price-asc', 'price-desc']
 export const FILTER_OPTIONS_BY_CATEGORY: Record<Categoria, { label: string; allLabel: string; options: Talla[] }> = {
-    camisas: { label: 'Talla', allLabel: 'Todas', options: ['S', 'M', 'L', 'XL'] },
+    camisas: { label: 'Talla', allLabel: 'Todas', options: ['S', 'M', 'L', 'XL', 'XXL'] },
     hoodies: { label: 'Talla', allLabel: 'Todas', options: ['S', 'M', 'L', 'XL'] },
     pantalones: { label: 'Talla', allLabel: 'Todas', options: ['S', 'M', 'L', 'XL'] },
     shorts: { label: 'Talla', allLabel: 'Todas', options: ['S', 'M', 'L', 'XL'] },
