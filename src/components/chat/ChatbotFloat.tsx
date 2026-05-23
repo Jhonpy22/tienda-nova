@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { QUICK_SUGGESTIONS, useChat } from '../../hooks/useChat'
 import ChatArea from './ChatArea'
 import InfoPanel from './InfoPanel'
@@ -11,8 +12,17 @@ const ChatbotFloat = () => {
 
     return (
         <div className="fixed inset-x-3 bottom-4 z-40 flex flex-col items-end gap-3 sm:inset-x-auto sm:bottom-7 sm:right-7">
-            {isOpen && (
-                <div className="mb-3 flex w-full max-w-none flex-col overflow-hidden rounded-2xl border border-warm/60 bg-card shadow-2xl sm:mb-0 sm:w-[380px] sm:max-w-[calc(100vw-2rem)] md:w-[400px] max-h-[72vh] sm:max-h-[calc(100vh-120px)]">
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        data-lenis-prevent
+                        initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.92, y: 20, transition: { duration: 0.2, ease: 'easeInOut' } }}
+                        transition={{ duration: 0.22, ease: 'easeOut' }}
+                        style={{ transformOrigin: 'bottom right' }}
+                        className="mb-3 flex w-full max-w-none flex-col overflow-hidden rounded-2xl border border-warm/60 bg-card shadow-2xl sm:mb-0 sm:w-[380px] sm:max-w-[calc(100vw-2rem)] md:w-[400px] max-h-[72vh] sm:max-h-[calc(100vh-120px)]"
+                    >
                     <div className="shrink-0 flex items-center justify-between bg-primary px-4 py-3">
                         <div className="flex items-center gap-3">
                             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-xs font-bold text-primary">
@@ -56,12 +66,15 @@ const ChatbotFloat = () => {
                     <div className="shrink-0">
                         <InputChat input={input} isLoading={isLoading} onChange={setInput} onSend={sendMessage} />
                     </div>
-                </div>
-            )}
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
-            <button
+            <motion.button
                 type="button"
                 onClick={() => setIsOpen((current) => !current)}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.96 }}
                 className="flex h-14 w-14 items-center justify-center rounded-full bg-accent text-primary shadow-xl transition-all duration-200 hover:bg-accent-dark hover:shadow-2xl active:scale-95"
                 aria-label={isOpen ? 'Cerrar NovaBot' : 'Abrir NovaBot'}
             >
@@ -74,7 +87,7 @@ const ChatbotFloat = () => {
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                     </svg>
                 )}
-            </button>
+            </motion.button>
         </div>
     )
 }

@@ -51,7 +51,7 @@ export type ProductTag =
     | 'canvas'
     | 'gráfico'
     | 'básico'
-export type TallaRopa = 'S' | 'M' | 'L' | 'XL'
+export type TallaRopa = 'S' | 'M' | 'L' | 'XL' | 'XXL'
 export type TallaTenis = '38' | '39' | '40' | '41' | '42' | '43' | '44'
 export type TallaAccesorio = 'Única'
 export type Talla = TallaRopa | TallaTenis | TallaAccesorio

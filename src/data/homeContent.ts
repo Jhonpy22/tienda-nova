@@ -9,7 +9,7 @@ export const collectionSpotlights: CollectionSpotlight[] = [
         category: 'camisas',
         categoryLabel: 'Ver camisas',
         image:
-            'https://cdn.shopify.com/s/files/1/0156/6146/files/images-PowerOriginalsT_ShirtGSConditioningRedA4B9W_RBWV_0002_V1.jpg?v=1775722272',
+            'https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/j/15/f2e71f99-c110-4adc-ad42-d409b15db192.jpg',
     },
     {
         eyebrow: 'Skate / Streetwear',
@@ -56,13 +56,13 @@ export const curatedGroups: CuratedGroup[] = [
                 name: 'Short Volcom Playa Beige',
                 price: '₡29.990',
                 note: 'Funciona con camiseta blanca y tenis canvas para paseo o fin de semana en la playa.',
-                image: 'https://kinoclothing.com/cdn/shop/files/JSLP5550copy_e66ad4f7-3887-4134-81ba-07ba37b10a42.jpg?v=1729105344',
+                image: 'https://img01.ztat.net/article/spp-media-p1/0ee72533e0c33428a60f4a72f1c21b47/968ee8978a114f63bec61b3a3b1abca7.jpg?imwidth=800',
             },
             {
                 name: 'Gorra Volcom Stone Black',
                 price: '₡18.990',
                 note: 'Gorra negra para sol fuerte, playa o cierre rápido de un outfit con camiseta y shorts.',
-                image: 'https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=700&h=900&q=80',
+                image: 'https://cms.blumewebsites.com/cachosasociacion/products/70VMD5512318BLK-BLACK/70VMD5512318_BLK-BLACK_1.jpg?v=133511962277611571',
             },
         ],
     },

@@ -195,6 +195,13 @@ const HOT_CONTEXT_TERMS = [
     'fresca',
 ]
 
+const BEACH_INTENT_TERMS = [
+    'algo para playa',
+    'para playa',
+    'playa',
+    'surf',
+]
+
 const SKATE_TERMS = [
     'skate',
     'skater',
@@ -379,6 +386,89 @@ const OUTSIDE_GUANACASTE_TERMS = [
     'otra provincia',
     'fuera',
 ]
+
+const GUANACASTE_LOCATIONS: Array<{ label: string; terms: string[] }> = [
+    { label: 'Cañas', terms: ['cañas', 'canas'] },
+    { label: 'Liberia', terms: ['liberia'] },
+    { label: 'Nicoya', terms: ['nicoya'] },
+    { label: 'Santa Cruz', terms: ['santa cruz'] },
+    { label: 'Filadelfia', terms: ['filadelfia'] },
+    { label: 'Carrillo', terms: ['carrillo'] },
+    { label: 'Bagaces', terms: ['bagaces'] },
+    { label: 'Tilarán', terms: ['tilarán', 'tilaran'] },
+    { label: 'Abangares', terms: ['abangares'] },
+    { label: 'Nandayure', terms: ['nandayure'] },
+    { label: 'La Cruz', terms: ['la cruz'] },
+    { label: 'Hojancha', terms: ['hojancha'] },
+    { label: 'Playas del Coco', terms: ['playas del coco'] },
+    { label: 'Coco', terms: ['coco'] },
+    { label: 'Tamarindo', terms: ['tamarindo'] },
+    { label: 'Nosara', terms: ['nosara'] },
+    { label: 'Sámara', terms: ['sámara', 'samara'] },
+]
+
+const GUANACASTE_CANTONES: Array<{ label: string; terms: string[] }> = [
+    { label: 'Liberia', terms: ['liberia'] },
+    { label: 'Nicoya', terms: ['nicoya'] },
+    { label: 'Santa Cruz', terms: ['santa cruz'] },
+    { label: 'Bagaces', terms: ['bagaces'] },
+    { label: 'Carrillo', terms: ['carrillo'] },
+    { label: 'Cañas', terms: ['cañas', 'canas'] },
+    { label: 'Abangares', terms: ['abangares'] },
+    { label: 'Tilarán', terms: ['tilarán', 'tilaran'] },
+    { label: 'Nandayure', terms: ['nandayure'] },
+    { label: 'La Cruz', terms: ['la cruz'] },
+    { label: 'Hojancha', terms: ['hojancha'] },
+]
+
+const GUANACASTE_KNOWN_ZONES: Array<{ label: string; terms: string[] }> = [
+    { label: 'Peñas Blancas', terms: ['peñas blancas', 'penas blancas'] },
+    { label: 'Playas del Coco', terms: ['playas del coco'] },
+    { label: 'Coco', terms: ['coco'] },
+    { label: 'Sardinal', terms: ['sardinal'] },
+    { label: 'Filadelfia', terms: ['filadelfia'] },
+    { label: 'Palmira', terms: ['palmira'] },
+    { label: 'Belén', terms: ['belén', 'belen'] },
+    { label: 'Comunidad', terms: ['comunidad'] },
+    { label: 'Tamarindo', terms: ['tamarindo'] },
+    { label: 'Villarreal', terms: ['villarreal'] },
+    { label: 'Huacas', terms: ['huacas'] },
+    { label: 'Brasilito', terms: ['brasilito'] },
+    { label: 'Flamingo', terms: ['flamingo'] },
+    { label: 'Potrero', terms: ['potrero'] },
+    { label: 'Nosara', terms: ['nosara'] },
+    { label: 'Sámara', terms: ['sámara', 'samara'] },
+    { label: 'Garza', terms: ['garza'] },
+    { label: 'Ostional', terms: ['ostional'] },
+    { label: 'Nambi', terms: ['nambi'] },
+    { label: 'Quebrada Honda', terms: ['quebrada honda'] },
+    { label: 'Mansión', terms: ['mansión', 'mansion'] },
+    { label: 'La Cruz', terms: ['la cruz'] },
+    { label: 'Santa Cecilia', terms: ['santa cecilia'] },
+    { label: 'Cuajiniquil', terms: ['cuajiniquil'] },
+    { label: 'Bagaces', terms: ['bagaces'] },
+    { label: 'Fortuna', terms: ['fortuna'] },
+    { label: 'Mogote', terms: ['mogote'] },
+    { label: 'Río Naranjo', terms: ['río naranjo', 'rio naranjo'] },
+    { label: 'Cañas Dulces', terms: ['cañas dulces', 'canas dulces'] },
+    { label: 'Mayorga', terms: ['mayorga'] },
+    { label: 'Curubandé', terms: ['curubandé', 'curubande'] },
+    { label: 'Guardia', terms: ['guardia'] },
+    { label: 'Cartagena', terms: ['cartagena'] },
+    { label: 'Tempate', terms: ['tempate'] },
+    { label: '27 de Abril', terms: ['27 de abril', 'veintisiete de abril'] },
+    { label: 'Junquillal', terms: ['junquillal'] },
+    { label: 'Paraíso', terms: ['paraíso', 'paraiso'] },
+    { label: 'Carmona', terms: ['carmona'] },
+    { label: 'Jicaral', terms: ['jicaral'] },
+    { label: 'Lepanto', terms: ['lepanto'] },
+    { label: 'Paquera', terms: ['paquera'] },
+    { label: 'Hojancha', terms: ['hojancha'] },
+    { label: 'Monte Romo', terms: ['monte romo'] },
+    { label: 'Puerto Carrillo', terms: ['puerto carrillo'] },
+]
+
+const GUANACASTE_SHIPPING_LOCATIONS = [...GUANACASTE_CANTONES, ...GUANACASTE_KNOWN_ZONES, ...GUANACASTE_LOCATIONS]
 
 const PRODUCT_TERMS = [
     'producto',
@@ -692,6 +782,18 @@ const DELIVERY_DAMAGE_TERMS = [
     'caja danada',
 ]
 
+const SHIPPING_CAUSE_TERMS = [
+    'envio',
+    'envío',
+    'empaque',
+    'paquete',
+    'caja',
+    'transportista',
+    'courier',
+    'mensajeria',
+    'mensajería',
+]
+
 const WARRANTY_CONTEXT_TERMS = [
     ...WARRANTY_TERMS,
     ...RETURN_TERMS,
@@ -708,6 +810,13 @@ const WARRANTY_CONTEXT_TERMS = [
 const PAYMENT_TERMS = [
     'pago',
     'pagos',
+    'pagar',
+    'quiero pagar',
+    'necesito pagar',
+    'pagar ya',
+    'formas de pago',
+    'metodos de pago',
+    'métodos de pago',
     'tarjeta',
     'transferencia',
     'sinpe',
@@ -1081,6 +1190,25 @@ const getLocationReply = (): StructuredReply => ({
 })
 
 const getShippingReply = (text: string): StructuredReply => {
+    return getShippingReplyEnhanced(text)
+    if (includesAny(text, ['peñas blancas', 'penas blancas'])) {
+        return {
+            content:
+                'Sí, si te referís a Peñas Blancas de La Cruz, realizamos envíos dentro de Guanacaste.\n' +
+                'El costo o tiempo exacto puede confirmarlo un empleado según la dirección.',
+        }
+    }
+
+    const guanacasteLocation = GUANACASTE_SHIPPING_LOCATIONS.find(({ terms }) => includesAny(text, terms))
+
+    if (guanacasteLocation) {
+        return {
+            content:
+                `Sí, realizamos envíos a ${guanacasteLocation!.label} porque está dentro de Guanacaste.\n` +
+                'El costo o tiempo exacto puede confirmarlo un empleado según la dirección.',
+        }
+    }
+
     if (includesAny(text, OUTSIDE_GUANACASTE_TERMS)) {
         return {
             content:
@@ -1126,9 +1254,17 @@ const getIncompleteProductReply = (): StructuredReply => ({
 })
 
 const getProductIssueReply = (text: string): StructuredReply => {
-    if (hasDeliveryDamageTerm(text)) return getShippingDamageWarrantyReply()
+    if (hasDeliveryDamageTerm(text) && includesAny(text, SHIPPING_CAUSE_TERMS)) return getShippingDamageWarrantyReply()
     if (hasIncompleteTerm(text)) return getIncompleteProductReply()
     if (isBrokenProductIntent(text) && includesAny(text, ['camisa', 'camisas'])) return getBrokenProductReply(text)
+
+    if (hasDeliveryDamageTerm(text)) {
+        return {
+            content:
+                'Lamento lo ocurrido. Si el producto llegó dañado o presenta algún defecto, enviá fotos claras del producto y, si aplica, del empaque por WhatsApp, Instagram o Facebook.\n' +
+                'El equipo revisará el caso para confirmar si aplica garantía, cambio o devolución.',
+        }
+    }
 
     return getProductDamageReply()
 }
@@ -1244,16 +1380,49 @@ const getPaymentReply = (text: string): StructuredReply => {
         return {
             content:
                 'Para problemas de pago o cobros, lo mejor es que te atienda un empleado real.\n' +
-                'Yo puedo orientarte de forma general, pero no revisar transacciones.\n' +
-                'Dejá el detalle para que el equipo lo revise en horario de atención.',
+                'No compartás datos bancarios ni números de tarjeta por este chat.\n' +
+                'Para completar el pago, contactá a un empleado por los canales oficiales.',
         }
     }
 
     return {
         content:
-            'Aceptamos tarjeta, transferencia y pago contra entrega, según disponibilidad.\n' +
-            'Si hubo un problema de cobro, debe revisarlo un empleado.\n' +
-            'Yo puedo ayudarte con productos o presupuestos mientras tanto.',
+            'Podés pagar por los métodos oficiales de la tienda, como SINPE, transferencia o tarjeta si está disponible.\n' +
+            'No compartás datos bancarios ni números de tarjeta por este chat.\n' +
+            'Para completar el pago, contactá a un empleado por los canales oficiales.',
+    }
+}
+
+const getShippingReplyEnhanced = (text: string): StructuredReply => {
+    if (includesAny(text, ['peñas blancas', 'penas blancas'])) {
+        return {
+            content:
+                'Sí, si te referís a Peñas Blancas de La Cruz, realizamos envíos dentro de Guanacaste.\n' +
+                'El costo o tiempo exacto puede confirmarlo un empleado según la dirección.',
+        }
+    }
+
+    const guanacasteLocation = GUANACASTE_SHIPPING_LOCATIONS.find(({ terms }) => includesAny(text, terms))
+    if (guanacasteLocation) {
+        return {
+            content:
+                `Sí, realizamos envíos a ${guanacasteLocation.label} porque está dentro de Guanacaste.\n` +
+                'El costo o tiempo exacto puede confirmarlo un empleado según la dirección.',
+        }
+    }
+
+    if (includesAny(text, OUTSIDE_GUANACASTE_TERMS)) {
+        return {
+            content:
+                'Por ahora manejamos envíos dentro de Guanacaste.\n' +
+                'Para envíos fuera de la provincia, lo mejor es que un empleado de la tienda lo revise.',
+        }
+    }
+
+    return {
+        content:
+            'Por ahora manejamos envíos dentro de Guanacaste.\n' +
+            'No puedo confirmar automáticamente esa ubicación, así que lo mejor es que un empleado revise la dirección exacta.',
     }
 }
 
@@ -1295,6 +1464,64 @@ const getProductsByTerms = (terms: string[], categorias?: Categoria[]) =>
         (!categorias || categorias.includes(product.categoria))
         && productHasAny(product, terms),
     )
+
+const getTermScore = (product: Product, terms: string[]) => {
+    const haystack = getProductSearchText(product)
+    return terms.reduce((score, term) => score + (haystack.includes(normalizeText(term)) ? 1 : 0), 0)
+}
+
+const pickProductByCategory = (
+    categoria: Categoria,
+    terms: string[],
+    subcategorias: string[] = [],
+): Product | null => {
+    const normalizedSubcategories = subcategorias.map((subcategoria) => normalizeText(subcategoria))
+    const filtered = products.filter((product) =>
+        product.categoria === categoria
+        && (
+            !normalizedSubcategories.length
+            || normalizedSubcategories.includes(normalizeText(product.subcategoria))
+        ))
+
+    if (!filtered.length) return null
+
+    const ranked = filtered
+        .map((product) => ({ product, score: getTermScore(product, terms) }))
+        .sort((left, right) => right.score - left.score)
+
+    return ranked.find(({ score }) => score > 0)?.product ?? ranked[0].product
+}
+
+const getBeachCombo = (): Product[] => {
+    const beachTerms = ['playa', 'surf', 'fresco', 'clima caliente', 'guanacaste']
+    const accessoriesTerms = ['playa', 'fresco', 'clima caliente', 'lentes', 'gorra']
+
+    const shirt = pickProductByCategory('camisas', beachTerms)
+    const short = pickProductByCategory('shorts', beachTerms)
+    const accessory = pickProductByCategory('accesorios', accessoriesTerms, ['Lentes', 'Gorras'])
+
+    return [shirt, short, accessory].filter((product): product is Product => Boolean(product))
+}
+
+const getSkateOutfitCombo = (): Product[] => {
+    const shirt = pickProductByCategory(
+        'camisas',
+        ['skate', 'gráfico', 'grafica', 'streetwear'],
+        ['Camisetas gráficas', 'Camisetas skate'],
+    )
+    const pants = pickProductByCategory(
+        'pantalones',
+        ['skate', 'baggy', 'cargo', 'urbano'],
+        ['Baggy jeans', 'Cargo pants', 'Pantalones skate'],
+    )
+    const shoes = pickProductByCategory(
+        'tenis',
+        ['skate', 'canvas', 'urbano', 'casual'],
+        ['Tenis skate', 'Tenis canvas', 'Tenis urbanos'],
+    )
+
+    return [shirt, pants, shoes].filter((product): product is Product => Boolean(product))
+}
 
 const getUnavailableBrandReply = (brand: string, text: string): StructuredReply => {
     const beachTerms = ['playa', 'surf', 'fresco', 'clima caliente', 'guanacaste']
@@ -1364,6 +1591,23 @@ const getHotClimateReply = (): StructuredReply => {
             'Una camiseta fresca con short de playa o short cargo funciona muy bien.\n' +
             `Te puede servir: ${formatNames(picks)}.`,
         action: buildCatalogAction('Ver shorts', 'shorts'),
+    }
+}
+
+const getBeachReply = (): StructuredReply => {
+    const picks = getBeachCombo()
+    const fallback = getProductsByTerms(
+        ['playa', 'surf', 'fresco', 'clima caliente', 'lentes', 'gorra'],
+        ['camisas', 'shorts', 'accesorios'],
+    )
+    const recommendations = picks.length === 3 ? picks : fallback
+
+    return {
+        content:
+            'Para playa, priorizá camiseta fresca, short cómodo y lentes o gorra.\n' +
+            `Te puede servir: ${formatNames(recommendations, 3)}.\n` +
+            'Podés revisar el catálogo para comparar camisas, shorts y accesorios.',
+        action: buildAction('Ver catálogo masculino', '/hombre'),
     }
 }
 
@@ -1493,26 +1737,20 @@ const getOutfitReply = (text: string, estilo?: Estilo): StructuredReply => {
     const isGoingOut = includesAny(text, ['salir', 'salida', 'noche'])
 
     if (isBeach) {
-        const picks = getProductsByTerms(['playa', 'fresco', 'clima caliente', 'lentes', 'gorra'], ['camisas', 'shorts', 'accesorios'])
-
-        return {
-            content:
-                'Para playa, priorizá camiseta fresca, short de playa y lentes o gorra.\n' +
-                `Te puede servir: ${formatNames(picks)}.\n` +
-                'Podés revisar Shorts o Accesorios.',
-            action: buildCatalogAction('Ver shorts', 'shorts'),
-        }
+        return getBeachReply()
     }
 
     if (isSkate) {
-        const picks = getProductsByTerms(['skate', 'baggy', 'cargo', 'canvas'], ['camisas', 'pantalones', 'tenis'])
+        const picks = getSkateOutfitCombo()
+        const fallback = getProductsByTerms(['skate', 'baggy', 'cargo', 'canvas'], ['camisas', 'pantalones', 'tenis'])
+        const recommendations = picks.length === 3 ? picks : fallback
 
         return {
             content:
                 'Para un outfit skate, usaría camiseta gráfica, pantalón baggy o cargo y tenis skate.\n' +
-                `Te puede servir: ${formatNames(picks)}.\n` +
-                'Podés revisar Pantalones o Tenis.',
-            action: buildCatalogAction('Ver tenis', 'tenis'),
+                `Te puede servir: ${formatNames(recommendations, 3)}.\n` +
+                'Podés revisar el catálogo para comparar camisas, pantalones y tenis.',
+            action: buildAction('Ver catálogo masculino', '/hombre'),
         }
     }
 
@@ -1674,7 +1912,8 @@ const isExchangeFollowUp = (text: string) => hasExchangeFollowUpTerm(text)
 
 const isDistanceFollowUp = (text: string) => includesAny(text, DISTANCE_FOLLOW_UP_TERMS)
 
-const isShippingDamageFollowUp = (text: string) => hasDeliveryDamageTerm(text)
+const isShippingDamageFollowUp = (text: string) =>
+    hasDeliveryDamageTerm(text) && includesAny(text, SHIPPING_CAUSE_TERMS)
 
 const isSupportNextStepFollowUp = (text: string) => includesAny(text, SUPPORT_NEXT_STEP_TERMS)
 
@@ -1713,6 +1952,8 @@ const isAvailabilityIntent = (text: string) =>
     )
     || hasSizeStockIntent(text)
 
+const isBeachIntent = (text: string) => includesAny(text, BEACH_INTENT_TERMS)
+
 const isHotContext = (text: string) => includesAny(text, HOT_CONTEXT_TERMS)
 
 const isGuanacasteContext = (text: string) => includesAny(text, GUANACASTE_TERMS)
@@ -1727,13 +1968,15 @@ const buildProductReply = (text: string): StructuredReply | null => {
     if (isColdContext(text)) return getColdWeatherReply()
     if (isFormalContext(text)) return getFormalReply()
 
+    const categoria = detectCategoria(text)
+    const requestedBrand = detectBrand(text)
+
+    if (isBeachIntent(text)) return getBeachReply()
+
     const budget = detectBudget(text)
     if (budget && (includesTerm(text, 'presupuesto') || includesTerm(text, 'tengo') || includesTerm(text, 'colones') || text.includes('₡'))) {
         return getBudgetReply(budget, text)
     }
-
-    const categoria = detectCategoria(text)
-    const requestedBrand = detectBrand(text)
 
     if (includesAny(text, ['running', 'runner', 'correr', 'corro', 'para correr', 'entrenamiento', 'gimnasio'])) {
         return getRunningRequestReply(requestedBrand)
@@ -1745,10 +1988,6 @@ const buildProductReply = (text: string): StructuredReply | null => {
 
     const isHot = isHotContext(text) || isGuanacasteContext(text)
     const isSkate = isSkateUrbanContext(text)
-
-    if (isHot && !isSkate && (!categoria || ['shorts', 'camisas', 'accesorios'].includes(categoria))) {
-        return getHotClimateReply()
-    }
 
     const globalRanked = findGlobalDirectMatches(text)
     const globalBestMatch = getBestMatch(globalRanked)
@@ -1773,6 +2012,10 @@ const buildProductReply = (text: string): StructuredReply | null => {
     ])
 
     if (isOutfitIntent) return getOutfitReply(text, estilo)
+
+    if (isHot && !isSkate && (!categoria || ['shorts', 'camisas', 'accesorios'].includes(categoria))) {
+        return getHotClimateReply()
+    }
 
     if (!resolvedCategoria && !color && !estilo) {
         if (globalBestMatch) return getProductReply(globalBestMatch)
@@ -1838,11 +2081,11 @@ export const getStructuredReply = (rawText: string, recentMessages: Message[] = 
     if (isSmallTalkIntent(text)) return getSmallTalkReply()
     const warrantyFollowUpReply = getWarrantyFollowUpReply(text, recentMessages)
     if (warrantyFollowUpReply) return warrantyFollowUpReply
-    if (isProductIssueIntent(text)) return getProductIssueReply(text)
     if (isSensitiveIntent(text)) return getSensitiveReply()
-    if (isComplaintIntent(text)) return getHumanSupportReply()
     if (isOrderIntent(text)) return getOrderReply()
     if (isPaymentIntent(text)) return getPaymentReply(text)
+    if (isComplaintIntent(text)) return getHumanSupportReply()
+    if (isProductIssueIntent(text)) return getProductIssueReply(text)
     if (isReturnIntent(text)) return getReturnReply(text)
     if (isWarrantyIntent(text)) return getWarrantyReply(text)
     if (isDiscountIntent(text)) return getDiscountReply()
