@@ -1,10 +1,13 @@
+import { useState } from 'react'
 import useCart from '../../hooks/useCart'
 import type { CartItem } from '../../models/Index'
+import CheckoutComingSoonModal from './CheckoutComingSoonModal'
 
 const formatCRC = (value: number) => `₡${value.toLocaleString('es-CR').replace(/\s/g, '.')}`
 
 const CartDrawer = () => {
     const { items, totalItems, totalPrice, isOpen, removeItem, clearCart, closeCart } = useCart()
+    const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false)
 
     return (
         <>
@@ -92,7 +95,7 @@ const CartDrawer = () => {
                                                 aria-label={`Quitar ${product.nombre}`}
                                                 className="text-xs text-text-muted underline-offset-2 transition-colors hover:text-accent hover:underline"
                                             >
-                                                Quitar
+                                                {quantity > 1 ? 'Quitar 1' : 'Quitar'}
                                             </button>
                                         </div>
                                     </div>
@@ -114,9 +117,7 @@ const CartDrawer = () => {
                         <button
                             type="button"
                             className="button-accent w-full py-3 text-sm"
-                            onClick={() => {
-                                alert('Pronto podras completar tu pedido aqui.')
-                            }}
+                            onClick={() => setIsCheckoutModalOpen(true)}
                         >
                             Continuar pedido
                         </button>
@@ -131,6 +132,13 @@ const CartDrawer = () => {
                     </div>
                 )}
             </aside>
+
+            <CheckoutComingSoonModal
+                isOpen={isCheckoutModalOpen}
+                onClose={() => setIsCheckoutModalOpen(false)}
+                totalItems={totalItems}
+                totalPrice={totalPrice}
+            />
         </>
     )
 }
