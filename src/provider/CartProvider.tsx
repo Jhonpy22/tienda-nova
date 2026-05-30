@@ -28,7 +28,15 @@ const CartProvider = ({ children }: Props) => {
     }, [])
 
     const removeItem = useCallback((productId: number) => {
-        setItems((prev) => prev.filter((item) => item.product.id !== productId))
+        setItems((prev) =>
+            prev
+                .map((item) =>
+                    item.product.id === productId
+                        ? { ...item, quantity: item.quantity - 1 }
+                        : item,
+                )
+                .filter((item) => item.quantity > 0),
+        )
     }, [])
 
     const clearCart = useCallback(() => setItems([]), [])
