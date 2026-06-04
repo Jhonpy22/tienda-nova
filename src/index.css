@@ -1018,6 +1018,288 @@
         @apply flex flex-col justify-center gap-3 sm:flex-row;
     }
 
+    .product-grid {
+        @apply grid gap-6 sm:grid-cols-2 xl:grid-cols-3;
+    }
+
+    .catalog-empty-state {
+        @apply border bg-card p-8 text-center;
+        border-color: color-mix(in srgb, var(--border) 78%, transparent);
+        border-radius: 1.125rem;
+        box-shadow: 0 12px 26px rgba(0, 0, 0, 0.14);
+    }
+
+    html[data-theme='light'] .catalog-empty-state {
+        box-shadow: 0 12px 26px rgba(13, 27, 42, 0.08);
+    }
+
+    .catalog-empty-state p {
+        @apply text-base font-semibold text-text-main;
+    }
+
+    .catalog-empty-state span {
+        @apply mt-3 block text-sm text-text-muted;
+        line-height: 1.65;
+    }
+
+    .product-card {
+        @apply flex h-full flex-col overflow-hidden border bg-card;
+        border-color: color-mix(in srgb, var(--border) 78%, transparent);
+        border-radius: 1.125rem;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+        transition:
+            transform 220ms var(--ease-premium),
+            border-color 220ms var(--ease-premium),
+            box-shadow 220ms var(--ease-premium);
+    }
+
+    html[data-theme='light'] .product-card {
+        box-shadow: 0 10px 24px rgba(13, 27, 42, 0.08);
+    }
+
+    .product-card:hover {
+        border-color: color-mix(in srgb, var(--accent) 64%, var(--border));
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.2);
+        transform: translateY(-0.22rem);
+    }
+
+    html[data-theme='light'] .product-card:hover {
+        box-shadow: 0 16px 34px rgba(13, 27, 42, 0.12);
+    }
+
+    .product-card-media {
+        @apply relative overflow-hidden;
+        background: color-mix(in srgb, var(--primary) 88%, var(--surface));
+    }
+
+    .product-card-image {
+        @apply aspect-[4/5] w-full object-cover grayscale-[6%];
+        transition:
+            transform 700ms var(--ease-premium),
+            filter 700ms var(--ease-premium);
+    }
+
+    .product-card:hover .product-card-image {
+        filter: saturate(1.04) contrast(1.02);
+        transform: scale(1.04);
+    }
+
+    .product-card-image-shade {
+        @apply absolute inset-x-0 bottom-0 h-24;
+        background: linear-gradient(to top, rgba(13, 27, 42, 0.66), transparent);
+        opacity: 0.82;
+    }
+
+    .product-card-badge {
+        @apply absolute left-3 top-3 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold text-primary;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    html[data-theme='light'] .product-card-badge {
+        color: var(--on-accent);
+    }
+
+    .product-card-body {
+        @apply flex flex-1 flex-col gap-3 p-4;
+    }
+
+    .product-card-heading {
+        @apply grid gap-1;
+    }
+
+    .product-card-heading h3 {
+        @apply text-base font-semibold text-text-main;
+        line-height: 1.25;
+        text-wrap: balance;
+    }
+
+    .product-card-heading p {
+        @apply line-clamp-2 text-xs text-text-muted;
+        line-height: 1.65;
+    }
+
+    .product-card-options,
+    .product-card-colors,
+    .product-card-styles {
+        @apply flex flex-wrap gap-1.5;
+    }
+
+    .product-option-chip,
+    .product-color-chip {
+        @apply inline-flex min-h-6 items-center rounded-md px-2 text-[11px] font-medium;
+    }
+
+    .product-option-chip {
+        border: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+        color: var(--text-soft);
+    }
+
+    .product-color-chip {
+        background: color-mix(in srgb, var(--bg) 70%, var(--surface));
+        color: var(--text-muted);
+    }
+
+    .product-style-chip {
+        @apply inline-flex min-h-7 items-center rounded-full px-2.5 text-[10px] font-semibold text-accent;
+        background: color-mix(in srgb, var(--accent) 13%, transparent);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    .product-card-footer {
+        @apply mt-auto flex items-center justify-between gap-3 border-t pt-3;
+        border-color: color-mix(in srgb, var(--border) 58%, transparent);
+    }
+
+    .product-card-price {
+        @apply text-3xl font-medium text-accent;
+        letter-spacing: 0.04em;
+        line-height: 1;
+    }
+
+    .product-add-button {
+        @apply inline-flex min-h-11 items-center justify-center rounded-full px-4 text-xs font-bold;
+        background: var(--accent);
+        color: var(--on-accent);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transition:
+            background-color 180ms var(--ease-premium),
+            color 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium),
+            box-shadow 180ms var(--ease-premium);
+    }
+
+    .product-add-button:hover {
+        background: var(--accent-hover);
+        color: var(--on-accent-hover);
+        box-shadow: 0 10px 22px rgba(193, 127, 58, 0.18);
+        transform: translateY(-1px);
+    }
+
+    .product-add-button:active {
+        transform: translateY(0) scale(0.98);
+    }
+
+    .product-add-button-added,
+    .product-add-button-added:hover {
+        background: color-mix(in srgb, var(--accent) 18%, var(--surface));
+        color: var(--accent);
+        box-shadow: none;
+        transform: none;
+    }
+
+    .catalog-filter-panel {
+        @apply h-fit border bg-card p-5;
+        border-color: color-mix(in srgb, var(--border) 78%, transparent);
+        border-radius: 1.125rem;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+    }
+
+    html[data-theme='light'] .catalog-filter-panel {
+        box-shadow: 0 10px 24px rgba(13, 27, 42, 0.08);
+    }
+
+    .filter-stack {
+        @apply grid gap-5;
+    }
+
+    .filter-field {
+        @apply grid gap-2;
+    }
+
+    .filter-label {
+        @apply text-sm font-semibold text-text-main;
+    }
+
+    .filter-chip-group {
+        @apply flex flex-wrap gap-2;
+    }
+
+    .filter-chip {
+        @apply inline-flex min-h-11 items-center justify-center rounded-full border px-3 text-sm font-semibold;
+        background: color-mix(in srgb, var(--surface) 74%, transparent);
+        border-color: color-mix(in srgb, var(--border) 70%, transparent);
+        color: var(--text);
+        transition:
+            background-color 180ms var(--ease-premium),
+            border-color 180ms var(--ease-premium),
+            color 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium);
+    }
+
+    .filter-chip:hover {
+        border-color: color-mix(in srgb, var(--accent) 70%, var(--border));
+        color: var(--accent);
+        transform: translateY(-1px);
+    }
+
+    .filter-chip-active,
+    .filter-chip-active:hover {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--on-accent);
+    }
+
+    .filter-price-grid {
+        @apply grid gap-3 sm:grid-cols-2 lg:grid-cols-1;
+    }
+
+    .catalog-filter-panel .input-base {
+        min-height: 2.75rem;
+        background: color-mix(in srgb, var(--bg) 54%, var(--surface));
+    }
+
+    .catalog-filter-panel summary {
+        @apply cursor-pointer text-sm font-semibold text-text-main;
+    }
+
+    .catalog-filter-mobile-body {
+        @apply mt-5;
+    }
+
+    .catalog-pagination {
+        @apply flex flex-wrap items-center justify-center gap-2;
+    }
+
+    .catalog-page-button {
+        @apply inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border px-3 text-sm font-semibold;
+        background: color-mix(in srgb, var(--surface) 58%, transparent);
+        border-color: color-mix(in srgb, var(--border) 72%, transparent);
+        color: var(--text);
+        transition:
+            background-color 180ms var(--ease-premium),
+            border-color 180ms var(--ease-premium),
+            color 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium);
+    }
+
+    .catalog-page-button-wide {
+        @apply px-4;
+    }
+
+    .catalog-page-button:hover:not(:disabled) {
+        border-color: color-mix(in srgb, var(--accent) 72%, var(--border));
+        color: var(--accent);
+        transform: translateY(-1px);
+    }
+
+    .catalog-page-button-active,
+    .catalog-page-button-active:hover:not(:disabled) {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--on-accent);
+    }
+
+    .catalog-page-button:disabled {
+        border-color: var(--disabled-border);
+        background: var(--disabled-bg);
+        color: var(--disabled-text);
+        opacity: 1;
+        transform: none;
+    }
+
     .section-title {
         @apply text-4xl font-medium tracking-wide text-text-main sm:text-5xl;
         font-family: var(--font-display);
