@@ -9,15 +9,15 @@ interface Props {
 const ProductGrid = ({ products, emptyMessage }: Props) => {
     if (!products.length) {
         return (
-            <div className="panel-card p-8 text-center">
-                <p className="text-base font-medium text-text-main">Sin resultados</p>
-                <p className="mt-3 text-sm text-text-muted">{emptyMessage}</p>
+            <div className="catalog-empty-state">
+                <p>Sin resultados</p>
+                <span>{emptyMessage}</span>
             </div>
         )
     }
 
     return (
-        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="product-grid">
             {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
             ))}

@@ -20,9 +20,9 @@ const SidebarContent = ({ search, category, colorOptions, onChange, onReset }: P
     const selectedFilter = filterConfig.options.includes(search.talla as Talla) ? search.talla : undefined
 
     return (
-        <div className="space-y-5">
-            <div className="space-y-2">
-                <label className="text-sm font-medium text-text-main" htmlFor="sort">
+        <div className="filter-stack">
+            <div className="filter-field">
+                <label className="filter-label" htmlFor="sort">
                     Ordenar por
                 </label>
                 <select
@@ -39,15 +39,13 @@ const SidebarContent = ({ search, category, colorOptions, onChange, onReset }: P
                 </select>
             </div>
 
-            <div className="space-y-3">
-                <p className="text-sm font-medium text-text-main">{filterConfig.label}</p>
-                <div className="flex flex-wrap gap-2">
+            <div className="filter-field">
+                <p className="filter-label">{filterConfig.label}</p>
+                <div className="filter-chip-group">
                     <button
                         type="button"
                         onClick={() => onChange({ talla: undefined })}
-                        className={`rounded-full border px-3 py-2 text-sm ${
-                            !selectedFilter ? 'border-accent bg-accent text-primary' : 'border-warm/50 text-text-main'
-                        }`}
+                        className={`filter-chip ${!selectedFilter ? 'filter-chip-active' : ''}`}
                     >
                         {filterConfig.allLabel}
                     </button>
@@ -56,9 +54,7 @@ const SidebarContent = ({ search, category, colorOptions, onChange, onReset }: P
                             key={size}
                             type="button"
                             onClick={() => onChange({ talla: size })}
-                            className={`rounded-full border px-3 py-2 text-sm ${
-                                selectedFilter === size ? 'border-accent bg-accent text-primary' : 'border-warm/50 text-text-main'
-                            }`}
+                            className={`filter-chip ${selectedFilter === size ? 'filter-chip-active' : ''}`}
                         >
                             {size}
                         </button>
@@ -66,8 +62,8 @@ const SidebarContent = ({ search, category, colorOptions, onChange, onReset }: P
                 </div>
             </div>
 
-            <div className="space-y-2">
-                <label className="text-sm font-medium text-text-main" htmlFor="color">
+            <div className="filter-field">
+                <label className="filter-label" htmlFor="color">
                     Color
                 </label>
                 <select
@@ -85,9 +81,9 @@ const SidebarContent = ({ search, category, colorOptions, onChange, onReset }: P
                 </select>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-                <div className="space-y-2">
-                    <label className="text-sm font-medium text-text-main" htmlFor="min-price">
+            <div className="filter-price-grid">
+                <div className="filter-field">
+                    <label className="filter-label" htmlFor="min-price">
                         Precio mínimo
                     </label>
                     <input
@@ -100,8 +96,8 @@ const SidebarContent = ({ search, category, colorOptions, onChange, onReset }: P
                     />
                 </div>
 
-                <div className="space-y-2">
-                    <label className="text-sm font-medium text-text-main" htmlFor="max-price">
+                <div className="filter-field">
+                    <label className="filter-label" htmlFor="max-price">
                         Precio máximo
                     </label>
                     <input
@@ -124,13 +120,13 @@ const SidebarContent = ({ search, category, colorOptions, onChange, onReset }: P
 
 const FilterSidebar = (props: Props) => (
     <>
-        <aside className="panel-card hidden h-fit p-5 lg:block">
+        <aside className="catalog-filter-panel hidden lg:block">
             <SidebarContent {...props} />
         </aside>
 
-        <details className="panel-card p-5 lg:hidden">
-            <summary className="cursor-pointer text-sm font-medium text-text-main">Filtros del catálogo</summary>
-            <div className="mt-5">
+        <details className="catalog-filter-panel lg:hidden">
+            <summary className="catalog-filter-summary">Filtros del catálogo</summary>
+            <div className="catalog-filter-mobile-body">
                 <SidebarContent {...props} />
             </div>
         </details>

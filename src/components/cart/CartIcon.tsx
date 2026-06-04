@@ -8,7 +8,7 @@ const CartIcon = () => {
             type="button"
             onClick={openCart}
             aria-label={`Carrito${totalItems > 0 ? `, ${totalItems} productos` : ''}`}
-            className="relative flex h-11 w-11 items-center justify-center rounded-full text-text-muted transition-colors duration-200 hover:bg-sand hover:text-accent"
+            className="cart-icon-button"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@ const CartIcon = () => {
             </svg>
 
             {totalItems > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[10px] font-semibold text-primary">
+                <span className="cart-icon-badge">
                     {totalItems > 99 ? '99+' : totalItems}
                 </span>
             )}

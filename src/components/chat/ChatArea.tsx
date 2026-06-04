@@ -15,14 +15,14 @@ const ChatArea = ({ messages, isLoading }: Props) => {
     }, [messages, isLoading])
 
     return (
-        <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-4 py-4 text-sm">
+        <div className="chat-area">
             {messages.map((message, index) => (
                 <MessageBubble key={`${message.timestamp}-${index}`} message={message} />
             ))}
 
             {isLoading && (
-                <div className="flex justify-start">
-                    <div className="rounded-2xl border border-warm/55 bg-card px-4 py-3 text-sm text-text-muted">
+                <div className="chat-message-row">
+                    <div className="chat-typing">
                         NovaBot está escribiendo...
                     </div>
                 </div>

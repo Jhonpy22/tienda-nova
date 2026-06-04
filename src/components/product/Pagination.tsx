@@ -10,12 +10,12 @@ const Pagination = ({ page, pageCount, onPageChange }: Props) => {
     const pages = Array.from({ length: pageCount }, (_, index) => index + 1)
 
     return (
-        <div className="flex flex-wrap items-center justify-center gap-2">
+        <div className="catalog-pagination">
             <button
                 type="button"
                 onClick={() => onPageChange(page - 1)}
                 disabled={page === 1}
-                className="rounded-full border border-warm/55 px-4 py-2 text-sm text-text-main transition-colors hover:border-accent disabled:cursor-not-allowed disabled:opacity-40"
+                className="catalog-page-button catalog-page-button-wide"
             >
                 Anterior
             </button>
@@ -25,9 +25,7 @@ const Pagination = ({ page, pageCount, onPageChange }: Props) => {
                     key={pageNumber}
                     type="button"
                     onClick={() => onPageChange(pageNumber)}
-                    className={`h-10 min-w-10 rounded-full px-3 text-sm transition-colors ${
-                        pageNumber === page ? 'bg-accent text-primary' : 'border border-warm/55 text-text-main hover:border-accent'
-                    }`}
+                    className={`catalog-page-button ${pageNumber === page ? 'catalog-page-button-active' : ''}`}
                 >
                     {pageNumber}
                 </button>
@@ -37,7 +35,7 @@ const Pagination = ({ page, pageCount, onPageChange }: Props) => {
                 type="button"
                 onClick={() => onPageChange(page + 1)}
                 disabled={page === pageCount}
-                className="rounded-full border border-warm/55 px-4 py-2 text-sm text-text-main transition-colors hover:border-accent disabled:cursor-not-allowed disabled:opacity-40"
+                className="catalog-page-button catalog-page-button-wide"
             >
                 Siguiente
             </button>

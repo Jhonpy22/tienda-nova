@@ -34,63 +34,63 @@ const ProductCard = ({ product }: Props) => {
     }
 
     return (
-        <article className="group panel-card flex h-full flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-accent/75 hover:shadow-[0_28px_90px_rgba(0,0,0,0.42)]">
-            <div className="relative overflow-hidden bg-primary/10">
+        <article className="product-card group">
+            <div className="product-card-media">
                 <img
                     src={product.imagen}
                     alt={product.nombre}
-                    className="aspect-[4/5] w-full object-cover grayscale-[8%] transition-transform duration-700 group-hover:scale-[1.045]"
+                    className="product-card-image"
                     loading="lazy"
                     onError={(event) => {
                         event.currentTarget.onerror = null
                         event.currentTarget.src = FALLBACK_IMAGE
                     }}
                 />
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-primary/72 to-transparent" />
+                <div className="product-card-image-shade" />
                 {product.nuevo && (
-                    <span className="absolute left-3 top-3 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-primary">
+                    <span className="product-card-badge">
                         Nuevo lanzamiento
                     </span>
                 )}
             </div>
 
-            <div className="flex flex-1 flex-col space-y-3 p-4">
-                <div>
-                    <h3 className="text-base font-medium text-text-main">{product.nombre}</h3>
-                    <p className="mt-1 line-clamp-2 text-xs leading-5 text-text-muted">{product.descripcion}</p>
+            <div className="product-card-body">
+                <div className="product-card-heading">
+                    <h3>{product.nombre}</h3>
+                    <p>{product.descripcion}</p>
                 </div>
 
-                <div className="flex flex-wrap gap-1.5">
+                <div className="product-card-options" aria-label="Tallas disponibles">
                     {visibleOptions.map((size) => (
-                        <span key={size} className="rounded-md border border-warm/60 px-2 py-0.5 text-[11px] text-text-muted">
+                        <span key={size} className="product-option-chip">
                             {size}
                         </span>
                     ))}
                     {hiddenOptionsCount > 0 && (
-                        <span className="rounded-md border border-warm/60 px-2 py-0.5 text-[11px] text-text-muted">
+                        <span className="product-option-chip">
                             +{hiddenOptionsCount}
                         </span>
                     )}
                 </div>
 
-                <div className="flex flex-wrap gap-1.5">
+                <div className="product-card-colors" aria-label="Colores disponibles">
                     {product.colores.map((color) => (
-                        <span key={color} className="rounded-md bg-background px-2 py-0.5 text-[11px] text-text-muted">
+                        <span key={color} className="product-color-chip">
                             {color}
                         </span>
                     ))}
                 </div>
 
-                <div className="flex flex-wrap gap-1.5">
+                <div className="product-card-styles">
                     {product.estilos.slice(0, 3).map((style) => (
-                        <span key={style} className="rounded-full bg-accent/12 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-accent">
+                        <span key={style} className="product-style-chip">
                             {STYLE_LABELS[style]}
                         </span>
                     ))}
                 </div>
 
-                <div className="mt-auto flex items-center justify-between gap-3 pt-1">
-                    <p className="text-2xl font-medium tracking-wide text-accent" style={{ fontFamily: 'var(--font-display)' }}>
+                <div className="product-card-footer">
+                    <p className="product-card-price" style={{ fontFamily: 'var(--font-display)' }}>
                         {formatCRC(product.precio)}
                     </p>
                     <button
@@ -98,8 +98,8 @@ const ProductCard = ({ product }: Props) => {
                         onClick={handleAdd}
                         disabled={added}
                         className={[
-                            'button-accent py-2 text-xs transition-all duration-200 hover:shadow-[0_18px_40px_rgba(224,197,143,0.26)] focus-visible:ring-offset-card',
-                            added ? 'cursor-default opacity-80' : '',
+                            'product-add-button',
+                            added ? 'product-add-button-added' : '',
                         ].join(' ')}
                     >
                         {added ? 'Agregado' : 'Agregar'}
