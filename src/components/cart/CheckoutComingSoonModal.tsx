@@ -61,7 +61,7 @@ const CheckoutComingSoonModal = ({
                             </svg>
                         </button>
 
-                        <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full border border-accent/35 bg-accent/12 text-accent shadow-[0_12px_30px_rgba(200,169,106,0.14)]">
+                        <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full border border-accent/35 bg-accent/12 text-accent shadow-[0_12px_30px_rgba(224,197,143,0.14)]">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
                                 <line x1="3" x2="21" y1="6" y2="6" />

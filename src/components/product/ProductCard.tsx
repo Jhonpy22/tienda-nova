@@ -98,7 +98,7 @@ const ProductCard = ({ product }: Props) => {
                         onClick={handleAdd}
                         disabled={added}
                         className={[
-                            'button-accent py-2 text-xs transition-all duration-200 hover:shadow-[0_18px_40px_rgba(200,169,106,0.26)] focus-visible:ring-offset-card',
+                            'button-accent py-2 text-xs transition-all duration-200 hover:shadow-[0_18px_40px_rgba(224,197,143,0.26)] focus-visible:ring-offset-card',
                             added ? 'cursor-default opacity-80' : '',
                         ].join(' ')}
                     >
