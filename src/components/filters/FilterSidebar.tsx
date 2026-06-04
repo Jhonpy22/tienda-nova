@@ -125,7 +125,7 @@ const FilterSidebar = (props: Props) => (
         </aside>
 
         <details className="catalog-filter-panel lg:hidden">
-            <summary className="cursor-pointer text-sm font-medium text-text-main">Filtros del catálogo</summary>
+            <summary className="catalog-filter-summary">Filtros del catálogo</summary>
             <div className="catalog-filter-mobile-body">
                 <SidebarContent {...props} />
             </div>

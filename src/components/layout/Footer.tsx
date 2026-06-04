@@ -147,7 +147,7 @@ const Footer = () => {
                                         key={item.label}
                                         href={item.href}
                                         aria-label={`Abrir ${item.label} de Tienda Nova`}
-                                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-on-primary/12 bg-on-primary/8 text-on-primary/78 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:bg-accent hover:text-primary"
+                                        className="footer-social-link inline-flex h-10 w-10 items-center justify-center rounded-full border border-on-primary/12 bg-on-primary/8 text-on-primary/78 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:bg-accent hover:text-primary"
                                     >
                                         {item.icon}
                                     </a>
