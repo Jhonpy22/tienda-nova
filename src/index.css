@@ -332,7 +332,12 @@
         @apply flex shrink-0 items-center gap-1.5;
     }
 
+    .header-cart-action {
+        @apply inline-flex;
+    }
+
     .header-action-cluster > button,
+    .header-cart-action > button,
     .header-menu-button {
         @apply inline-flex h-11 items-center justify-center rounded-full border;
         background: color-mix(in srgb, var(--surface) 72%, transparent);
@@ -351,12 +356,13 @@
         @apply px-3;
     }
 
-    .header-action-cluster > button[aria-label^='Carrito'],
+    .header-cart-action > button,
     .header-menu-button {
         @apply w-11 px-0;
     }
 
     .header-action-cluster > button:hover,
+    .header-cart-action > button:hover,
     .header-menu-button:hover,
     .header-menu-button[aria-expanded='true'] {
         background: color-mix(in srgb, var(--accent) 14%, var(--surface));
@@ -367,6 +373,7 @@
     }
 
     .header-action-cluster > button:active,
+    .header-cart-action > button:active,
     .header-menu-button:active {
         transform: translateY(0) scale(0.98);
     }

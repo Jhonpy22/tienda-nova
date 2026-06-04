@@ -68,7 +68,7 @@ const Header = () => {
                                     to={item.to}
                                     className="nav-link"
                                     activeProps={{
-                                        className: 'nav-link nav-link-active',
+                                        className: 'nav-link-active',
                                     }}
                                 >
                                     {item.label}
@@ -82,7 +82,7 @@ const Header = () => {
                                     search={{ page: 1, sort: 'newest' }}
                                     className="nav-link"
                                     activeProps={{
-                                        className: 'nav-link nav-link-active-accent',
+                                        className: 'nav-link-active-accent',
                                     }}
                                 >
                                     {item.label}
@@ -91,14 +91,18 @@ const Header = () => {
                         </nav>
                         <div className="header-action-cluster">
                             <ThemeToggle />
-                            <CartIcon />
+                            <span className="header-cart-action">
+                                <CartIcon />
+                            </span>
                         </div>
                     </div>
 
                     <div className="header-mobile-actions">
                         <div className="header-action-cluster">
                             <ThemeToggle />
-                            <CartIcon />
+                            <span className="header-cart-action">
+                                <CartIcon />
+                            </span>
                         </div>
                         <button
                             type="button"
@@ -146,7 +150,7 @@ const Header = () => {
                                         onClick={closeMenu}
                                         className="mobile-nav-link"
                                         activeProps={{
-                                            className: 'mobile-nav-link mobile-nav-link-active',
+                                            className: 'mobile-nav-link-active',
                                         }}
                                     >
                                         {item.label}
@@ -161,7 +165,7 @@ const Header = () => {
                                         onClick={closeMenu}
                                         className="mobile-nav-link"
                                         activeProps={{
-                                            className: 'mobile-nav-link mobile-nav-link-active',
+                                            className: 'mobile-nav-link-active',
                                         }}
                                     >
                                         {item.label}
