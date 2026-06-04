@@ -45,6 +45,7 @@
         --disabled-bg: #243346;
         --disabled-text: #9DB0C2;
         --disabled-border: #344B62;
+        --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
 
         --color-primary: var(--primary);
         --color-secondary: var(--surface);
@@ -186,6 +187,258 @@
 @layer components {
     .container-shell {
         @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+    }
+
+    .site-header {
+        @apply sticky top-0 z-30 border-b backdrop-blur-xl;
+        background: color-mix(in srgb, var(--surface) 94%, transparent);
+        border-color: color-mix(in srgb, var(--border) 86%, transparent);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.025);
+        transition:
+            background-color 220ms var(--ease-premium),
+            border-color 220ms var(--ease-premium),
+            box-shadow 220ms var(--ease-premium);
+    }
+
+    .site-header--scrolled {
+        background: color-mix(in srgb, var(--surface) 98%, transparent);
+        border-color: color-mix(in srgb, var(--accent) 32%, var(--border));
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+    }
+
+    html[data-theme='light'] .site-header {
+        box-shadow: 0 1px 0 rgba(13, 27, 42, 0.04);
+    }
+
+    html[data-theme='light'] .site-header--scrolled {
+        box-shadow: 0 12px 28px rgba(13, 27, 42, 0.1);
+    }
+
+    .header-container {
+        @apply py-3 lg:py-4;
+    }
+
+    .header-row {
+        @apply flex min-h-14 items-center justify-between gap-3 lg:min-h-18;
+    }
+
+    .brand-lockup {
+        @apply flex shrink-0 flex-col leading-none;
+    }
+
+    .brand-mark {
+        @apply text-xl text-text-main sm:text-3xl;
+        letter-spacing: 0.14em;
+        transition:
+            color 180ms var(--ease-premium),
+            letter-spacing 220ms var(--ease-premium);
+    }
+
+    .brand-lockup:hover .brand-mark {
+        color: var(--accent);
+        letter-spacing: 0.16em;
+    }
+
+    .brand-subtitle {
+        @apply mt-1 hidden text-[9px] uppercase text-accent sm:block sm:text-[10px];
+        letter-spacing: 0.32em;
+    }
+
+    .header-desktop-controls {
+        @apply hidden items-center gap-3 lg:flex;
+    }
+
+    .nav-shell {
+        @apply flex max-w-full items-center gap-1 rounded-full border p-1;
+        background: color-mix(in srgb, var(--surface-soft) 42%, var(--surface));
+        border-color: color-mix(in srgb, var(--border) 78%, transparent);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    }
+
+    html[data-theme='light'] .nav-shell {
+        background: color-mix(in srgb, var(--surface) 72%, var(--surface-soft));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.62);
+    }
+
+    .nav-link {
+        @apply relative shrink-0 rounded-full px-4 py-2 text-sm font-semibold;
+        color: var(--text-muted);
+        transition:
+            background-color 180ms var(--ease-premium),
+            color 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium),
+            box-shadow 180ms var(--ease-premium);
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        right: 1rem;
+        bottom: 0.35rem;
+        left: 1rem;
+        height: 1px;
+        background: currentColor;
+        opacity: 0;
+        transform: scaleX(0.35);
+        transition:
+            opacity 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium);
+    }
+
+    .nav-link:hover {
+        background: var(--surface-hover);
+        color: var(--text);
+        transform: translateY(-1px);
+    }
+
+    .nav-link:hover::after {
+        opacity: 0.32;
+        transform: scaleX(1);
+    }
+
+    .nav-link-active {
+        background: var(--text);
+        color: var(--bg);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+    }
+
+    .nav-link-active-accent {
+        background: var(--accent);
+        color: var(--on-accent);
+        box-shadow: 0 8px 18px rgba(193, 127, 58, 0.2);
+    }
+
+    .nav-link-active::after,
+    .nav-link-active-accent::after {
+        opacity: 0;
+    }
+
+    .nav-link-active:hover,
+    .nav-link-active-accent:hover {
+        transform: translateY(-1px);
+    }
+
+    .nav-link-active:hover {
+        background: var(--text);
+        color: var(--bg);
+    }
+
+    .nav-link-active-accent:hover {
+        background: var(--accent-hover);
+        color: var(--on-accent-hover);
+    }
+
+    .header-action-cluster {
+        @apply flex shrink-0 items-center gap-1.5;
+    }
+
+    .header-action-cluster > button,
+    .header-menu-button {
+        @apply inline-flex h-11 items-center justify-center rounded-full border;
+        background: color-mix(in srgb, var(--surface) 72%, transparent);
+        border-color: color-mix(in srgb, var(--border) 82%, transparent);
+        color: var(--text-muted);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+        transition:
+            background-color 180ms var(--ease-premium),
+            border-color 180ms var(--ease-premium),
+            color 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium),
+            box-shadow 180ms var(--ease-premium);
+    }
+
+    .header-action-cluster > button {
+        @apply px-3;
+    }
+
+    .header-action-cluster > button[aria-label^='Carrito'],
+    .header-menu-button {
+        @apply w-11 px-0;
+    }
+
+    .header-action-cluster > button:hover,
+    .header-menu-button:hover,
+    .header-menu-button[aria-expanded='true'] {
+        background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+        border-color: color-mix(in srgb, var(--accent) 72%, var(--border));
+        color: var(--accent);
+        transform: translateY(-1px);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    .header-action-cluster > button:active,
+    .header-menu-button:active {
+        transform: translateY(0) scale(0.98);
+    }
+
+    .header-mobile-actions {
+        @apply flex shrink-0 items-center gap-1.5 lg:hidden;
+    }
+
+    .header-menu-button {
+        @apply flex;
+    }
+
+    .mobile-navigation {
+        @apply grid overflow-hidden transition-[grid-template-rows,opacity,transform] duration-200 lg:hidden;
+        transition-timing-function: var(--ease-premium);
+    }
+
+    .mobile-nav-panel {
+        @apply mt-3 rounded-2xl border p-2;
+        background: color-mix(in srgb, var(--surface) 96%, transparent);
+        border-color: color-mix(in srgb, var(--border) 86%, transparent);
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.2);
+    }
+
+    html[data-theme='light'] .mobile-nav-panel {
+        box-shadow: 0 14px 30px rgba(13, 27, 42, 0.12);
+    }
+
+    .mobile-nav-grid {
+        @apply grid gap-2;
+    }
+
+    .mobile-nav-link {
+        @apply relative flex min-h-11 items-center justify-between rounded-xl border px-4 py-3 text-sm font-semibold;
+        background: color-mix(in srgb, var(--bg) 62%, var(--surface));
+        border-color: color-mix(in srgb, var(--border) 72%, transparent);
+        color: var(--text);
+        transition:
+            background-color 180ms var(--ease-premium),
+            border-color 180ms var(--ease-premium),
+            color 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium);
+    }
+
+    .mobile-nav-link::after {
+        content: '';
+        width: 0.4rem;
+        height: 0.4rem;
+        border-radius: 999px;
+        background: var(--accent);
+        opacity: 0;
+        transform: scale(0.4);
+        transition:
+            opacity 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium);
+    }
+
+    .mobile-nav-link:hover {
+        border-color: color-mix(in srgb, var(--accent) 70%, var(--border));
+        color: var(--accent);
+        transform: translateX(2px);
+    }
+
+    .mobile-nav-link-active {
+        background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+        border-color: color-mix(in srgb, var(--accent) 82%, var(--border));
+        color: var(--accent);
+    }
+
+    .mobile-nav-link-active::after {
+        opacity: 1;
+        transform: scale(1);
     }
 
     .section-title {
