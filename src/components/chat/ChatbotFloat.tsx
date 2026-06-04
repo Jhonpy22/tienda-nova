@@ -29,10 +29,10 @@ const ChatbotFloat = () => {
                                 NB
                             </div>
                             <div>
-                                <p className="text-sm font-medium text-white">NovaBot</p>
+                                <p className="text-sm font-medium text-on-primary">NovaBot</p>
                                 <div className="flex items-center gap-1.5">
                                     <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
-                                    <p className="text-[11px] text-white/72">En linea</p>
+                                    <p className="text-[11px] text-on-primary/72">En linea</p>
                                 </div>
                             </div>
                         </div>
@@ -40,14 +40,14 @@ const ChatbotFloat = () => {
                             <button
                                 type="button"
                                 onClick={clearChat}
-                                className="rounded-full border border-white/20 px-3 py-1.5 text-[11px] text-white/70 transition-colors hover:border-accent hover:text-accent"
+                                className="rounded-full border border-on-primary/20 px-3 py-1.5 text-[11px] text-on-primary/70 transition-colors hover:border-accent hover:text-accent"
                             >
                                 Limpiar
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setIsOpen(false)}
-                                className="flex h-7 w-7 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:border-accent hover:text-accent"
+                                className="flex h-7 w-7 items-center justify-center rounded-full border border-on-primary/20 text-on-primary/70 transition-colors hover:border-accent hover:text-accent"
                                 aria-label="Cerrar chat"
                             >
                                 X

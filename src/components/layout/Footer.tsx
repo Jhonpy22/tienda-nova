@@ -74,20 +74,20 @@ const Footer = () => {
     ]
 
     return (
-        <footer ref={footerRef} className="border-t border-warm bg-primary text-white">
+        <footer ref={footerRef} className="border-t border-warm bg-primary text-on-primary">
             <div className="container-shell grid gap-10 py-14 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr]">
                 <div data-reveal className="space-y-4">
                     <div>
-                        <p className="text-3xl tracking-[0.16em] text-white" style={{ fontFamily: 'var(--font-display)' }}>
+                        <p className="text-3xl tracking-[0.16em] text-on-primary" style={{ fontFamily: 'var(--font-display)' }}>
                             NOVA STREET
                         </p>
-                        <p className="mt-2 max-w-xs text-sm leading-6 text-white/72">
+                        <p className="mt-2 max-w-xs text-sm leading-6 text-on-primary/72">
                             Moda urbana masculina en Nicoya, Guanacaste. Fits amplios, tonos oscuros, estilo skate y surf.
                         </p>
                     </div>
-                    <div className="rounded-[1.25rem] border border-white/12 bg-white/6 p-4">
+                    <div className="rounded-[1.25rem] border border-on-primary/12 bg-on-primary/6 p-4">
                         <p className="text-xs uppercase tracking-[0.28em] text-accent">NovaBot</p>
-                        <p className="mt-2 text-sm leading-6 text-white/76">
+                        <p className="mt-2 text-sm leading-6 text-on-primary/76">
                             Asesor de outfits, productos, envios, pagos y acceso directo al catalogo.
                         </p>
                     </div>
@@ -95,7 +95,7 @@ const Footer = () => {
 
                 <div data-reveal className="space-y-4">
                     <p className="text-sm uppercase tracking-[0.22em] text-accent">Explorar</p>
-                    <div className="space-y-3 text-sm text-white/80">
+                    <div className="space-y-3 text-sm text-on-primary/80">
                         {footerSections.explore.map((item) => (
                             <Link key={item.to} to={item.to} className="block transition-colors hover:text-accent">
                                 {item.label}
@@ -106,7 +106,7 @@ const Footer = () => {
 
                 <div data-reveal className="space-y-4">
                     <p className="text-sm uppercase tracking-[0.22em] text-accent">Colecciones</p>
-                    <div className="space-y-3 text-sm text-white/80">
+                    <div className="space-y-3 text-sm text-on-primary/80">
                         {footerSections.categories.map((item) => (
                             <Link
                                 key={`${item.to}-${item.categoria}`}
@@ -123,31 +123,31 @@ const Footer = () => {
 
                 <div data-reveal className="space-y-4 lg:col-span-4">
                     <p className="text-sm uppercase tracking-[0.22em] text-accent">Confianza</p>
-                    <div className="grid gap-3 rounded-[1.75rem] border border-white/12 bg-white/[0.055] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.22)] sm:grid-cols-3 sm:p-5">
-                        <div className="rounded-[1.25rem] border border-white/10 bg-black/18 p-4">
+                    <div className="grid gap-3 rounded-[1.75rem] border border-on-primary/12 bg-on-primary/[0.055] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.22)] sm:grid-cols-3 sm:p-5">
+                        <div className="rounded-[1.25rem] border border-on-primary/10 bg-background/18 p-4">
                             <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-accent/35 bg-accent/12 text-accent">
                                 <ClockIcon className="h-5 w-5" />
                             </div>
-                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/55">Horario</p>
-                            <div className="mt-3 space-y-1 text-sm leading-6 text-white/82">
+                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-on-primary/55">Horario</p>
+                            <div className="mt-3 space-y-1 text-sm leading-6 text-on-primary/82">
                                 <p>Lun - Vie: 9:00 a. m. - 7:00 p. m.</p>
                                 <p>Sábados: 8:00 a. m. - 5:00 p. m.</p>
                             </div>
                         </div>
 
-                        <div className="rounded-[1.25rem] border border-white/10 bg-black/18 p-4">
+                        <div className="rounded-[1.25rem] border border-on-primary/10 bg-background/18 p-4">
                             <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-accent/35 bg-accent/12 text-accent">
                                 <MessageIcon className="h-5 w-5" />
                             </div>
-                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/55">Contacto</p>
-                            <p className="mt-3 text-sm leading-6 text-white/82">WhatsApp: {STORE_CONTACT_LINKS.whatsapp.phone}</p>
+                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-on-primary/55">Contacto</p>
+                            <p className="mt-3 text-sm leading-6 text-on-primary/82">WhatsApp: {STORE_CONTACT_LINKS.whatsapp.phone}</p>
                             <div className="mt-4 flex gap-2">
                                 {contactLinks.map((item) => (
                                     <a
                                         key={item.label}
                                         href={item.href}
                                         aria-label={`Abrir ${item.label} de Tienda Nova`}
-                                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-white/8 text-white/78 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:bg-accent hover:text-primary"
+                                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-on-primary/12 bg-on-primary/8 text-on-primary/78 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:bg-accent hover:text-primary"
                                     >
                                         {item.icon}
                                     </a>
@@ -155,12 +155,12 @@ const Footer = () => {
                             </div>
                         </div>
 
-                        <div className="rounded-[1.25rem] border border-white/10 bg-black/18 p-4">
+                        <div className="rounded-[1.25rem] border border-on-primary/10 bg-background/18 p-4">
                             <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-accent/35 bg-accent/12 text-accent">
                                 <ShieldCheckIcon className="h-5 w-5" />
                             </div>
-                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/55">Garantía</p>
-                            <div className="mt-3 space-y-1 text-sm leading-6 text-white/82">
+                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-on-primary/55">Garantía</p>
+                            <div className="mt-3 space-y-1 text-sm leading-6 text-on-primary/82">
                                 <p>{WARRANTY_POLICY.defectCoverage}</p>
                                 <p>Revisión con fotos o en tienda</p>
                             </div>
@@ -169,8 +169,8 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div data-reveal className="border-t border-white/10">
-                <div className="container-shell flex flex-col gap-2 py-5 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
+            <div data-reveal className="border-t border-on-primary/10">
+                <div className="container-shell flex flex-col gap-2 py-5 text-xs text-on-primary/60 sm:flex-row sm:items-center sm:justify-between">
                     <p>NOVA STREET (c) 2026. Streetwear masculino premium.</p>
                     <p>Catalogo urbano con carrito, filtros y asesor de outfits.</p>
                 </div>
