@@ -6,16 +6,16 @@ const BrandStatement = () => {
     useSectionReveal(sectionRef)
 
     return (
-        <section ref={sectionRef} className="container-shell py-18">
-            <div className="grid gap-8 rounded-[2rem] border border-warm bg-card p-8 shadow-[var(--shadow-panel)] lg:grid-cols-[0.85fr_1.15fr] lg:p-10">
-                <div data-reveal className="space-y-3">
-                    <p className="text-xs uppercase tracking-[0.32em] text-text-muted">Manifiesto</p>
-                    <h2 className="text-3xl leading-tight text-text-main sm:text-4xl" style={{ fontFamily: 'var(--font-display)' }}>
+        <section ref={sectionRef} className="container-shell home-manifesto-section">
+            <div className="home-manifesto">
+                <div data-reveal className="home-manifesto-title">
+                    <p className="home-kicker">Manifiesto</p>
+                    <h2 style={{ fontFamily: 'var(--font-display)' }}>
                         Streetwear sin ruido: silueta, textura y actitud.
                     </h2>
                 </div>
 
-                <div data-reveal className="grid gap-6 text-sm leading-7 text-text-muted sm:grid-cols-2 sm:text-base">
+                <div data-reveal className="home-manifesto-copy">
                     <p>
                         La propuesta combina una presentacion editorial oscura con navegacion clara para encontrar prendas,
                         hoodies, tenis y accesorios sin exceso visual.

@@ -10,25 +10,29 @@ const FeaturedCollections = () => {
     useSectionReveal(sectionRef)
 
     return (
-        <section ref={sectionRef} className="container-shell space-y-8 py-8">
-            <div data-reveal className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-                <div className="space-y-3">
-                    <p className="text-xs uppercase tracking-[0.32em] text-text-muted">Colecciones destacadas</p>
-                    <h2 className="section-title max-w-2xl">Streetwear masculino con direccion clara.</h2>
+        <section ref={sectionRef} className="container-shell home-collections">
+            <div data-reveal className="home-section-header home-section-header-split">
+                <div>
+                    <p className="home-kicker">Colecciones destacadas</p>
+                    <h2 className="section-title">Streetwear masculino con direccion clara.</h2>
                 </div>
-                <p className="max-w-xl text-sm leading-6 text-text-muted sm:text-base">
+                <p>
                     Colecciones pensadas para armar outfits completos: prendas amplias, tenis correctos y accesorios sobrios.
                 </p>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-2">
-                {collectionSpotlights.map((collection) => (
-                    <article key={collection.category} data-reveal className="overflow-hidden rounded-[2rem] border border-warm bg-card shadow-[var(--shadow-panel)]">
-                        <div className="aspect-[4/5] overflow-hidden">
+            <div className="home-collection-grid">
+                {collectionSpotlights.map((collection, index) => (
+                    <article
+                        key={collection.category}
+                        data-reveal
+                        className={`home-collection-card ${index === 0 ? 'home-collection-card-primary' : 'home-collection-card-offset'}`}
+                    >
+                        <div className="home-collection-image">
                             <img
                                 src={collection.image}
                                 alt={collection.title}
-                                className="h-full w-full object-cover grayscale-[12%] transition-transform duration-700 hover:scale-105"
+                                className="h-full w-full object-cover grayscale-[12%]"
                                 loading="lazy"
                                 onError={(event) => {
                                     event.currentTarget.onerror = null
@@ -36,16 +40,16 @@ const FeaturedCollections = () => {
                                 }}
                             />
                         </div>
-                        <div className="space-y-5 p-7">
-                            <div className="space-y-3">
-                                <p className="text-xs uppercase tracking-[0.3em] text-text-muted">{collection.eyebrow}</p>
-                                <h3 className="text-3xl leading-tight text-text-main" style={{ fontFamily: 'var(--font-display)' }}>
+                        <div className="home-collection-content">
+                            <div>
+                                <p className="home-card-label">{collection.eyebrow}</p>
+                                <h3 style={{ fontFamily: 'var(--font-display)' }}>
                                     {collection.title}
                                 </h3>
-                                <p className="text-sm leading-7 text-text-muted sm:text-base">{collection.description}</p>
+                                <p>{collection.description}</p>
                             </div>
 
-                            <div className="flex flex-col gap-3 sm:flex-row">
+                            <div className="home-card-actions">
                                 <Link to="/hombre" className="button-primary">
                                     Ver catalogo
                                 </Link>

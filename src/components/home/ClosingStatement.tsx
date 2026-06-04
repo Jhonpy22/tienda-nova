@@ -7,16 +7,16 @@ const ClosingStatement = () => {
     useSectionReveal(sectionRef)
 
     return (
-        <section ref={sectionRef} className="container-shell pb-20 pt-8">
-            <div data-reveal className="space-y-6 rounded-[2rem] border border-warm bg-card px-8 py-12 text-center shadow-[var(--shadow-panel)]">
-                <p className="text-xs uppercase tracking-[0.32em] text-text-muted">Cierre</p>
-                <h2 className="mx-auto max-w-3xl text-3xl leading-tight text-text-main sm:text-4xl" style={{ fontFamily: 'var(--font-display)' }}>
+        <section ref={sectionRef} className="container-shell home-closing-section">
+            <div data-reveal className="home-closing">
+                <p className="home-kicker">Cierre</p>
+                <h2 style={{ fontFamily: 'var(--font-display)' }}>
                     Un buen fit empieza con piezas correctas y una ruta clara para comprarlas.
                 </h2>
-                <p className="mx-auto max-w-2xl text-sm leading-7 text-text-muted sm:text-base">
+                <p>
                     Nova combina direccion visual, catalogo funcional y asesoria inmediata para elegir sin perder tiempo.
                 </p>
-                <div className="flex flex-col justify-center gap-3 sm:flex-row">
+                <div className="home-closing-actions">
                     <Link to="/hombre" className="button-primary">
                         Ver catalogo masculino
                     </Link>
