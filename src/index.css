@@ -1300,6 +1300,540 @@
         transform: none;
     }
 
+    .cart-icon-button {
+        @apply relative inline-flex h-11 w-11 items-center justify-center rounded-full text-text-muted;
+        transition:
+            background-color 180ms var(--ease-premium),
+            border-color 180ms var(--ease-premium),
+            color 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium);
+    }
+
+    .cart-icon-button:hover {
+        color: var(--accent);
+        transform: translateY(-1px);
+    }
+
+    .cart-icon-button:active {
+        transform: translateY(0) scale(0.98);
+    }
+
+    .cart-icon-badge {
+        @apply absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-bold;
+        background: var(--accent);
+        color: var(--on-accent);
+        box-shadow: 0 0 0 2px var(--surface);
+    }
+
+    .cart-overlay {
+        @apply fixed inset-0 z-40 backdrop-blur-sm;
+        background: color-mix(in srgb, var(--primary) 68%, transparent);
+    }
+
+    .cart-drawer {
+        @apply fixed right-0 top-0 z-50 flex h-full w-full max-w-[27rem] flex-col border-l bg-card;
+        border-color: color-mix(in srgb, var(--border) 82%, transparent);
+        box-shadow: -10px 0 12px rgba(0, 0, 0, 0.22);
+    }
+
+    html[data-theme='light'] .cart-drawer {
+        box-shadow: -10px 0 12px rgba(13, 27, 42, 0.1);
+    }
+
+    .cart-drawer-header {
+        @apply flex items-center justify-between gap-4 border-b px-5 py-4;
+        background: color-mix(in srgb, var(--surface) 86%, var(--bg));
+        border-color: color-mix(in srgb, var(--border) 72%, transparent);
+    }
+
+    .cart-drawer-title {
+        @apply text-3xl font-medium tracking-wide text-accent;
+        line-height: 1;
+    }
+
+    .cart-drawer-meta {
+        @apply mt-1 text-xs font-medium text-text-muted;
+    }
+
+    .cart-close-button,
+    .checkout-modal-close,
+    .chatbot-close-button {
+        @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border text-text-muted;
+        background: color-mix(in srgb, var(--surface-soft) 46%, transparent);
+        border-color: color-mix(in srgb, var(--border) 70%, transparent);
+        transition:
+            background-color 180ms var(--ease-premium),
+            border-color 180ms var(--ease-premium),
+            color 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium);
+    }
+
+    .cart-close-button:hover,
+    .checkout-modal-close:hover,
+    .chatbot-close-button:hover {
+        background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+        border-color: color-mix(in srgb, var(--accent) 70%, var(--border));
+        color: var(--accent);
+        transform: translateY(-1px);
+    }
+
+    .cart-drawer-body {
+        @apply flex-1 overflow-y-auto px-4 py-4 sm:px-5;
+    }
+
+    .cart-empty-state {
+        @apply flex h-full min-h-[24rem] flex-col items-center justify-center gap-4 text-center;
+        color: var(--text-muted);
+    }
+
+    .cart-empty-icon {
+        color: var(--accent);
+        opacity: 0.78;
+    }
+
+    .cart-empty-state p {
+        @apply max-w-48 text-sm font-medium;
+        color: var(--text-muted);
+    }
+
+    .cart-item-list {
+        @apply grid gap-3;
+    }
+
+    .cart-item {
+        @apply flex gap-3 border bg-background p-3;
+        border-color: color-mix(in srgb, var(--border) 72%, transparent);
+        border-radius: 1rem;
+        transition:
+            background-color 180ms var(--ease-premium),
+            border-color 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium);
+    }
+
+    .cart-item:hover {
+        background: color-mix(in srgb, var(--surface) 62%, var(--bg));
+        border-color: color-mix(in srgb, var(--accent) 48%, var(--border));
+        transform: translateY(-1px);
+    }
+
+    .cart-item-image {
+        @apply h-24 w-[4.5rem] shrink-0 object-cover;
+        border-radius: 0.75rem;
+        background: color-mix(in srgb, var(--primary) 84%, var(--surface));
+    }
+
+    .cart-item-content {
+        @apply flex min-w-0 flex-1 flex-col justify-between gap-3;
+    }
+
+    .cart-item-info {
+        @apply min-w-0;
+    }
+
+    .cart-item-name {
+        @apply line-clamp-2 text-sm font-semibold text-text-main;
+        line-height: 1.35;
+    }
+
+    .cart-item-meta {
+        @apply mt-1 text-xs font-medium text-text-muted;
+    }
+
+    .cart-item-footer {
+        @apply flex items-end justify-between gap-3;
+    }
+
+    .cart-item-price {
+        @apply text-base font-bold text-accent;
+    }
+
+    .cart-remove-button,
+    .cart-clear-button {
+        @apply inline-flex min-h-10 items-center justify-center rounded-full border px-3 text-xs font-semibold;
+        background: color-mix(in srgb, var(--surface) 44%, transparent);
+        border-color: color-mix(in srgb, var(--border) 62%, transparent);
+        color: var(--text-muted);
+        transition:
+            background-color 180ms var(--ease-premium),
+            border-color 180ms var(--ease-premium),
+            color 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium);
+    }
+
+    .cart-remove-button:hover,
+    .cart-clear-button:hover {
+        background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+        border-color: color-mix(in srgb, var(--accent) 64%, var(--border));
+        color: var(--accent);
+        transform: translateY(-1px);
+    }
+
+    .cart-summary {
+        @apply grid gap-3 border-t px-5 py-4;
+        background: color-mix(in srgb, var(--surface) 90%, var(--bg));
+        border-color: color-mix(in srgb, var(--border) 74%, transparent);
+    }
+
+    .cart-summary-row {
+        @apply flex items-center justify-between gap-4;
+    }
+
+    .cart-summary-label {
+        @apply text-sm font-medium text-text-muted;
+    }
+
+    .cart-summary-value {
+        @apply text-3xl font-medium tracking-wide text-accent;
+        line-height: 1;
+    }
+
+    .cart-checkout-button,
+    .checkout-modal-button {
+        @apply min-h-11 w-full py-3 text-sm;
+    }
+
+    .cart-clear-button {
+        @apply w-full;
+    }
+
+    .checkout-modal-backdrop {
+        @apply fixed inset-0 z-[70] flex items-center justify-center px-4 backdrop-blur-md;
+        background: color-mix(in srgb, var(--primary) 76%, transparent);
+    }
+
+    .checkout-modal {
+        @apply relative w-full max-w-md overflow-hidden border bg-card p-6 text-text-main sm:p-7;
+        border-color: color-mix(in srgb, var(--accent) 42%, var(--border));
+        border-radius: 1.25rem;
+        box-shadow: 0 10px 14px rgba(0, 0, 0, 0.26);
+    }
+
+    html[data-theme='light'] .checkout-modal {
+        box-shadow: 0 10px 14px rgba(13, 27, 42, 0.12);
+    }
+
+    .checkout-modal-close {
+        @apply absolute right-4 top-4;
+    }
+
+    .checkout-modal-icon {
+        @apply mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full border text-accent;
+        background: color-mix(in srgb, var(--accent) 13%, transparent);
+        border-color: color-mix(in srgb, var(--accent) 42%, var(--border));
+    }
+
+    .checkout-modal-title {
+        @apply pr-12 text-3xl font-medium tracking-wide text-accent;
+        line-height: 1;
+        text-wrap: balance;
+    }
+
+    .checkout-modal-copy {
+        @apply mt-3 text-sm leading-6 text-text-muted;
+    }
+
+    .checkout-modal-summary {
+        @apply mt-5 grid gap-2 border p-4 text-sm text-text-muted;
+        background: color-mix(in srgb, var(--bg) 70%, transparent);
+        border-color: color-mix(in srgb, var(--border) 70%, transparent);
+        border-radius: 1rem;
+    }
+
+    .checkout-modal-note {
+        @apply mt-4 text-xs leading-5 text-text-muted;
+    }
+
+    .chatbot-float {
+        @apply fixed inset-x-3 bottom-4 z-40 flex flex-col items-end gap-3 sm:inset-x-auto sm:bottom-7 sm:right-7;
+    }
+
+    .chatbot-panel {
+        @apply mb-3 flex w-full max-w-none flex-col overflow-hidden border bg-card sm:mb-0 sm:w-[390px] sm:max-w-[calc(100vw-2rem)] md:w-[410px];
+        max-height: min(76vh, 46rem);
+        border-color: color-mix(in srgb, var(--border) 78%, transparent);
+        border-radius: 1.25rem;
+        box-shadow: 0 10px 14px rgba(0, 0, 0, 0.24);
+    }
+
+    html[data-theme='light'] .chatbot-panel {
+        box-shadow: 0 10px 14px rgba(13, 27, 42, 0.12);
+    }
+
+    .chatbot-header {
+        @apply flex shrink-0 items-center justify-between gap-3 px-4 py-3;
+        background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 78%, var(--accent)));
+    }
+
+    .chatbot-avatar {
+        @apply flex h-10 w-10 items-center justify-center rounded-full text-xs font-bold;
+        background: var(--accent);
+        color: var(--on-accent);
+    }
+
+    .chatbot-title {
+        @apply text-sm font-semibold text-on-primary;
+    }
+
+    .chatbot-status {
+        @apply mt-0.5 flex items-center gap-1.5;
+    }
+
+    .chatbot-status span {
+        @apply h-1.5 w-1.5 rounded-full bg-green-400;
+    }
+
+    .chatbot-status p {
+        @apply text-[11px];
+        color: rgba(242, 237, 228, 0.74);
+    }
+
+    .chatbot-clear-button {
+        @apply inline-flex min-h-9 items-center justify-center rounded-full border px-3 text-[11px] font-semibold;
+        background: rgba(242, 237, 228, 0.06);
+        border-color: rgba(242, 237, 228, 0.2);
+        color: rgba(242, 237, 228, 0.74);
+        transition:
+            background-color 180ms var(--ease-premium),
+            border-color 180ms var(--ease-premium),
+            color 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium);
+    }
+
+    .chatbot-clear-button:hover {
+        background: rgba(193, 127, 58, 0.14);
+        border-color: var(--accent);
+        color: var(--accent);
+        transform: translateY(-1px);
+    }
+
+    .chatbot-close-button {
+        @apply h-9 w-9;
+        background: rgba(242, 237, 228, 0.06);
+        border-color: rgba(242, 237, 228, 0.2);
+        color: rgba(242, 237, 228, 0.74);
+    }
+
+    .chatbot-info-wrap {
+        @apply shrink-0 border-b px-4 py-3;
+        background: color-mix(in srgb, var(--surface) 90%, var(--bg));
+        border-color: color-mix(in srgb, var(--border) 70%, transparent);
+    }
+
+    .chat-info-panel {
+        @apply flex items-start gap-3;
+    }
+
+    .chat-info-avatar {
+        @apply mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full;
+        background: color-mix(in srgb, var(--accent) 16%, transparent);
+    }
+
+    .chat-info-avatar span {
+        @apply text-[10px] font-bold text-accent;
+    }
+
+    .chat-info-panel p {
+        @apply text-xs leading-5 text-text-muted;
+    }
+
+    .chat-suggestion-strip {
+        @apply flex gap-2 overflow-x-auto px-4 py-3 sm:flex-wrap sm:overflow-visible;
+        scrollbar-width: thin;
+    }
+
+    .chat-suggestion-button {
+        @apply inline-flex min-h-10 shrink-0 items-center justify-center rounded-full border px-3 text-[11px] font-semibold;
+        background: color-mix(in srgb, var(--bg) 64%, var(--surface));
+        border-color: color-mix(in srgb, var(--border) 70%, transparent);
+        color: var(--text-muted);
+        transition:
+            background-color 180ms var(--ease-premium),
+            border-color 180ms var(--ease-premium),
+            color 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium);
+    }
+
+    .chat-suggestion-button:hover:not(:disabled) {
+        background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+        border-color: color-mix(in srgb, var(--accent) 66%, var(--border));
+        color: var(--accent);
+        transform: translateY(-1px);
+    }
+
+    .chat-suggestion-button:disabled {
+        border-color: var(--disabled-border);
+        background: var(--disabled-bg);
+        color: var(--disabled-text);
+        opacity: 1;
+        transform: none;
+    }
+
+    .chat-area {
+        @apply min-h-0 flex-1 space-y-3 overflow-y-auto px-4 py-4 text-sm;
+        background:
+            radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 12rem),
+            var(--surface);
+    }
+
+    .chat-message-row {
+        @apply flex items-end gap-2;
+    }
+
+    .chat-message-row-user {
+        @apply justify-end;
+    }
+
+    .chat-message-row-bot {
+        @apply justify-start;
+    }
+
+    .chat-message-avatar {
+        @apply mb-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[9px] font-bold;
+        background: var(--accent);
+        color: var(--on-accent);
+    }
+
+    .chat-bubble {
+        @apply max-w-[86%] px-4 py-3 text-sm sm:max-w-[80%];
+        border-radius: 1rem;
+        line-height: 1.6;
+    }
+
+    .chat-bubble-user {
+        background: var(--accent);
+        color: var(--on-accent);
+        border-bottom-right-radius: 0.35rem;
+    }
+
+    .chat-bubble-bot {
+        @apply border bg-background text-text-main;
+        border-color: color-mix(in srgb, var(--border) 72%, transparent);
+        border-bottom-left-radius: 0.35rem;
+    }
+
+    .chat-message-time {
+        @apply mt-1 block text-[10px];
+    }
+
+    .chat-message-time-user {
+        @apply text-right;
+        color: color-mix(in srgb, var(--on-accent) 72%, transparent);
+    }
+
+    .chat-message-time-bot {
+        color: var(--text-muted);
+    }
+
+    .chat-action-button {
+        @apply mt-3 inline-flex min-h-10 items-center gap-1.5 rounded-full px-4 text-xs font-semibold;
+        background: var(--accent);
+        color: var(--on-accent);
+        transition:
+            background-color 180ms var(--ease-premium),
+            color 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium);
+    }
+
+    .chat-action-button:hover {
+        background: var(--accent-hover);
+        color: var(--on-accent-hover);
+        transform: translateY(-1px);
+    }
+
+    .chat-typing {
+        @apply rounded-2xl border px-4 py-3 text-sm text-text-muted;
+        background: color-mix(in srgb, var(--bg) 74%, var(--surface));
+        border-color: color-mix(in srgb, var(--border) 72%, transparent);
+    }
+
+    .chat-input-shell {
+        @apply shrink-0 border-t bg-card p-3;
+        border-color: color-mix(in srgb, var(--border) 72%, transparent);
+    }
+
+    .chat-input-wrap {
+        @apply flex items-center gap-2 border bg-background px-3 py-2;
+        min-height: 3.5rem;
+        border-color: color-mix(in srgb, var(--border) 72%, transparent);
+        border-radius: 1rem;
+        transition:
+            background-color 180ms var(--ease-premium),
+            border-color 180ms var(--ease-premium),
+            box-shadow 180ms var(--ease-premium);
+    }
+
+    .chat-input-wrap:focus-within {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px var(--focus-ring-soft);
+    }
+
+    .chat-input {
+        @apply min-w-0 flex-1 bg-transparent text-sm text-text-main outline-none placeholder:text-text-muted;
+    }
+
+    .chat-input:disabled {
+        color: var(--disabled-text);
+        opacity: 1;
+    }
+
+    .chat-send-button {
+        @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-full;
+        background: var(--accent);
+        color: var(--on-accent);
+        transition:
+            background-color 180ms var(--ease-premium),
+            color 180ms var(--ease-premium),
+            transform 180ms var(--ease-premium);
+    }
+
+    .chat-send-button:hover:not(:disabled) {
+        background: var(--accent-hover);
+        color: var(--on-accent-hover);
+        transform: translateY(-1px);
+    }
+
+    .chat-send-button:active:not(:disabled) {
+        transform: scale(0.96);
+    }
+
+    .chat-send-button:disabled {
+        background: var(--disabled-bg);
+        color: var(--disabled-text);
+        opacity: 1;
+        transform: none;
+    }
+
+    .chatbot-trigger {
+        @apply flex h-14 w-14 items-center justify-center rounded-full;
+        background: var(--accent);
+        color: var(--on-accent);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.22);
+        transition:
+            background-color 180ms var(--ease-premium),
+            color 180ms var(--ease-premium),
+            box-shadow 180ms var(--ease-premium);
+    }
+
+    .chatbot-trigger:hover {
+        background: var(--accent-hover);
+        color: var(--on-accent-hover);
+        box-shadow: 0 10px 14px rgba(0, 0, 0, 0.26);
+    }
+
+    @media (max-width: 640px) {
+        .cart-drawer {
+            @apply max-w-none;
+        }
+
+        .chatbot-panel {
+            max-height: 74vh;
+        }
+
+        .chat-bubble {
+            max-width: 88%;
+        }
+    }
+
     .section-title {
         @apply text-4xl font-medium tracking-wide text-text-main sm:text-5xl;
         font-family: var(--font-display);

@@ -11,7 +11,7 @@ const ChatbotFloat = () => {
     const { messages, input, setInput, isLoading, sendMessage, clearChat } = useChat()
 
     return (
-        <div className="fixed inset-x-3 bottom-4 z-40 flex flex-col items-end gap-3 sm:inset-x-auto sm:bottom-7 sm:right-7">
+        <div className="chatbot-float">
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -21,18 +21,18 @@ const ChatbotFloat = () => {
                         exit={{ opacity: 0, scale: 0.92, y: 20, transition: { duration: 0.2, ease: 'easeInOut' } }}
                         transition={{ duration: 0.22, ease: 'easeOut' }}
                         style={{ transformOrigin: 'bottom right' }}
-                        className="mb-3 flex w-full max-w-none flex-col overflow-hidden rounded-2xl border border-warm/60 bg-card shadow-2xl sm:mb-0 sm:w-[380px] sm:max-w-[calc(100vw-2rem)] md:w-[400px] max-h-[72vh] sm:max-h-[calc(100vh-120px)]"
+                        className="chatbot-panel"
                     >
-                    <div className="shrink-0 flex items-center justify-between bg-primary px-4 py-3">
+                    <div className="chatbot-header">
                         <div className="flex items-center gap-3">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-xs font-bold text-primary">
+                            <div className="chatbot-avatar">
                                 NB
                             </div>
                             <div>
-                                <p className="text-sm font-medium text-on-primary">NovaBot</p>
-                                <div className="flex items-center gap-1.5">
-                                    <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
-                                    <p className="text-[11px] text-on-primary/72">En linea</p>
+                                <p className="chatbot-title">NovaBot</p>
+                                <div className="chatbot-status">
+                                    <span />
+                                    <p>En linea</p>
                                 </div>
                             </div>
                         </div>
@@ -40,14 +40,14 @@ const ChatbotFloat = () => {
                             <button
                                 type="button"
                                 onClick={clearChat}
-                                className="rounded-full border border-on-primary/20 px-3 py-1.5 text-[11px] text-on-primary/70 transition-colors hover:border-accent hover:text-accent"
+                                className="chatbot-clear-button"
                             >
                                 Limpiar
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setIsOpen(false)}
-                                className="flex h-7 w-7 items-center justify-center rounded-full border border-on-primary/20 text-on-primary/70 transition-colors hover:border-accent hover:text-accent"
+                                className="chatbot-close-button"
                                 aria-label="Cerrar chat"
                             >
                                 X
@@ -55,7 +55,7 @@ const ChatbotFloat = () => {
                         </div>
                     </div>
 
-                    <div className="shrink-0 border-b border-warm/55 px-4 py-3">
+                    <div className="chatbot-info-wrap">
                         <InfoPanel />
                     </div>
 
@@ -75,7 +75,7 @@ const ChatbotFloat = () => {
                 onClick={() => setIsOpen((current) => !current)}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.96 }}
-                className="flex h-14 w-14 items-center justify-center rounded-full bg-accent text-primary shadow-xl transition-all duration-200 hover:bg-accent-dark hover:shadow-2xl active:scale-95"
+                className="chatbot-trigger"
                 aria-label={isOpen ? 'Cerrar NovaBot' : 'Abrir NovaBot'}
             >
                 {isOpen ? (
