@@ -10,38 +10,42 @@ const CuratedSelection = () => {
     useSectionReveal(sectionRef)
 
     return (
-        <section ref={sectionRef} className="bg-sand">
-            <div className="container-shell space-y-8 py-18">
-                <div data-reveal className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-                    <div className="space-y-3">
-                        <p className="text-xs uppercase tracking-[0.32em] text-text-muted">Selecciones curadas</p>
-                        <h2 className="section-title max-w-3xl">Outfits base para moverte entre skate, surf, Y2K y urbano limpio.</h2>
+        <section ref={sectionRef} className="home-curated">
+            <div className="container-shell home-curated-inner">
+                <div data-reveal className="home-section-header home-section-header-split">
+                    <div>
+                        <p className="home-kicker">Selecciones curadas</p>
+                        <h2 className="section-title">Outfits base para moverte entre skate, surf, Y2K y urbano limpio.</h2>
                     </div>
-                    <a href="#novabot" className="text-sm font-semibold text-accent transition-colors hover:text-accent-dark">
+                    <a href="#novabot" className="home-text-link">
                         Pedir asesoria a NovaBot
                     </a>
                 </div>
 
-                <div className="grid gap-8 xl:grid-cols-2">
-                    {curatedGroups.map((group) => (
-                        <article key={group.category} data-reveal className="space-y-6 rounded-[2rem] border border-warm bg-card p-6 shadow-[var(--shadow-panel)] sm:p-7">
-                            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-                                <div className="space-y-3">
-                                    <p className="text-xs uppercase tracking-[0.3em] text-text-muted">{group.eyebrow}</p>
-                                    <h3 className="text-3xl leading-tight text-text-main" style={{ fontFamily: 'var(--font-display)' }}>
+                <div className="home-curated-grid">
+                    {curatedGroups.map((group, groupIndex) => (
+                        <article
+                            key={group.category}
+                            data-reveal
+                            className={`home-curated-group ${groupIndex % 2 === 1 ? 'home-curated-group-invert' : ''}`}
+                        >
+                            <div className="home-curated-group-head">
+                                <div>
+                                    <p className="home-card-label">{group.eyebrow}</p>
+                                    <h3 style={{ fontFamily: 'var(--font-display)' }}>
                                         {group.title}
                                     </h3>
-                                    <p className="max-w-2xl text-sm leading-7 text-text-muted sm:text-base">{group.description}</p>
+                                    <p>{group.description}</p>
                                 </div>
                                 <Link to="/hombre/$categoria" params={{ categoria: group.category }} search={{ page: 1, sort: 'newest' }} className="button-secondary shrink-0">
                                     {group.ctaLabel}
                                 </Link>
                             </div>
 
-                            <div className="grid gap-6 sm:grid-cols-2">
+                            <div className="home-curated-items">
                                 {group.items.map((item) => (
-                                    <article key={item.name} className="overflow-hidden rounded-[1.5rem] border border-warm bg-background shadow-[var(--shadow-panel)]">
-                                        <div className="aspect-[4/5] overflow-hidden">
+                                    <article key={item.name} className="home-curated-item">
+                                        <div className="home-curated-item-image">
                                             <img
                                                 src={item.image}
                                                 alt={item.name}
@@ -53,14 +57,14 @@ const CuratedSelection = () => {
                                                 }}
                                             />
                                         </div>
-                                        <div className="space-y-3 p-5">
+                                        <div className="home-curated-item-copy">
                                             <div>
-                                                <h4 className="text-lg text-text-main" style={{ fontFamily: 'var(--font-display)' }}>
+                                                <h4 style={{ fontFamily: 'var(--font-display)' }}>
                                                     {item.name}
                                                 </h4>
-                                                <p className="mt-1 text-sm text-text-muted">{item.note}</p>
+                                                <p>{item.note}</p>
                                             </div>
-                                            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">{item.price}</p>
+                                            <p className="home-price-tag">{item.price}</p>
                                         </div>
                                     </article>
                                 ))}

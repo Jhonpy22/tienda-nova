@@ -43,29 +43,29 @@ const HeroSection = () => {
     }, [prefersReducedMotion])
 
     return (
-        <section ref={sectionRef} className="relative overflow-hidden border-b border-warm bg-primary text-on-primary">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_12%,_var(--hero-radial-a),_transparent_30%),radial-gradient(circle_at_86%_18%,_var(--hero-radial-b),_transparent_24%),linear-gradient(135deg,_var(--hero-gradient-a),_var(--hero-gradient-b))]" />
-            <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background to-transparent" />
-            <div className="container-shell relative grid gap-12 py-18 lg:grid-cols-[1.08fr_0.92fr] lg:items-end lg:py-24">
-                <div className="space-y-8">
-                    <p data-hero="eyebrow" className="text-xs uppercase tracking-[0.35em] text-accent">
+        <section ref={sectionRef} className="home-hero">
+            <div className="home-hero-atmosphere" />
+            <div className="home-hero-fade" />
+            <div className="container-shell home-hero-grid">
+                <div className="home-hero-copy">
+                    <p data-hero="eyebrow" className="home-kicker home-kicker-strong">
                         Nueva coleccion 2026 / Moda urbana masculina Guanacaste
                     </p>
-                    <div className="space-y-5">
+                    <div className="home-hero-heading-group">
                         <h1
                             data-hero="title"
-                            className="max-w-3xl text-5xl leading-[0.95] sm:text-6xl lg:text-7xl"
+                            className="home-hero-title"
                             style={{ fontFamily: 'var(--font-display)' }}
                         >
                             Streetwear para Guanacaste, sin renunciar al estilo.
                         </h1>
-                        <p data-hero="subtitle" className="max-w-xl text-base leading-7 text-on-primary/75 sm:text-lg">
+                        <p data-hero="subtitle" className="home-hero-subtitle">
                             Camisetas oversized, cargos baggy, banadores, tenis skate y lentes oscuros para construir outfits masculinos
                             urbanos listos para playa, skate o ciudad en Nicoya.
                         </p>
                     </div>
 
-                    <div className="flex flex-col gap-3 sm:flex-row">
+                    <div className="home-hero-actions">
                         <Link to="/hombre" data-hero="cta" className="button-accent">
                             Comprar streetwear
                         </Link>
@@ -80,35 +80,41 @@ const HeroSection = () => {
                         </Link>
                     </div>
 
-                    <div className="grid gap-3 sm:grid-cols-3">
-                        {brandPillars.map((pillar) => (
-                            <div key={pillar} data-hero="pillar" className="rounded-2xl border border-on-primary/18 bg-on-primary/10 px-4 py-4 backdrop-blur-sm">
-                                <p className="text-sm leading-6 text-on-primary/85">{pillar}</p>
-                            </div>
-                        ))}
-                    </div>
                 </div>
 
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div className="home-hero-visuals">
+                    <div data-hero="visual" className="home-hero-editorial-card">
+                        <p>Drop 2026</p>
+                        <span>Nicoya, Guanacaste</span>
+                    </div>
+
                     <article
                         data-hero="visual"
-                        className="flex min-h-[18rem] flex-col justify-end rounded-[2rem] border border-on-primary/18 bg-[linear-gradient(180deg,var(--image-overlay-a),var(--image-overlay-b)),url('https://fastcolors.in/cdn/shop/files/Oversize_Back_Printed_oversize_t_shirt_for_men_-_FastColors_-_Oversize_Back_Printed_T-Shirt_-_FastColors_-_tag1_-_tag2_-_tag3_-_-6266647.jpg?v=1751898677&width=2048')] bg-cover bg-center p-6 shadow-[0_28px_90px_rgba(0,0,0,0.45)] will-change-transform"
+                        className="home-hero-look home-hero-look-primary"
                     >
-                        <p className="text-xs uppercase tracking-[0.28em] text-accent">Oversized</p>
-                        <p className="mt-3 max-w-[14rem] text-2xl leading-tight text-on-primary" style={{ fontFamily: 'var(--font-display)' }}>
+                        <p className="home-look-label">Oversized</p>
+                        <p className="home-look-title" style={{ fontFamily: 'var(--font-display)' }}>
                             Camisas boxy y denim amplio para una silueta fuerte.
                         </p>
                     </article>
 
                     <article
                         data-hero="visual"
-                        className="flex min-h-[18rem] flex-col justify-end rounded-[2rem] border border-on-primary/18 bg-[linear-gradient(180deg,var(--image-overlay-a),var(--image-overlay-b)),url('https://i.pinimg.com/564x/45/6d/7f/456d7fbbc494b824ea3e6943763d37ce.jpg')] bg-cover bg-center p-6 shadow-[0_28px_90px_rgba(0,0,0,0.45)] will-change-transform sm:translate-y-10"
+                        className="home-hero-look home-hero-look-secondary"
                     >
-                        <p className="text-xs uppercase tracking-[0.28em] text-accent">Skate / Y2K</p>
-                        <p className="mt-3 max-w-[14rem] text-2xl leading-tight text-on-primary" style={{ fontFamily: 'var(--font-display)' }}>
+                        <p className="home-look-label">Skate / Y2K</p>
+                        <p className="home-look-title" style={{ fontFamily: 'var(--font-display)' }}>
                             Tenis robustos, accesorios metalicos y actitud urbana.
                         </p>
                     </article>
+
+                    <div className="home-hero-proof">
+                        {brandPillars.map((pillar) => (
+                            <div key={pillar} data-hero="pillar" className="home-hero-proof-item">
+                                <p>{pillar}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
